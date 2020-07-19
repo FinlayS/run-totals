@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
 import { getNasa } from "../src/server"
+import { getTotals } from "../utils/get-totals";
 
 export default class extends Component {
   static async getInitialProps() {
 
     const data = await getNasa();
-    console.log(data.url)
+    console.log("LAPS", getTotals());
     return {
       title: data.title,
       imageUrl: data.url,

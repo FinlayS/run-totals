@@ -7,6 +7,7 @@ export default class extends Component {
 
     const data = await getNasa();
     console.log("LAPS", getTotals());
+    // console.log(data.url)
     return {
       title: data.title,
       imageUrl: data.url,
@@ -22,8 +23,7 @@ export default class extends Component {
         </div>
 
         <div>
-          <iframe width="420" height="345" src={this.props.imageUrl}>
-          </iframe>
+          <img src={this.props.imageUrl}/>
         </div>
 
         <div>

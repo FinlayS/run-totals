@@ -1,17 +1,36 @@
 import React, {Component} from 'react'
-import { getNasa } from "../src/server"
 import { getTotals } from "../utils/get-totals";
+import { getPace} from "../utils/get-pace";
+import { getRunList } from "../utils/getRuns";
+import RunList from "./runList";
 
 export default class extends Component {
   static async getInitialProps() {
 
-    const data = await getNasa();
-    console.log("LAPS", getTotals());
-    // console.log(data.url)
+    getRunList()
+
+    const allTimes = getTotals({})
+
+    const totalPace = getPace(
+      allTimes.totalTimeSecs,
+      allTimes.totalDistance
+    )
+
+    const activePace = getPace(
+      allTimes.activeTimeSeconds,
+      allTimes.activeDistance
+    )
+
+    console.log('index-allTimes',allTimes)
+
     return {
-      title: data.title,
-      imageUrl: data.url,
-      explanation: data.explanation
+      title: "Run totals",
+      totalTime: allTimes.totalTime,
+      totalDistance: allTimes.totalDistance,
+      totalAveragePace: totalPace,
+      activeTime: allTimes.activeTime,
+      activeDistance: allTimes.activeDistance,
+      activeAveragePace: activePace
     }
   }
 
@@ -19,17 +38,20 @@ export default class extends Component {
     return (
       <div>
         <div>
-          {this.props.title}
+          <h1>{this.props.title}</h1>
         </div>
 
         <div>
-          <img src={this.props.imageUrl}/>
+          <RunList></RunList>
         </div>
 
         <div>
-          {this.props.explanation}
+          Total Distance {this.props.totalDistance}, Total Time {this.props.totalTime}, Total ave Pace {this.props.totalAveragePace},
         </div>
 
+        <div>
+          Active Distance {this.props.activeDistance}, Active Time {this.props.activeTime}, Active ave Pace {this.props.activeAveragePace},
+        </div>
       </div>
     )
   }

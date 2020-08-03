@@ -1,20 +1,3 @@
-/**
- * Add two string time values (HH:mm:ss) with javascript
- *
- * Usage:
- *  > addTimes('04:20:10', '21:15:10');
- *  > "25:35:20"
- *  > addTimes('04:35:10', '21:35:10');
- *  > "26:10:20"
- *  > addTimes('30:59', '17:10');
- *  > "48:09:00"
- *  > addTimes('19:30:00', '00:30:00');
- *  > "20:00:00"
- *
- * @param {String} startTime  String time format
- * @param {String} endTime  String time format
- * @returns {String}
- */
 export function addTimes (startTime, endTime) {
   let times = [0, 0, 0];
   let max = times.length;
@@ -49,8 +32,5 @@ export function addTimes (startTime, endTime) {
     minutes -= 60 * h
   }
 
-  // let timeInSeconds = (hours * 360 + minutes * 60 + seconds);
-  // console.log(timeInSeconds)
-
-  return   ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2);
+  return  ('0' + hours).slice(-2) + ':' + ('0' + minutes).slice(-2) + ':' + ('0' + seconds).slice(-2);
 }

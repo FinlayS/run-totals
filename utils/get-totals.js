@@ -1,27 +1,33 @@
 import {addTimes} from "./add-times";
-import allLaps from "../data/laps"
+import allLaps from "../data/runs.json"
+import {timeInSeconds} from "./timeInSeconds";
 
-
-
+Number.prototype.round = function(places) {
+  return +(Math.round(this + "e+" + places)  + "e-" + places);
+}
 
 export function getTotals() {
-  let td = 0;
+  let activeTime = "";
   let totalTime = "";
+  let activeDistance = 0;
   let totalDistance = 0;
   allLaps.laps.forEach((lap) => {
+    if (lap.lapActive === true) {
+      console.log(lap)
+      activeTime = addTimes(activeTime, lap.lapTime);
+      activeDistance = activeDistance + lap.lapDistance;
+    }
     totalTime = addTimes(totalTime, lap.lapTime);
-    td = td + lap.lapDistance;
-    totalDistance = td.toFixed(2);
+    totalDistance = totalDistance + lap.lapDistance;
   });
-  console.log('tt', totalTime)
-  return { totalTime, totalDistance }
+  const totalTimeSecs = (timeInSeconds(totalTime))
+  let activeTimeSeconds = (timeInSeconds(activeTime))
+  activeDistance = activeDistance.round(2);
+  totalDistance = totalDistance.round(2)
+  return { totalTime, totalDistance, totalTimeSecs, activeTime, activeDistance, activeTimeSeconds }
 }
 
-export function getPace() {
-
-}
-
-export   function toSeconds(h, m, s) {
+export function toSeconds(h, m, s) {
   h = parseInt(h) || 0;
   m = parseInt(m) || 0;
   s = parseInt(s) || 0;

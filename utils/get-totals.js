@@ -1,19 +1,17 @@
 import {addTimes} from "./add-times";
-import allLaps from "../data/runs.json"
 import {timeInSeconds} from "./timeInSeconds";
 
 Number.prototype.round = function(places) {
   return +(Math.round(this + "e+" + places)  + "e-" + places);
 }
 
-export function getTotals() {
+export function getLapTotals(laps) {
   let activeTime = "";
   let totalTime = "";
   let activeDistance = 0;
   let totalDistance = 0;
-  allLaps.laps.forEach((lap) => {
+  laps.forEach((lap) => {
     if (lap.lapActive === true) {
-      console.log(lap)
       activeTime = addTimes(activeTime, lap.lapTime);
       activeDistance = activeDistance + lap.lapDistance;
     }

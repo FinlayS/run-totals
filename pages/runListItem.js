@@ -1,9 +1,11 @@
 import React from 'react';
-import RunLapTotals from "./runLapItems";
+import RunLapTotals from "./runLapTotals";
+import RunLaps from "./runLaps";
 
 const RunListItem = ( id, description, date ) => (
   <div>
       <h2>Run {id }, Date {date}, Description {description}</h2>
+    <RunLaps id={id}></RunLaps>
     <RunLapTotals id={id}></RunLapTotals>
   </div>
 );

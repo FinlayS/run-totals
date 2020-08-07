@@ -3,14 +3,12 @@ import React from 'react';
 const Checkbox = (isChecked) => {
 
   return (
-    <div className="checkbox">
-      <label>
+      <label className="checkbox">
         <input
           type="checkbox"
           checked={isChecked.checked}
         />
       </label>
-    </div>
   )
 }
 

@@ -1,5 +1,4 @@
-import {addTimes} from "./add-times";
-import {timeInSeconds} from "./timeInSeconds";
+import {addTimes} from "./addTimes";
 
 Number.prototype.round = function(places) {
   return +(Math.round(this + "e+" + places)  + "e-" + places);
@@ -18,11 +17,9 @@ export function getLapTotals(laps) {
     totalTime = addTimes(totalTime, lap.lapTime);
     totalDistance = totalDistance + lap.lapDistance;
   });
-  const totalTimeSecs = (timeInSeconds(totalTime))
-  let activeTimeSeconds = (timeInSeconds(activeTime))
   activeDistance = activeDistance.round(2);
   totalDistance = totalDistance.round(2)
-  return { totalTime, totalDistance, totalTimeSecs, activeTime, activeDistance, activeTimeSeconds }
+  return { totalDistance, totalTime, activeTime, activeDistance }
 }
 
 export function toSeconds(h, m, s) {

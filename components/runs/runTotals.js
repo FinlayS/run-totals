@@ -1,9 +1,9 @@
 import React from 'react';
-import {getRunLaps} from "../utils/getRunLaps";
-import {getLapTotals} from "../utils/getTotals";
-import {getPace} from "../utils/getPace";
+import {getRunLaps} from "../../utils/getRunLaps";
+import {getLapTotals} from "../../utils/getTotals";
+import {getPace} from "../../utils/getPace";
 
-const RunLapTotals = (id) => {
+const RunTotals = (id) => {
 
   const runLaps = getRunLaps(id.id)
   const lapTimesAndDistances = getLapTotals(runLaps)
@@ -64,4 +64,4 @@ const RunLapTotals = (id) => {
   )
 }
 
-export default RunLapTotals;
+export default RunTotals;

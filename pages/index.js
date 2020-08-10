@@ -1,5 +1,5 @@
 import React from 'react'
-import RunList from "./runList";
+import Runs from "../components/runs/runs";
 
 const Home = () => {
     return (
@@ -8,7 +8,7 @@ const Home = () => {
           <main style={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
             <h1>Run totals</h1>
           </main>
-          <RunList />
+          <Runs />
         </div>
       </div>
     )

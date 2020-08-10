@@ -1,8 +1,8 @@
 import React from 'react';
-import Checkbox from '../components/checkbox';
-import {getPace} from "../utils/getPace";
+import Checkbox from '../checkbox';
+import {getPace} from "../../utils/getPace";
 
-const RunLapList = (lapActive, lapNo, lapTime, lapDistance) => {
+const LapDetails = (lapActive, lapNo, lapTime, lapDistance) => {
 
   const lapPace = getPace(lapTime, lapDistance)
 
@@ -30,4 +30,4 @@ const RunLapList = (lapActive, lapNo, lapTime, lapDistance) => {
   )
 }
 
-export default RunLapList;
+export default LapDetails;

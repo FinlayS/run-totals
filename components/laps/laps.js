@@ -1,8 +1,8 @@
 import React from 'react';
-import {getRunLaps} from "../utils/getRunLaps";
-import RunLapList from "./runLapList";
+import {getRunLaps} from "../../utils/getRunLaps";
+import LapDetails from "./lapDetails";
 
-const RunLaps = (id) => {
+const Laps = (id) => {
 
   const runLaps = getRunLaps(id.id)
 
@@ -28,10 +28,10 @@ const RunLaps = (id) => {
         </tbody>
         </table>
       {runLaps.map(({lapActive, lapNo, lapTime, lapDistance}) => (
-      RunLapList(lapActive, lapNo, lapTime, lapDistance)
+      LapDetails(lapActive, lapNo, lapTime, lapDistance)
       ))}
     </div>
   )
 }
 
-export default RunLaps;
+export default Laps;

@@ -1,18 +1,17 @@
-import React, {Component} from 'react'
+import React from 'react'
 import RunList from "./runList";
 
-export default class extends Component {
-
-  render() {
+const Home = () => {
     return (
       <div>
         <div>
-          <h1>Run totals</h1>
-        </div>
-        <div>
-          <RunList></RunList>
+          <main style={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
+            <h1>Run totals</h1>
+          </main>
+          <RunList />
         </div>
       </div>
     )
-  }
 }
+
+export default Home

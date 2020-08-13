@@ -7,7 +7,7 @@ const RunDetails = (id, description, date) => {
   return (
     <div>
       <div className="text-title">
-        <div width="80%" color="black">{description}</div>
+        <div >{description}</div>
         <div >{date}</div>
       </div>
       <Container className="container">

@@ -1,21 +1,23 @@
 .container {
-    /*display: flex;*/
-    flex: 100%;
+    padding: 5px;
     width: 100%;
     flex-wrap: wrap;
     background: lightgray;
-    /*padding: 5px;*/
-    /*margin: 2px;*/
+    margin-bottom: 20px;
 }
 
 .text-title {
     display: flex;
-    width: 100%;
+    flex: 0 0 100%;
+    font-family: "Open Sans", Arial;
+    font-size: 20px;
     justify-content: space-between;
-    background-color: green;
+    background-color: greenyellow;
     color: black;
-    padding: 2px;
-    margin: 1px;
+    padding: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-self: center;
 }
 
 .flex-container {
@@ -30,7 +32,8 @@
     display: flex;
     flex: 100%;
     justify-content: space-between;
-    background-color: pink;
+    background-color: hotpink;
+    color: white;
     text-align: left;
     padding: 2px;
     margin: 1px;

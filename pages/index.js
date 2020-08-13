@@ -6,7 +6,7 @@ import Header from "../components/header";
 
 const Index = () => {
   return (
-    <>
+    <div>
       <Header/>
       <h3>Runs</h3>
       <div>
@@ -14,7 +14,7 @@ const Index = () => {
           <Runs/>
         </Container>
       </div>
-    </>
+    </div>
   )
 }
 

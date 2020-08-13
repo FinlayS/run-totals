@@ -5,9 +5,9 @@ import React from "react";
 const Header = () => {
   return (
  <>
-   <style jsx>{`
-     marginBottom: 5%;
-   `}</style>
+   {/*<style jsx>{`*/}
+   {/*  marginBottom: 5%;*/}
+   {/*`}</style>*/}
    <Head>
      <title>Run Totals</title>
      <link rel="icon" type="image/png" href="../public/favicon.png"/>

@@ -1,27 +1,49 @@
 .container {
+    /*display: flex;*/
+    flex: 100%;
+    width: 100%;
+    flex-wrap: wrap;
+    background: lightgray;
+    /*padding: 5px;*/
+    /*margin: 2px;*/
+}
+
+.text-title {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    background-color: green;
+    color: black;
+    padding: 2px;
+    margin: 1px;
+}
+
+.flex-container {
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
-    background: #e2eaf4;
-    padding: 10px;
+    background-color: steelblue;
+    padding: 2px;
+    margin: 1px;
+}
+
+.flex-table {
+    display: flex;
+    flex: 100%;
+    justify-content: space-between;
+    background-color: pink;
+    text-align: left;
+    padding: 2px;
+    margin: 1px;
 }
 
 .child {
     display: inline-block;
     font-family: "Open Sans", Arial;
-    font-size: 20px;
+    width: 20%;
+    max-height: 25px;
+    font-size: 15px;
     color: #FFF;
     text-align: left;
-    background: #3794fe;
-    border-radius: 6px;
-    padding: 20px;
-    margin: 12px;
-}
-
-.child:first-child {
-    width: 100%;
-}
-
-.child:not(:first-child) {
-    flex: 1;
+    padding: 2px;
+    margin: 5px;
 }

@@ -8,31 +8,12 @@ const Laps = (id) => {
 
   return (
     <div>
-      <style jsx>{`
-        th {
-          background: LightPink;
-          width: 150px;
-          max-width: 150px;
-          text-align: center;
-        }
-      `}</style>
-      <table id="lapHeaders">
-        <tbody>
-        <tr>
-          <th>Lap No</th>
-          <th>Active?</th>
-          <th>Time</th>
-          <th>Distance</th>
-          <th>Pace</th>
-        </tr>
-        </tbody>
-        </table>
-      <div className="d-flex flex-row bd-highlight mb-3">
-        <div className="p-ddd bd-highlight">Lap No</div>
-        <div className="p-2 bd-highlight">Active?</div>
-        <div className="p-2 bd-highlight">Time</div>
-        <div className="p-2 bd-highlight">Distance</div>
-        <div className="p-2 bd-highlight">Pace</div>
+      <div className="flex-table">
+        <th className="child">Lap</th>
+        <th className="child">Act?</th>
+        <th className="child">Time</th>
+        <th className="child">Dist</th>
+        <th className="child">Pace</th>
       </div>
       {runLaps.map(({lapActive, lapNo, lapTime, lapDistance}) => (
       LapDetails(lapActive, lapNo, lapTime, lapDistance)

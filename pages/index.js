@@ -1,17 +1,21 @@
-import React from 'react'
+import React from 'react';
+import Container from 'react-bootstrap/Container';
 import Runs from "../components/runs/runs";
+import Header from "../components/header";
 
-const Home = () => {
-    return (
+
+const Index = () => {
+  return (
+    <>
+      <Header/>
+      <h3>Runs</h3>
       <div>
-        <div>
-          <main style={{ display: "flex", flexDirection: "column", alignItems: "center"}}>
-            <h1>Run totals</h1>
-          </main>
-          <Runs />
-        </div>
+        <Container className="container">
+          <Runs/>
+        </Container>
       </div>
-    )
+    </>
+  )
 }
 
-export default Home
+export default Index

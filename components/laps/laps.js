@@ -27,6 +27,13 @@ const Laps = (id) => {
         </tr>
         </tbody>
         </table>
+      <div className="d-flex flex-row bd-highlight mb-3">
+        <div className="p-ddd bd-highlight">Lap No</div>
+        <div className="p-2 bd-highlight">Active?</div>
+        <div className="p-2 bd-highlight">Time</div>
+        <div className="p-2 bd-highlight">Distance</div>
+        <div className="p-2 bd-highlight">Pace</div>
+      </div>
       {runLaps.map(({lapActive, lapNo, lapTime, lapDistance}) => (
       LapDetails(lapActive, lapNo, lapTime, lapDistance)
       ))}

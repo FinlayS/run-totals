@@ -2,7 +2,6 @@
   "name": "run-totals",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "next",
@@ -14,8 +13,10 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.19.2",
+    "bootstrap": "^4.5.2",
     "next": "^9.4.4",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.3.0",
     "react-dom": "^16.13.1"
   }
 }

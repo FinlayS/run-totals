@@ -1,0 +1,57 @@
+.container {
+    padding: 5px;
+    width: 100%;
+    flex-wrap: wrap;
+    background: lightgray;
+    margin-bottom: 20px;
+}
+
+.text-title {
+    display: flex;
+    flex: 0 0 100%;
+    font-family: "Open Sans", Arial;
+    font-size: 20px;
+    justify-content: space-between;
+    background-color: greenyellow;
+    color: black;
+    padding: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    align-self: center;
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    background-color: steelblue;
+    padding: 2px;
+    margin: 1px;
+}
+
+.flex-table {
+    display: flex;
+    flex: 100%;
+    justify-content: space-between;
+    background-color: hotpink;
+    color: white;
+    text-align: left;
+    padding: 2px;
+    margin: 1px;
+}
+
+.child {
+    display: inline-block;
+    font-family: "Open Sans", Arial;
+    width: 20%;
+    max-height: 25px;
+    font-size: 15px;
+    color: #FFF;
+    text-align: left;
+    padding: 2px;
+    margin: 5px;
+}
+
+.navBar-title {
+    font-size: 25px;
+    color: #FFF;
+}

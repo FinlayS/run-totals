@@ -1,18 +1,21 @@
-import React, {Component} from 'react'
-import RunList from "./runList";
+import React from 'react';
+import Container from 'react-bootstrap/Container';
+import Runs from "../components/runs/runs";
+import Header from "../components/header";
 
-export default class extends Component {
 
-  render() {
-    return (
+const Index = () => {
+  return (
+    <div>
+      <Header/>
+      <h3>Runs</h3>
       <div>
-        <div>
-          <h1>Run totals</h1>
-        </div>
-        <div>
-          <RunList></RunList>
-        </div>
+        <Container className="container">
+          <Runs/>
+        </Container>
       </div>
-    )
-  }
+    </div>
+  )
 }
+
+export default Index

@@ -10,7 +10,7 @@ const Header = () => {
      <link rel="icon" type="image/png" href="../public/favicon.png"/>
    </Head>
      <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark" >
-       <Navbar.Brand text-align="center">Run Totals</Navbar.Brand>
+       <Navbar.Brand class="navBar-title">Run Totals</Navbar.Brand>
        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
        <Navbar.Collapse id="responsive-navbar-nav">
          <Nav>

@@ -2,19 +2,26 @@ const mongoose = require('mongoose')
 
 const Lap = mongoose.model('Lap', {
   runId: {
-    type: Object
+    type: Object,
+    required: true,
   },
-  lapActive: {
-    type: Boolean
+  runId: {
+    type: Boolean,
+    default: false,
+    required: true,
   },
   lapNo: {
-    type: Object
+    type: Number,
+    required: true,
   },
   lapTime: {
-    type: String
+    type: String,
+    required: true,
+    trim: true,
   },
   lapDistance: {
-    type: Number
+    type: Number,
+    required: true,
   }
 })
 

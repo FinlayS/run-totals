@@ -5,7 +5,7 @@ const Lap = mongoose.model('Lap', {
     type: Object,
     required: true,
   },
-  runId: {
+  lapActive: {
     type: Boolean,
     default: false,
     required: true,

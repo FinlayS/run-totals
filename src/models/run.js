@@ -10,6 +10,11 @@ const Run = mongoose.model('Run', {
     type: String,
     required: true,
     trim: true
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectID,
+    required: true,
+    ref: 'User'
   }
 })
 

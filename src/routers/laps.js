@@ -1,9 +1,13 @@
 const express = require('express')
 const router = new express.Router()
+const auth = require('../middleware/authentication')
 const Lap = require('../models/lap')
 
-router.post('/laps', async (req, res) => {
-  const lap = new Lap(req.body)
+router.post('/laps', auth, async (req, res) => {
+  const lap = new Lap({
+    ...req.body,
+    owner: req.user._id
+  })
 
   try {
     await lap.save()
@@ -13,11 +17,12 @@ router.post('/laps', async (req, res) => {
   }
 })
 
-router.get('/laps/:id', async (req, res) => {
+router.get('/laps/:id', auth, async (req, res) => {
   const _id = req.params.id
 
   try {
-    const lap = await Lap.findById(_id)
+    const lap = await Lap.findOne({ _id, owner: req.user._id })
+
 
     if (!lap) {
       return res.status(404).send()
@@ -29,11 +34,11 @@ router.get('/laps/:id', async (req, res) => {
   }
 })
 
-router.get('/laps/:id?', async (req, res) => {
+router.get('/laps/:id?', auth, async (req, res) => {
   const query = req.query.runId
 
   try {
-    const laps = await Lap.find({runId: query})
+    const laps = await Lap.find({ runId: query, owner: req.user._id })
     if (laps.length < 1) {
       return res.status(404).send()
     }
@@ -44,7 +49,8 @@ router.get('/laps/:id?', async (req, res) => {
   }
 })
 
-router.patch('/laps/:id', async (req, res) => {
+router.patch('/laps/:id', auth,  async (req, res) => {
+  const _id = req.params.id
   const updates = Object.keys(req.body)
   const allowedUpdates = ["runId", , "runId", "lapNo", "lapTime", "lapDistance"]
   const isValidOperation = updates.every((update ) => allowedUpdates.includes(update))
@@ -54,14 +60,14 @@ router.patch('/laps/:id', async (req, res) => {
   }
 
   try {
-    const lap = await Lap.findById(req.params.id)
-
-    updates.forEach((update) => lap[update] = req.body[update])
-    await lap.save()
+    const lap = await Lap.findOne({ _id, owner: req.user._id })
 
     if (!lap) {
       return res.status(404).send()
     }
+
+    updates.forEach((update) => lap[update] = req.body[update])
+    await lap.save()
 
     res.send(lap)
   } catch(e) {
@@ -69,9 +75,11 @@ router.patch('/laps/:id', async (req, res) => {
   }
 })
 
-router.delete('/laps/:id', async (req, res) => {
+router.delete('/laps/:id', auth, async (req, res) => {
+  const _id = req.params.id
+
   try {
-    const lap = await Lap.findByIdAndDelete(req.params.id)
+    const lap = await Lap.findOneAndDelete({ _id, owner: req.user._id })
 
     if (!lap) {
       return res.status(404).send()

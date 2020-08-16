@@ -2,6 +2,8 @@ const mongoose = require('mongoose')
 const validator = require('validator')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const Lap = require('../models/lap')
+const Run = require('../models/run')
 
 const jwtSecret = process.env.JWT_SECRET
 
@@ -95,6 +97,14 @@ userSchema.pre('save', async function (next) {
    user.password = await bcrypt.hash(user.password, 8)
   }
 
+  next()
+})
+
+userSchema.pre('remove', async function (next) {
+  const user = this
+
+  await Run.deleteMany({ owner: user._id})
+  await Lap.deleteMany({ owner: user._id})
   next()
 })
 

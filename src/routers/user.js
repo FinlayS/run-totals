@@ -3,7 +3,6 @@ const router = new express.Router()
 const auth = require('../middleware/authentication')
 const User = require('../models/user')
 
-
 router.post('/users', async (req, res) => {
   const user = new User(req.body)
 

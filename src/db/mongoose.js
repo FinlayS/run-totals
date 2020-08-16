@@ -8,13 +8,4 @@ mongoose.connect('mongodb://127.0.0.1:27017/run-totals', {
   useFindAndModify: false
 })
 
-const r = new Run({
-  description: "Server started",
-  date: new Date()
-})
-
-r.save().then(() => {
-  console.log(r)
-}).catch((error) => {
-  console.log("error", error)
-})
+console.log('Server started')

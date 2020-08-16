@@ -22,6 +22,11 @@ const Lap = mongoose.model('Lap', {
   lapDistance: {
     type: Number,
     required: true,
+  },
+  owner: {
+    type: mongoose.Schema.Types.ObjectID,
+    required: true,
+    ref: 'User'
   }
 })
 

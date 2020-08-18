@@ -10,7 +10,7 @@ const jwtSecret = process.env.JWT_SECRET
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: false,
     trim: true
   },
   email: {
@@ -76,15 +76,16 @@ userSchema.methods.generateAuthToken = async function () {
 
 userSchema.statics.findByCredentials = async (email, password) => {
   const user = await User.findOne({ email })
+  const errorMessage = 'Email and password combination incorrect'
 
   if (!user) {
-    throw new Error('Unable to login')
+    throw new Error(errorMessage)
   }
 
   const isMatch = await bcrypt.compare(password, user.password)
 
   if (!isMatch) {
-    throw new Error('Unable to login')
+    throw new Error(errorMessage)
   }
 
   return user

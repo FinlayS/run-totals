@@ -5,7 +5,7 @@ import Container from "react-bootstrap/Container";
 
 const RunDetails = (id, description, date) => {
   return (
-    <div>
+    <div key={id}>
       <div className="text-title">
         <div >{description}</div>
         <div >{date}</div>

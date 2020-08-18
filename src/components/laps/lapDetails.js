@@ -1,13 +1,13 @@
 import React from 'react';
 import Checkbox from '../checkbox';
-import {getPace} from "../../utils/getPace";
+import {getPace} from "../../../utils/getPace";
 
 const LapDetails = (lapActive, lapNo, lapTime, lapDistance) => {
 
   const lapPace = getPace(lapTime, lapDistance)
 
   return (
-    <div>
+    <div key={lapNo}>
       <div className="flex-container">
         <div className="child">{lapNo}</div>
         <div className="child"><Checkbox checked={lapActive}></Checkbox></div>

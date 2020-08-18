@@ -1,7 +1,7 @@
 import React from 'react';
-import {getRunLaps} from "../../utils/getRunLaps";
-import {getLapTotals} from "../../utils/getTotals";
-import {getPace} from "../../utils/getPace";
+import {getRunLaps} from "../../../utils/getRunLaps";
+import {getLapTotals} from "../../../utils/getTotals";
+import {getPace} from "../../../utils/getPace";
 
 const RunTotals = (id) => {
 

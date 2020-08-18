@@ -1,5 +1,5 @@
 import React from 'react';
-import {getRunList} from "../../utils/getRuns";
+import {getRunList} from "../../../utils/getRuns";
 import RunDetails from "./runDetails";
 
 const Runs = () => {

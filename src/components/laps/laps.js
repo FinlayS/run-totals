@@ -1,5 +1,5 @@
 import React from 'react';
-import {getRunLaps} from "../../utils/getRunLaps";
+import {getRunLaps} from "../../../utils/getRunLaps";
 import LapDetails from "./lapDetails";
 
 const Laps = (id) => {
@@ -9,11 +9,11 @@ const Laps = (id) => {
   return (
     <div>
       <div className="flex-table">
-        <th className="child">Lap</th>
-        <th className="child">Act?</th>
-        <th className="child">Time</th>
-        <th className="child">Dist</th>
-        <th className="child">Pace</th>
+        <div className="child">Lap</div>
+        <div className="child">Act?</div>
+        <div className="child">Time</div>
+        <div className="child">Dist</div>
+        <div className="child">Pace</div>
       </div>
       {runLaps.map(({lapActive, lapNo, lapTime, lapDistance}) => (
       LapDetails(lapActive, lapNo, lapTime, lapDistance)

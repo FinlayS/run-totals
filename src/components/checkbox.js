@@ -7,6 +7,7 @@ const Checkbox = (isChecked) => {
         <input
           type="checkbox"
           checked={isChecked.checked}
+          readOnly={true}
         />
       </label>
   )

@@ -6,10 +6,10 @@
       "date": "31/07/2020",
       "laps": [
         {
-          "lapActive": false,
+          "lapActive": true,
           "lapNo": "1",
           "lapTime": "00:09:08",
-          "lapDistance": 0.52
+          "lapDistance": 10.52
         },
         {
           "lapActive": true,

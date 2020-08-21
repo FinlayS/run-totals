@@ -3,7 +3,6 @@ import Container from 'react-bootstrap/Container';
 import Runs from "../components/runs/runs";
 import Header from "../components/header";
 
-
 const Index = () => {
   return (
     <div>

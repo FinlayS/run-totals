@@ -2,15 +2,18 @@ import React, {useState} from 'react';
 import { useRouter } from "next/router";
 import axios from "axios";
 
-const RegisterForm = (props) => {
+const RegisterForm = () => {
   const router = useRouter()
   const [state , setState] = useState({
     email : "",
     password : "",
-    confirmPassword: ""
+    confirmPassword: "",
+    successMessage: null,
+    error: ""
   })
 
   const handleChange = (e) => {
+    showError(null)
     const {id , value} = e.target
     setState(prevState => ({
       ...prevState,
@@ -18,10 +21,15 @@ const RegisterForm = (props) => {
     }))
   }
 
+  const showError = (msg) => {
+    setState(prevState => ({
+      ...prevState,
+      error : msg
+    }))
+  }
+
   const sendDetailsToServer = async () => {
     if(state.email.length && state.password.length) {
-      // TODO return an error here to render
-
       const payload={
         "email":state.email,
         "password":state.password,
@@ -35,33 +43,35 @@ const RegisterForm = (props) => {
             }))
             localStorage.setItem('token', response.data.token)
             router.push('/')
-            // TODO return an error here to render
-            //  props.showError(null)
+            showError(null)
           } else{
-            // TODO return an error here to render
-            //   props.showError("Some error ocurred");
-
+            showError(response.status, "Some error occurred");
           }
         })
         .catch(function (error) {
+          setState(prevState => ({
+            ...prevState,
+            'error' : "bad request"
+          }))
           console.log(error);
         });
     } else {
-      // TODO return an error here to render
-      //  props.showError('Please enter valid username and password')
+      showError('Please enter valid username and password')
     }
   }
 
-  const handleSubmitClick = (e) => {
-
+  const handleSubmitClick = async (e) => {
     e.preventDefault();
-    console.log('state.password', state.password, 'state.confirmPassword', state.confirmPassword)
     if(state.password === state.confirmPassword) {
-      sendDetailsToServer()
+      await sendDetailsToServer()
     } else {
-      // TODO return an error here to render
-      //  props.showError('Passwords do not match');
+      console.log(state.password, state.confirmPassword)
+      showError('Passwords do not match');
     }
+  }
+
+  const redirectToLogin = async () => {
+    await router.push('/login');
   }
 
   return(
@@ -107,6 +117,17 @@ const RegisterForm = (props) => {
           Register
         </button>
       </form>
+      <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
+        {state.successMessage}
+      </div>
+      <div className="alert alert-danger mt-2" style={{display: state.error ? 'block' : 'none' }} role="alert">
+        {state.error}
+      </div>
+      <div className="mt-2">
+        <span>Already have an account? </span>
+        <span className="loginText" onClick={() => redirectToLogin()}>Login here</span>
+      </div>
+
     </div>
   )
 }

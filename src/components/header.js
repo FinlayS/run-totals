@@ -15,7 +15,10 @@ const Header = () => {
       ).then(() => {
         localStorage.removeItem("token")
         router.push('/')
+    }).catch((e) => {
+      console.log(e.data)
     })
+
 
   }
 
@@ -32,8 +35,7 @@ const Header = () => {
          <Nav>
            <NavDropdown title="Account" id="nav-title">
              <NavDropdown.Item href='/login'>login</NavDropdown.Item>
-             <NavDropdown.Divider />
-             <NavDropdown.Item href='/register'>register</NavDropdown.Item>
+             <NavDropdown.Item href='/register'>sign up</NavDropdown.Item>
              <NavDropdown.Divider />
              <NavDropdown.Item onSelect={logout} >logout</NavDropdown.Item>
            </NavDropdown>

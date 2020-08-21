@@ -27,34 +27,30 @@ const LoginForm = () => {
   }
 
   const sendDetailsToServer = async () => {
-    if(state.email.length && state.password.length) {
-      const payload={
-        "email":state.email,
-        "password":state.password,
-      }
-      await axios.post('http://localhost:3001'+'/users/login', payload)
-        .then(function (response) {
-          if(response.status === 200){
-            setState(prevState => ({
-              ...prevState,
-              'successMessage' : 'Login successful. Redirecting to home page..'
-            }))
-            localStorage.setItem('token', response.data.token)
-            router.push('/')
-            showError(null)
-          } else{
-            showError("Some error occurred");
-          }
-        })
-        .catch(function (error) {
+    let logInResp
+    try {
+      if(state.email.length && state.password.length) {
+        const payload={
+          "email":state.email,
+          "password":state.password,
+        }
+        logInResp = await axios.post('http://localhost:3001'+'/users/login', payload)
+        if(logInResp.status === 200){
+          showError(null)
           setState(prevState => ({
             ...prevState,
-            'error' : "bad request"
+            'successMessage' : 'Login successful. Redirecting to home page..'
           }))
-          console.log(error);
-        });
-    } else {
-      showError('Please enter valid username and password')
+          localStorage.setItem('token', logInResp.data.token)
+          await router.push('/')
+        } else{
+          showError(logInResp.status, "Some error occurred");
+        }
+      }
+      return showError('Please enter valid username and password')
+    }
+    catch (e) {
+      showError('Invalid login')
     }
   }
 

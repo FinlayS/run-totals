@@ -29,34 +29,30 @@ const RegisterForm = () => {
   }
 
   const sendDetailsToServer = async () => {
-    if(state.email.length && state.password.length) {
-      const payload={
-        "email":state.email,
-        "password":state.password,
-      }
-      await axios.post('http://localhost:3001'+'/users', payload)
-        .then(function (response) {
-          if(response.status === 201){
-            setState(prevState => ({
-              ...prevState,
-              'successMessage' : 'Registration successful. Redirecting to home page..'
-            }))
-            localStorage.setItem('token', response.data.token)
-            router.push('/')
-            showError(null)
-          } else{
-            showError(response.status, "Some error occurred");
-          }
-        })
-        .catch(function (error) {
+    let regResp
+    try {
+      if(state.email.length && state.password.length) {
+        const payload={
+          "email":state.email,
+          "password":state.password,
+        }
+        regResp = await axios.post('http://localhost:3001'+'/users', payload)
+        if(regResp.status === 201){
           setState(prevState => ({
             ...prevState,
-            'error' : "bad request"
+            'successMessage' : 'Registration successful. Redirecting to home page..'
           }))
-          console.log(error);
-        });
-    } else {
-      showError('Please enter valid username and password')
+          localStorage.setItem('token', regResp.data.token)
+          await router.push('/')
+          showError(null)
+        } else{
+          showError(regResp.status, "Some error occurred");
+        }
+      }
+      return showError('Please enter valid username and password')
+    }
+    catch (e) {
+      showError(e.response.data._message)
     }
   }
 

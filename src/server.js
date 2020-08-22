@@ -10,7 +10,6 @@ const lapRouter = require('./routers/laps')
 const app = express()
 const port = process.env.PORT || 3001
 
-app.use('/', express.static(path.join(__dirname, '/client/build')));
 app.use(cors())
 app.use(express.json())
 app.use(userRouter, runRouter, lapRouter)

@@ -7,7 +7,8 @@
     "dev": "next",
     "dev-server": "nodemon src/server.js",
     "build": "next build",
-    "start": "npm run build && node src/server.js"
+    "postinstall": "npm run build",
+    "start": "node src/server.js"
   },
   "keywords": [],
   "author": "",

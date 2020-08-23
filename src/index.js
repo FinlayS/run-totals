@@ -1,3 +1,4 @@
+const path = require('path')
 require('dotenv').config()
 const express = require('express')
 require('./db/mongoose')
@@ -8,12 +9,16 @@ const runRouter = require('./routers/runs')
 const lapRouter = require('./routers/laps')
 
 const app = express()
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3000
 
 app.use(cors())
 app.use(express.json())
-app.use(express.static(path.join(__dirname, "static")));
+app.use(express.static(path.join(__dirname, '../.next/server/pages/')));
 app.use(userRouter, runRouter, lapRouter)
+app.get('/', function(req, res){
+ console.log(__dirname)
+ res.sendfile(path.join(__dirname, '../.next/server/pages'));
+});
 
 
 app.listen(port,() => {

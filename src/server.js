@@ -12,7 +12,9 @@ const port = process.env.PORT || 3001
 
 app.use(cors())
 app.use(express.json())
+app.use(express.static(path.join(__dirname, "static")));
 app.use(userRouter, runRouter, lapRouter)
+
 
 app.listen(port,() => {
  console.log('Server is up on port', + port)

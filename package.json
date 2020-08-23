@@ -7,7 +7,7 @@
     "dev": "next",
     "dev-server": "nodemon src/server.js",
     "build": "next build",
-    "start": "next start -p ${PORT} && npm run start-server",
+    "start": "next start -p ${PORT} & npm run start-server",
     "start-server": "NODE_ENV=production node src/server.js"
   },
   "keywords": [],

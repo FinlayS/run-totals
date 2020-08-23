@@ -13,6 +13,7 @@ const runRouter = require('./routers/runs')
 const lapRouter = require('./routers/laps')
 
 app.prepare().then(() => {
+ console.log("ENVIRONMENT", dev)
  const server = express()
 
  server.use(cors())

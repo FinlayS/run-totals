@@ -7,7 +7,8 @@
     "dev": "next",
     "dev-server": "nodemon src/server.js",
     "build": "next build",
-    "start": "next start -p ${PORT} & npm run start-server",
+    "postinstall": "npm run start-server",
+    "start": "next start -p ${PORT}",
     "start-server": "node src/server.js"
   },
   "keywords": [],

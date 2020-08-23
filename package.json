@@ -7,8 +7,7 @@
     "dev": "next",
     "dev-server": "nodemon src/server.js",
     "build": "next build",
-    "prestart": "npm run build",
-    "start": "next start -p ${PORT}"
+    "start": "node src/server.js"
   },
   "keywords": [],
   "author": "",

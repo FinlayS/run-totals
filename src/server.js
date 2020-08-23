@@ -1,28 +1,19 @@
+require('dotenv').config()
 const express = require('express')
-const next = require('next')
 require('./db/mongoose')
 const cors = require('cors')
-
-const port = parseInt(process.env.PORT, 10) || 3000
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
-const handle = app.getRequestHandler()
 
 const userRouter = require('./routers/user')
 const runRouter = require('./routers/runs')
 const lapRouter = require('./routers/laps')
 
-app.prepare().then(() => {
- console.log("ENVIRONMENT", dev)
- const server = express()
+const app = express()
+const port = process.env.PORT || 3001
 
- server.use(cors())
- server.use(express.json())
- server.use(userRouter, runRouter, lapRouter)
- server.all('*', (req, res) => {
-  return handle(req, res)
- })
- server.listen(port,() => {
-  console.log('Server is up on port', + port)
- })
+app.use(cors())
+app.use(express.json())
+app.use(userRouter, runRouter, lapRouter)
+
+app.listen(port,() => {
+ console.log('Server is up on port', + port)
 })

@@ -21,7 +21,6 @@ app.prepare().then(() => {
  server.all('*', (req, res) => {
   return handle(req, res)
  })
-
  server.listen(port,() => {
   console.log('Server is up on port', + port)
  })

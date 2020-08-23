@@ -7,8 +7,8 @@
     "dev": "next",
     "dev-server": "nodemon src/server.js",
     "build": "next build",
-    "postinstall": "npm run build",
-    "start": "NODE_ENV=production node src/server.js"
+    "prestart": "npm run build",
+    "start": "next start"
   },
   "keywords": [],
   "author": "",

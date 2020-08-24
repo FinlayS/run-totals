@@ -18,8 +18,6 @@ export const userLogout = async () => {
         }
       }
     )
-    localStorage.removeItem("token")
-
   } catch (e) {
     console.log(e.data)
   }

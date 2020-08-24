@@ -15,6 +15,7 @@ const Header = () => {
     } catch (e) {
     }
     await router.push('/')
+    localStorage.removeItem("token")
   }
 
   return (

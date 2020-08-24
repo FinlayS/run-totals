@@ -4,7 +4,7 @@ require('./db/mongoose')
 const next = require('next')
 const PORT = process.env.PORT || 3001
 const dev = process.env.NODE_ENV !== 'production' //true false
-const nextApp = next({  })
+const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler() //part of next config
 const cors = require('cors')
 

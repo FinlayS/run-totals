@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 const Header = () => {
   const router = useRouter()
   const logout = async () => {
-    await axios.post('http://localhost:3001'+'/users/logout',
+    await axios.post('/users/logout',
       {},
       {headers: {
           "Authorization": `Bearer ${localStorage.getItem("token")}`

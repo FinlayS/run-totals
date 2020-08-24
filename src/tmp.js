@@ -1,26 +1,32 @@
-const mongoose = require('mongoose')
+// server.js
+require('dotenv').config()
 
-mongoose.connect('mongodb://127.0.0.1:27017/run-totals', {
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  useUnifiedTopology: true
-})
+const express = require('express')
+require('./db/mongoose')
+const next = require('next')
+const bodyParser = require('body-parser')
+const PORT = process.env.PORT || 3000
+const dev = process.env.NODE_ENV !== 'production' //true false
+const nextApp = next({ dev })
+const handle = nextApp.getRequestHandler() //part of next config
+const cors = require('cors')
 
-const r = new Run({
-  description: "Run saved in database",
-  date: "13/08/2020"
-})
+const userRouter = require('./routers/user')
+const runRouter = require('./routers/runs')
+const lapRouter = require('./routers/laps')
 
-const l = new Lap({
-  runId:  mongoose.Types.ObjectId("5f368c67a65f903481274157"),
-  lapActive: false,
-  lapNo: {type: [String], index: true},
-  lapTime: "00:09:08",
-  lapDistance: 0.52
-})
-
-l.save().then(() => {
-  console.log(l)
-}).catch((error) => {
-  console.log("error", error)
+nextApp.prepare().then(() => {
+  // express code here
+  const app = express()
+  app.use(cors())
+   app.use(express.json());
+  // app.use(bodyParser.urlencoded({ extended: true }));
+  app.use(userRouter, runRouter, lapRouter)
+  app.get('*', (req,res) => {
+    return handle(req,res) // for all the react stuff
+  })
+  app.listen(PORT, err => {
+    if (err) throw err;
+    console.log(`ready at http://localhost:${PORT}`)
+  })
 })

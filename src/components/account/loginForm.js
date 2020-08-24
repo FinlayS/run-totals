@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { useRouter } from 'next/router'
-import axios from "axios";
+
+import {userLogin} from "../../routers/utils/api";
 
 const LoginForm = () => {
   const router = useRouter()
@@ -27,21 +28,19 @@ const LoginForm = () => {
   }
 
   const sendDetailsToServer = async () => {
-    let logInResp
     try {
       if(state.email.length && state.password.length) {
         const payload={
           "email":state.email,
           "password":state.password,
         }
-        logInResp = await axios.post('http://localhost:3001'+'/users/login', payload)
+        const logInResp = await userLogin(payload)
         if(logInResp.status === 200){
           showError(null)
           setState(prevState => ({
             ...prevState,
             'successMessage' : 'Login successful. Redirecting to home page..'
           }))
-          localStorage.setItem('token', logInResp.data.token)
           await router.push('/')
         } else{
           showError(logInResp.status, "Some error occurred");

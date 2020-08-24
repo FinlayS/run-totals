@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { useRouter } from "next/router";
-import axios from "axios";
+
+import {userRegister} from "../../routers/utils/api";
 
 const RegisterForm = () => {
   const router = useRouter()
@@ -29,20 +30,18 @@ const RegisterForm = () => {
   }
 
   const sendDetailsToServer = async () => {
-    let regResp
     try {
       if(state.email.length && state.password.length) {
         const payload={
           "email":state.email,
           "password":state.password,
         }
-        regResp = await axios.post('http://localhost:3001'+'/users', payload)
+       const regResp = await userRegister( payload)
         if(regResp.status === 201){
           setState(prevState => ({
             ...prevState,
             'successMessage' : 'Registration successful. Redirecting to home page..'
           }))
-          localStorage.setItem('token', regResp.data.token)
           await router.push('/')
           showError(null)
         } else{

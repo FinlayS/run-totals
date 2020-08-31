@@ -10,10 +10,10 @@ const RunDetails = (id, description, date) => {
         <div >{description}</div>
         <div >{date}</div>
       </div>
-      <Container className="container">
-        <Laps id={id}></Laps>
-        <RunTotals id={id}></RunTotals>
-      </Container>
+      {/*<Container className="container">*/}
+      {/*  <Laps id={id}></Laps>*/}
+      {/*  <RunTotals id={id}></RunTotals>*/}
+      {/*</Container>*/}
     </div>
   )
 }

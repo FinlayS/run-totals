@@ -11,7 +11,6 @@ const Register = () => {
         <div className="container d-flex align-items-center flex-column">
           <RegisterForm/>
         </div>
-
       </div>
     </div>
   )

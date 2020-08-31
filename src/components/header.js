@@ -1,8 +1,8 @@
 import Head from "next/head";
-import {Navbar, Nav, NavDropdown} from 'react-bootstrap'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import React from "react";
-import {useRouter} from 'next/router'
-import {userLogout} from "../routers/utils/api";
+import { useRouter } from 'next/router'
+import { userLogout } from "../routers/api/user";
 
 const Header = () => {
   const router = useRouter()

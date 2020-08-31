@@ -1,12 +1,5 @@
 import axios from 'axios'
-
-const getUrl = (url) => {
-  if (process.env.NODE_ENV !== 'production') {
-    const newUrl = `http://localhost:3001${url}`
-    return newUrl
-  }
-  return url
-}
+import { getUrl } from './utils'
 
 export const userLogout = async () => {
   try {

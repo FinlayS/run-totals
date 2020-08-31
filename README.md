@@ -2,6 +2,7 @@
 
 - npm i 
 - npm run dev
+- npm run dev-server
 - Go to `http://localhost:3000/`
 
 ## Build

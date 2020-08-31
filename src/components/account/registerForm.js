@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useRouter } from "next/router";
 
-import {userRegister} from "../../routers/utils/api";
+import {userRegister} from "../../routers/api/user";
 
 const RegisterForm = () => {
   const router = useRouter()

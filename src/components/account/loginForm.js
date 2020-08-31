@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import { useRouter } from 'next/router'
-
-import {userLogin} from "../../routers/utils/api";
+import { userLogin } from "../../routers/api/user";
 
 const LoginForm = () => {
+
   const router = useRouter()
   const [state , setState] = useState({
     email : "",
@@ -41,7 +41,7 @@ const LoginForm = () => {
             ...prevState,
             'successMessage' : 'Login successful. Redirecting to home page..'
           }))
-          await router.push('/')
+          await router.push('/RunTotalsForm')
         } else{
           showError(logInResp.status, "Some error occurred");
         }

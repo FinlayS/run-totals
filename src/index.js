@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require('express')
 require('./db/mongoose')
 const next = require('next')
-const PORT = process.env.api_PORT || 3001
+const PORT = process.env.PORT || 3001
 const dev = process.env.NODE_ENV !== 'production' //true false
 const nextApp = next({ dev })
 const handle = nextApp.getRequestHandler() //part of next config

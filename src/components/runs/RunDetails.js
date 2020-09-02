@@ -8,14 +8,17 @@ const RunDetails = ({ run }) => {
   const { dispatch } =useContext(RunContext)
 
   const removeRun = async() => {
-    let response
-    try {
-      response = await deleteRun(run._id)
-    } catch (e) {
-      console.log(e.data)
-    }
-    if (response) {
-      dispatch({ type: 'REMOVE_RUN', _id: run._id })
+    let r = confirm("Confirm you wish to delete this run");
+    if (r === true) {
+      let response
+      try {
+        response = await deleteRun(run._id)
+      } catch (e) {
+        console.log(e.data)
+      }
+      if (response) {
+        dispatch({ type: 'REMOVE_RUN', _id: run._id })
+      }
     }
   }
 
@@ -24,7 +27,12 @@ const RunDetails = ({ run }) => {
       <div className="text-title">
         <div >{run.description}</div>
         <div >{run.date}</div>
-        <button onClick={removeRun}>x</button>
+        <button class="btn btn-link"
+                data-toggle="tooltip"
+                data-placement="left"
+                title="Delete Run"
+                onClick={removeRun}
+        >x</button>
       </div>
     </div>
   )

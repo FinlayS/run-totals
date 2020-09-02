@@ -1,8 +1,7 @@
-import Head from "next/head";
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import {Navbar, Nav, NavDropdown} from 'react-bootstrap'
 import React from "react";
-import { useRouter } from 'next/router'
-import { userLogout } from "../routers/api/user";
+import {useRouter} from 'next/router'
+import {userLogout} from "../routers/api/user";
 
 const Header = () => {
   const router = useRouter()
@@ -15,15 +14,13 @@ const Header = () => {
     } catch (e) {
     }
     localStorage.removeItem("token")
-    await router.push('/')
+    await router.push('/Home')
   }
 
   return (
     <>
-      <Head>
-        <title>Run Totals</title>
-        <link rel="icon" type="image/png" href="../../public/favicon.ico"/>
-      </Head>
+      <title>Run Totals</title>
+      <link rel="icon" type="image/png" href="../../public/favicon.ico"/>
       <Navbar fixed="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Navbar.Brand className="navBar-title">Run Totals</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>

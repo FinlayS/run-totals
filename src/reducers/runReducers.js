@@ -11,7 +11,7 @@ const runReducer = (state, action) => {
         }
       ]
     case 'REMOVE_RUN':
-      return state.filter((run) => run._id !== run._id)
+      return state.filter((run) => run._id !== action._id)
     default:
       return state
   }

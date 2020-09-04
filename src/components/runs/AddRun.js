@@ -1,33 +1,92 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useState,} from "react";
 import RunContext from "../../context/runContext";
-import { postRun } from '../../routers/api/runs'
+import Container from 'react-bootstrap/Container';
+import moment from "moment";
+import {postRun} from '../../routers/api/runs'
+import {Button, Modal, Row, Col} from "react-bootstrap";
 
 const AddRun = () => {
+  const today = moment().format('DD/MM/YYYY')
   const {dispatch} = useContext(RunContext)
   const [description, setDescription] = useState('')
-  const [date, setDate] = useState('')
+  const [date, setDate] = useState(today)
+  const [id, setId] = useState('')
+  const [show, setShow] = useState(false);
 
-  const addRun = async(e) => {
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const addRun = async (e) => {
     let run
     e.preventDefault()
+
     try {
       run = await postRun({description, date})
     } catch (e) {
       console.log(e.data)
     }
     if (run) {
-    dispatch({type: 'ADD_RUN', description, date})
-    setDescription('')
-    setDate('')
+      const _id = run._id
+      dispatch({type: 'ADD_RUN', description, date, _id})
+      setDescription('')
+      setId('')
+      setDate(today)
+      setShow(false)
     }
   }
 
   return (
-    <form onSubmit={addRun}>
-      <input value={description} onChange={(e) => setDescription(e.target.value)}/>
-      <textarea value={date} onChange={(e) => setDate(e.target.value)}></textarea>
-      <button>add run</button>
-    </form>
+    <>
+      <Container>
+        <Button variant="primary" onClick={handleShow}>
+          Add run
+        </Button>
+      </Container>
+
+      <Modal show={show}
+             onHide={handleClose}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Add a new run</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <Row className="form-row">
+            <Col className="col-md-8 mb-3 md-form">
+              <label htmlFor="runDescription">Describe your run</label>
+              <input
+                type="text"
+                className="input-group"
+                id="runDescription"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+            </Col>
+
+            <Col className="col-md-4 mb-1 md-form">
+              <label htmlFor="runDate">Date</label>
+              <input
+                type="text"
+                className="input-group"
+                id="runDate"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+              />
+            </Col>
+          </Row>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={addRun} type="submit">
+            Save Changes
+          </Button>
+        </Modal.Footer>
+
+      </Modal>
+    </>
   )
 }
 

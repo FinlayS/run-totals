@@ -1,13 +1,13 @@
 import React, {useContext} from 'react';
 import RunContext from "../../context/runContext";
-import { deleteRun } from "../../routers/api/runs";
+import {deleteRun} from "../../routers/api/runs";
+import {Row, Col, Container} from "react-bootstrap";
 
+const RunDetails = ({run}) => {
 
-const RunDetails = ({ run }) => {
+  const {dispatch} = useContext(RunContext)
 
-  const { dispatch } =useContext(RunContext)
-
-  const removeRun = async() => {
+  const removeRun = async () => {
     let r = confirm("Confirm you wish to delete this run");
     if (r === true) {
       let response
@@ -17,24 +17,28 @@ const RunDetails = ({ run }) => {
         console.log(e.data)
       }
       if (response) {
-        dispatch({ type: 'REMOVE_RUN', _id: run._id })
+        dispatch({type: 'REMOVE_RUN', _id: run._id})
       }
     }
   }
 
   return (
-    <div key={run._id}>
-      <div className="text-title">
-        <div >{run.description}</div>
-        <div >{run.date}</div>
-        <button class="btn btn-link"
-                data-toggle="tooltip"
-                data-placement="left"
-                title="Delete Run"
-                onClick={removeRun}
-        >x</button>
-      </div>
-    </div>
+    <Container>
+      <Row className="run-row" key={run._id}>
+        <Col> {run.description}</Col>
+        <Col xs={4}> {run.date}</Col>
+        <Col xs={2}>
+          <button
+            className="btn btn-link"
+            data-toggle="tooltip"
+            data-placement="right"
+            title="Delete Run"
+            onClick={removeRun}
+          >x
+          </button>
+        </Col>
+      </Row>
+    </Container>
   )
 }
 

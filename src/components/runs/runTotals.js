@@ -1,12 +1,12 @@
 import React from 'react';
-import {getRunLaps} from "../../../utils/getRunLaps";
+import {getLaps} from "../../routers/api/laps";
 import {getLapTotals} from "../../../utils/getTotals";
 import {getPace} from "../../../utils/getPace";
 
-const RunTotals = (id) => {
+const RunTotals = async (id) => {
 
-  const runLaps = getRunLaps(id.id)
-  const lapTimesAndDistances = getLapTotals(runLaps)
+  const runLaps = await getLaps(id.children[1])
+  const lapTimesAndDistances = await getLapTotals(runLaps)
   const totalPace = getPace(
     lapTimesAndDistances.totalTime,
     lapTimesAndDistances.totalDistance

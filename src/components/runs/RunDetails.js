@@ -2,6 +2,8 @@ import React, {useContext} from 'react';
 import RunContext from "../../context/runContext";
 import {deleteRun} from "../../routers/api/runs";
 import {Row, Col, Container} from "react-bootstrap";
+import Laps from "../laps/laps";
+import RunTotals from "./runTotals";
 
 const RunDetails = ({run}) => {
 
@@ -38,6 +40,10 @@ const RunDetails = ({run}) => {
           </button>
         </Col>
       </Row>
+
+      <Laps >{run._id}</Laps>
+      {/*<RunTotals>{run._id}</RunTotals>*/}
+
     </Container>
   )
 }

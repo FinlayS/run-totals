@@ -1,10 +1,27 @@
-import React from 'react';
-import {getRunLaps} from "../../../utils/getRunLaps";
+import React, {useEffect, useReducer} from 'react';
 import LapDetails from "./lapDetails";
+import AddLap from "./AddLap";
+import {getLaps} from "../../routers/api/laps";
+import runReducer from "../../reducers/runReducers";
 
 const Laps = (id) => {
+  const [laps, dispatch] = useReducer(runReducer, [])
+  const runId = id.children
 
-  const runLaps = getRunLaps(id.id)
+  useEffect(() => {
+    async function fetchData() {
+      const laps =  await getLaps(runId)
+
+      if (laps) {
+        dispatch({type: 'POPULATE_LAPS', laps})
+      }
+    }
+    fetchData().then(() => {console.log("got the laps", laps)});
+    return () => {
+      console.log('laps unmounts')
+    }
+  }, [])
+
 
   return (
     <div>
@@ -15,9 +32,10 @@ const Laps = (id) => {
         <div className="child">Dist</div>
         <div className="child">Pace</div>
       </div>
-      {runLaps.map(({lapActive, lapNo, lapTime, lapDistance}) => (
-      LapDetails(lapActive, lapNo, lapTime, lapDistance)
+      {laps.map(({lapActive, lapNo, lapTime, lapDistance}) => (
+        LapDetails(lapActive, lapNo, lapTime, lapDistance)
       ))}
+      <AddLap> {runId} </AddLap>
     </div>
   )
 }

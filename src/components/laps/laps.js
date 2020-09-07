@@ -3,6 +3,8 @@ import LapDetails from "./lapDetails";
 import AddLap from "./AddLap";
 import {getLaps} from "../../routers/api/laps";
 import runReducer from "../../reducers/runReducers";
+import { ContextDevTool } from 'react-context-devtool';
+import RunContext from "../../context/runContext";
 
 const Laps = (id) => {
   const [laps, dispatch] = useReducer(runReducer, [])
@@ -24,6 +26,8 @@ const Laps = (id) => {
 
 
   return (
+    <RunContext.Provider value={{laps, dispatch}}>
+      <ContextDevTool context={RunContext} id="laps" displayName="Lap Context" />
     <div>
       <div className="flex-table">
         <div className="child">Lap</div>
@@ -37,6 +41,7 @@ const Laps = (id) => {
       ))}
       <AddLap> {runId} </AddLap>
     </div>
+    </RunContext.Provider>
   )
 }
 

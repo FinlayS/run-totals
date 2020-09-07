@@ -7,7 +7,8 @@ const runReducer = (state, action) => {
     case 'ADD_RUN':
       return [
         ...state,
-        { _id: action._id,
+        {
+          _id: action._id,
           description: action.description,
           date: action.date
         }
@@ -15,7 +16,9 @@ const runReducer = (state, action) => {
     case 'ADD_LAP':
       return [
         ...state,
-        { _id: action.runId,
+        {
+          _id: action._id,
+          run_id: action.runId,
           lapNo: action.lapNo,
           active: action.active,
           lapTime: action.lapTime,

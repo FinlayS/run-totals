@@ -34,7 +34,6 @@ const AddLap = (id) => {
       setActive(false)
       setLapTime('')
       setLapDistance('')
-      setShow(false)
     }
   }
 
@@ -67,7 +66,7 @@ const AddLap = (id) => {
             </Col>
 
             <Col className="col-md-3 mb-1 md-form">
-              <label htmlFor="active">Active Lap?</label>
+              <label htmlFor="active">Active?</label>
               <input
                 type="checkbox"
                 className="form-check"
@@ -106,7 +105,7 @@ const AddLap = (id) => {
             Close
           </Button>
           <Button variant="primary" onClick={addLap} type="submit">
-            Save Changes
+            Add
           </Button>
         </Modal.Footer>
 

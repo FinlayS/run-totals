@@ -40,7 +40,7 @@ router.get('/laps/:id?', auth, async (req, res) => {
   try {
     const laps = await Lap.find({ runId: query, owner: req.user._id })
     if (laps.length < 1) {
-      return res.status(404).send()
+      return res.send()
     }
 
     res.send(laps)

@@ -1,6 +1,7 @@
 import React, {useEffect, useReducer} from "react";
 import Container from 'react-bootstrap/Container';
 import runReducer from "../reducers/runReducers";
+import { ContextDevTool } from 'react-context-devtool';
 import RunContext from "../context/runContext";
 import { getRuns } from "../routers/api/runs";
 import RunList from "../components/runs/RunList";
@@ -26,6 +27,7 @@ const RunTotalsForm =  () => {
 
   return (
     <RunContext.Provider value={{runs, dispatch}}>
+      <ContextDevTool context={RunContext} id="runs" displayName="Run Context" />
       <Header/>
       <h3>Runs</h3>
       <div>

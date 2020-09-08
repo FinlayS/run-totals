@@ -1,5 +1,5 @@
-import axios from "axios";
-import { getUrl } from "./utils";
+import axios from 'axios';
+import { getUrl } from './utils';
 
 export const getLaps = async (id) => {
   let response
@@ -7,7 +7,7 @@ export const getLaps = async (id) => {
     response = await axios.get(getUrl(`/laps/?runId=${id}`),
       {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }
     )
@@ -27,13 +27,13 @@ export const postLap = async (data) => {
       {
         runId: data.runId,
         lapNo: data.lapNo,
-        active: data.active,
+        lapActive: data.lapActive,
         lapTime: data.lapTime,
         lapDistance: data.lapDistance
       },
       {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }
     )

@@ -1,5 +1,5 @@
-import axios from "axios";
-import { getUrl } from "./utils";
+import axios from 'axios';
+import { getUrl } from './utils';
 
 export const getRuns = async () => {
   let response
@@ -7,7 +7,7 @@ export const getRuns = async () => {
     response = await axios.get(getUrl('/runs'),
       {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }
     )
@@ -27,7 +27,7 @@ export const postRun = async (data) => {
       },
       {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }
     )
@@ -43,7 +43,7 @@ export const deleteRun = async (id) => {
     response = await axios.delete(getUrl(`/runs/${id}`),
       {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }
     )

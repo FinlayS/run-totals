@@ -7,7 +7,7 @@ export const userLogout = async () => {
       {},
       {
         headers: {
-          "Authorization": `Bearer ${localStorage.getItem("token")}`
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       }
     )

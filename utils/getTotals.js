@@ -1,12 +1,12 @@
-import {addTimes} from "./addTimes";
+import {addTimes} from './addTimes';
 
 Number.prototype.round = function(places) {
-  return +(Math.round(this + "e+" + places)  + "e-" + places);
+  return +(Math.round(this + 'e+' + places)  + 'e-' + places);
 }
 
 export function getLapTotals(laps) {
-  let activeTime = "";
-  let totalTime = "";
+  let activeTime = '';
+  let totalTime = '';
   let activeDistance = 0;
   let totalDistance = 0;
   laps.forEach((lap) => {

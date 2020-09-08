@@ -47,11 +47,11 @@ router.get('/runs/:id', auth, async  (req, res) => {
 router.patch('/runs/:id', auth, async (req, res) => {
   const _id = req.params.id
   const updates = Object.keys(req.body)
-  const allowedUpdates = ["description", , "date"]
+  const allowedUpdates = ['description', , 'date']
   const isValidOperation = updates.every((update ) => allowedUpdates.includes(update))
 
   if (!isValidOperation) {
-    return res.status(400).send({ error: "invalid update" })
+    return res.status(400).send({ error: 'invalid update' })
   }
 
   try {

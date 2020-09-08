@@ -3,9 +3,9 @@ import React from 'react';
 const Checkbox = (isChecked) => {
 
   return (
-      <label className="checkbox">
+      <label className='checkbox'>
         <input
-          type="checkbox"
+          type='checkbox'
           checked={isChecked.checked}
           readOnly={true}
         />

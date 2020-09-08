@@ -1,4 +1,4 @@
-import allRuns from "../data/runs"
+import allRuns from '../data/runs'
 
 export function getRunLaps(id) {
   let l = [];

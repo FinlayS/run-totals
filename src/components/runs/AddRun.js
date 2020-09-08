@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
-import { Button, Modal, Row, Col, Container } from "react-bootstrap";
-import moment from "moment";
+import React, { useContext, useState } from 'react';
+import { Button, Modal, Row, Col, Container } from 'react-bootstrap';
+import moment from 'moment';
 
 import { postRun } from '../../routers/api/runs'
-import RunContext from "../../context/runContext";
+import RunContext from '../../context/runContext';
 
 const AddRun = () => {
   const today = moment().format('DD/MM/YYYY')
@@ -44,7 +44,7 @@ const AddRun = () => {
   return (
     <>
       <Container>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant='primary' onClick={handleShow}>
           Add run
         </Button>
       </Container>
@@ -57,24 +57,24 @@ const AddRun = () => {
         </Modal.Header>
 
         <Modal.Body>
-          <Row className="form-row">
-            <Col className="col-md-8 mb-3 md-form">
-              <label htmlFor="runDescription">Describe your run</label>
+          <Row className='form-row'>
+            <Col className='col-md-8 mb-3 md-form'>
+              <label htmlFor='runDescription'>Describe your run</label>
               <input
-                type="text"
-                className="input-group"
-                id="runDescription"
+                type='text'
+                className='input-group'
+                id='runDescription'
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
               />
             </Col>
 
-            <Col className="col-md-4 mb-1 md-form">
-              <label htmlFor="runDate">Date</label>
+            <Col className='col-md-4 mb-1 md-form'>
+              <label htmlFor='runDate'>Date</label>
               <input
-                type="text"
-                className="input-group"
-                id="runDate"
+                type='text'
+                className='input-group'
+                id='runDate'
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
               />
@@ -83,10 +83,10 @@ const AddRun = () => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant='secondary' onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={addRun} type="submit">
+          <Button variant='primary' onClick={addRun} type='submit'>
             Save Changes
           </Button>
         </Modal.Footer>

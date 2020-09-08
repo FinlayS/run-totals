@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { useRouter } from "next/router";
+import { useRouter } from 'next/router';
 
-import { userRegister } from "../../routers/api/user";
+import { userRegister } from '../../routers/api/user';
 
 const RegisterForm = () => {
   const router = useRouter()
   const [state , setState] = useState({
-    email : "",
-    password : "",
-    confirmPassword: "",
+    email : '',
+    password : '',
+    confirmPassword: '',
     successMessage: null,
-    error: ""
+    error: ''
   })
 
   const handleChange = (e) => {
@@ -33,8 +33,8 @@ const RegisterForm = () => {
     try {
       if(state.email.length && state.password.length) {
         const payload={
-          "email":state.email,
-          "password":state.password,
+          'email':state.email,
+          'password':state.password,
         }
        const regResp = await userRegister( payload)
         if(regResp.status === 201){
@@ -45,7 +45,7 @@ const RegisterForm = () => {
           await router.push('/')
           showError(null)
         } else{
-          showError(regResp.status, "Some error occurred");
+          showError(regResp.status, 'Some error occurred');
         }
       }
       return showError('Please enter valid username and password')
@@ -70,57 +70,57 @@ const RegisterForm = () => {
   }
 
   return(
-    <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
+    <div className='card col-12 col-lg-4 login-card mt-2 hv-center'>
       <form>
-        <div className="form-group text-left">
-          <label htmlFor="exampleInputEmail1">Email address</label>
-          <input type="email"
-                 className="form-control"
-                 id="email"
-                 aria-describedby="emailHelp"
-                 placeholder="Enter email"
+        <div className='form-group text-left'>
+          <label htmlFor='exampleInputEmail1'>Email address</label>
+          <input type='email'
+                 className='form-control'
+                 id='email'
+                 aria-describedby='emailHelp'
+                 placeholder='Enter email'
                  value={state.email}
                  onChange={handleChange}
           />
-          <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
+          <small id='emailHelp' className='form-text text-muted'>We'll never share your email with anyone else.</small>
         </div>
-        <div className="form-group text-left">
-          <label htmlFor="exampleInputPassword1">Password</label>
-          <input type="password"
-                 className="form-control"
-                 id="password"
-                 placeholder="Password"
+        <div className='form-group text-left'>
+          <label htmlFor='exampleInputPassword1'>Password</label>
+          <input type='password'
+                 className='form-control'
+                 id='password'
+                 placeholder='Password'
                  value={state.password}
                  onChange={handleChange}
           />
         </div>
-        <div className="form-group text-left">
-          <label htmlFor="exampleInputPassword1">Confirm Password</label>
-          <input type="password"
-                 className="form-control"
-                 id="confirmPassword"
-                 placeholder="Confirm Password"
+        <div className='form-group text-left'>
+          <label htmlFor='exampleInputPassword1'>Confirm Password</label>
+          <input type='password'
+                 className='form-control'
+                 id='confirmPassword'
+                 placeholder='Confirm Password'
                  value={state.confirmPassword}
                  onChange={handleChange}
           />
         </div>
         <button
-          type="submit"
-          className="btn btn-primary"
+          type='submit'
+          className='btn btn-primary'
           onClick={handleSubmitClick}
         >
           Register
         </button>
       </form>
-      <div className="alert alert-success mt-2" style={{display: state.successMessage ? 'block' : 'none' }} role="alert">
+      <div className='alert alert-success mt-2' style={{display: state.successMessage ? 'block' : 'none' }} role='alert'>
         {state.successMessage}
       </div>
-      <div className="alert alert-danger mt-2" style={{display: state.error ? 'block' : 'none' }} role="alert">
+      <div className='alert alert-danger mt-2' style={{display: state.error ? 'block' : 'none' }} role='alert'>
         {state.error}
       </div>
-      <div className="mt-2">
+      <div className='mt-2'>
         <span>Already have an account? </span>
-        <span className="loginText" onClick={() => redirectToLogin()}>Login here</span>
+        <span className='loginText' onClick={() => redirectToLogin()}>Login here</span>
       </div>
 
     </div>

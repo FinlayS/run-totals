@@ -52,11 +52,11 @@ router.get('/laps/:id?', auth, async (req, res) => {
 router.patch('/laps/:id', auth,  async (req, res) => {
   const _id = req.params.id
   const updates = Object.keys(req.body)
-  const allowedUpdates = ["runId", , "runId", "lapNo", "lapTime", "lapDistance"]
+  const allowedUpdates = ['runId', , 'runId', 'lapNo', 'lapTime', 'lapDistance']
   const isValidOperation = updates.every((update ) => allowedUpdates.includes(update))
 
   if (!isValidOperation) {
-    return res.status(400).send({ error: "invalid update" })
+    return res.status(400).send({ error: 'invalid update' })
   }
 
   try {

@@ -1,7 +1,7 @@
 import React from 'react';
-import {getLaps} from "../../routers/api/laps";
-import {getLapTotals} from "../../../utils/getTotals";
-import {getPace} from "../../../utils/getPace";
+import {getLaps} from '../../routers/api/laps';
+import {getLapTotals} from '../../../utils/getTotals';
+import {getPace} from '../../../utils/getPace';
 
 const RunTotals = async (id) => {
 
@@ -36,7 +36,7 @@ const RunTotals = async (id) => {
         }
       `}</style>
 
-        <table id="lapTotals">
+        <table id='lapTotals'>
           <tbody>
           <tr>
             <th></th>

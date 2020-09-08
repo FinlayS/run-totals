@@ -1,19 +1,19 @@
 import React from 'react';
 import Header from '../components/Header';
-import LoginForm from '../components/account/LoginForm'
+import RegisterForm from '../components/account/RegisterForm'
 
-const Home = () => {
+const Register = () => {
   return (
     <div>
       <Header/>
       <div>
-        <h3 className='login-title'>Login or create account to get started</h3>
+        <h3 className='login-title'>Sign up for a new account</h3>
         <div className='container d-flex align-items-center flex-column'>
-          <LoginForm/>
+          <RegisterForm/>
         </div>
       </div>
     </div>
   )
 }
 
-export default Home
+export default Register

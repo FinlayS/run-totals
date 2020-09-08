@@ -2,12 +2,12 @@ import React from 'react';
 import Header from '../components/Header';
 import LoginForm from '../components/account/LoginForm'
 
-const Home = () => {
+const Login = () => {
   return (
     <div>
       <Header/>
       <div>
-        <h3 className='login-title'>Login or create account to get started</h3>
+        <h3 className='login-title'>Log in to existing account</h3>
         <div className='container d-flex align-items-center flex-column'>
           <LoginForm/>
         </div>
@@ -16,4 +16,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Login

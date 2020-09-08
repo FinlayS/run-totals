@@ -1,6 +1,7 @@
 import React from 'react';
+
 import Checkbox from '../checkbox';
-import {getPace} from "../../../utils/getPace";
+import { getPace } from "../../../utils/getPace";
 
 const LapDetails = (lapActive, lapNo, lapTime, lapDistance) => {
 

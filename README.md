@@ -13,4 +13,8 @@
 ## mongoDb
 
 - local `/Users/finlay/mongodb/bin/mongod --dbpath=/Users/finlay/mongodb-data`
-- - or `node src/mongodb.js`
+- install mongoDb Compass
+  - set the connection string: `mongodb://localhost:27017/?readPreference=primary&appname=MongoDB%20Compass&ssl=false`
+  
+## Context viewer
+- Install chrome extension [React Context Dev Tool!](https://chrome.google.com/webstore/detail/react-context-devtool/oddhnidmicpefilikhgeagedibnefkcf?hl=en) 

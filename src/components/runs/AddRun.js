@@ -1,9 +1,9 @@
-import React, {useContext, useState,} from "react";
-import RunContext from "../../context/runContext";
-import Container from 'react-bootstrap/Container';
+import React, { useContext, useState } from "react";
+import { Button, Modal, Row, Col, Container } from "react-bootstrap";
 import moment from "moment";
-import {postRun} from '../../routers/api/runs'
-import {Button, Modal, Row, Col} from "react-bootstrap";
+
+import { postRun } from '../../routers/api/runs'
+import RunContext from "../../context/runContext";
 
 const AddRun = () => {
   const today = moment().format('DD/MM/YYYY')
@@ -27,7 +27,13 @@ const AddRun = () => {
     }
     if (run) {
       const _id = run._id
-      dispatch({type: 'ADD_RUN', description, date, _id})
+      dispatch(
+        {
+          type: 'ADD_RUN',
+          description,
+          date,
+          _id
+        })
       setDescription('')
       setId('')
       setDate(today)

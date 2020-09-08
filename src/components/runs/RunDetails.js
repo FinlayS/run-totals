@@ -1,7 +1,9 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
+import { Row, Col, Container } from "react-bootstrap";
+
+import { deleteRun } from "../../routers/api/runs";
 import RunContext from "../../context/runContext";
-import {deleteRun} from "../../routers/api/runs";
-import {Row, Col, Container} from "react-bootstrap";
+
 import Laps from "../laps/laps";
 import RunTotals from "./runTotals";
 

@@ -1,8 +1,9 @@
 import React, { useContext, useState } from "react";
-import RunContext from "../../context/runContext";
 import Container from 'react-bootstrap/Container';
-import { postLap } from '../../routers/api/laps'
 import { Button, Modal, Row, Col } from "react-bootstrap";
+
+import { postLap } from '../../routers/api/laps'
+import RunContext from "../../context/runContext";
 
 const AddLap = (id) => {
   const run_id = id.children[1]
@@ -22,13 +23,29 @@ const AddLap = (id) => {
     e.preventDefault()
 
     try {
-      lap = await postLap({runId, lapNo, lapActive, lapTime, lapDistance})
+      lap = await postLap(
+        {
+          runId,
+          lapNo,
+          lapActive,
+          lapTime,
+          lapDistance
+        })
     } catch (e) {
       console.log(e.data)
     }
     if (lap) {
       const _id = lap._id
-      dispatch({type: 'ADD_LAP', _id, runId, lapNo, lapActive, lapTime, lapDistance})
+      dispatch(
+        {
+          type: 'ADD_LAP',
+          _id,
+          runId,
+          lapNo,
+          lapActive,
+          lapTime,
+          lapDistance}
+          )
       setRunId('')
       setLapNo('')
       setLapActive(false)

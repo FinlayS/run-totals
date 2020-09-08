@@ -20,7 +20,7 @@ const runReducer = (state, action) => {
           _id: action._id,
           run_id: action.runId,
           lapNo: action.lapNo,
-          active: action.active,
+          lapActive: action.lapActive,
           lapTime: action.lapTime,
           lapDistance: action.lapDistance
         }

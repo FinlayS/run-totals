@@ -9,7 +9,7 @@ const AddLap = (id) => {
   const {dispatch} = useContext(RunContext)
   const [runId, setRunId] = useState(run_id)
   const [lapNo, setLapNo] = useState('')
-  const [active, setActive] = useState(false)
+  const [lapActive, setLapActive] = useState(false)
   const [lapTime, setLapTime] = useState('')
   const [lapDistance, setLapDistance] = useState('');
   const [show, setShow] = useState(false);
@@ -22,16 +22,16 @@ const AddLap = (id) => {
     e.preventDefault()
 
     try {
-      lap = await postLap({runId, lapNo, active, lapTime, lapDistance})
+      lap = await postLap({runId, lapNo, lapActive, lapTime, lapDistance})
     } catch (e) {
       console.log(e.data)
     }
     if (lap) {
       const _id = lap._id
-      dispatch({type: 'ADD_LAP', _id, runId, lapNo, active, lapTime, lapDistance})
+      dispatch({type: 'ADD_LAP', _id, runId, lapNo, lapActive, lapTime, lapDistance})
       setRunId('')
       setLapNo('')
-      setActive(false)
+      setLapActive(false)
       setLapTime('')
       setLapDistance('')
     }
@@ -71,8 +71,8 @@ const AddLap = (id) => {
                 type="checkbox"
                 className="form-check"
                 id="active"
-                value={active}
-                onChange={(e) => setActive(e.target.checked)}
+                value={lapActive}
+                onChange={(e) => setLapActive(e.target.checked)}
               />
             </Col>
 

@@ -60,7 +60,7 @@ const LoginForm = () => {
   }
 
   const redirectToLogin = async () => {
-    await router.push('/register');
+    await router.push('/Register');
   }
 
   return(

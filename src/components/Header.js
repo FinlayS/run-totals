@@ -28,8 +28,8 @@ const Header = () => {
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav>
             <NavDropdown title='Account' id='nav-title'>
-              <NavDropdown.Item href='/login'>login</NavDropdown.Item>
-              <NavDropdown.Item href='/register'>sign up</NavDropdown.Item>
+              <NavDropdown.Item href='/Login'>login</NavDropdown.Item>
+              <NavDropdown.Item href='/Register'>sign up</NavDropdown.Item>
               <NavDropdown.Divider/>
               <NavDropdown.Item onSelect={logout}>logout</NavDropdown.Item>
             </NavDropdown>

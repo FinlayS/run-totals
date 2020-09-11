@@ -5,7 +5,7 @@ import { deleteRun } from '../../routers/api/runs';
 import RunContext from '../../context/runContext';
 
 import Laps from '../laps/Laps';
-import RunTotals from './runTotals';
+import RunSummary from './RunSummary';
 
 const RunDetails = ({run}) => {
 
@@ -42,10 +42,8 @@ const RunDetails = ({run}) => {
           </button>
         </Col>
       </Row>
-
       <Laps >{run._id}</Laps>
-      {/*<RunTotals>{run._id}</RunTotals>*/}
-
+      <RunSummary id={run._id}/>
     </Container>
   )
 }

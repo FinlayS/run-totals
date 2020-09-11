@@ -4,6 +4,8 @@ const runReducer = (state, action) => {
       return action.runs
     case 'POPULATE_LAPS':
       return action.laps
+    case 'POPULATE_TOTALS':
+      return action.totals
     case 'ADD_RUN':
       return [
         ...state,

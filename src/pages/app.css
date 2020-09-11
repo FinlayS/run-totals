@@ -3,6 +3,7 @@
     width: 100%;
     flex-wrap: wrap;
     background: white;
+    margin-bottom: 30px;
 }
 
 .text-title {
@@ -27,9 +28,8 @@
     justify-content: space-between;
     background-color: greenyellow;
     color: black;
-    padding: 2px;
     margin-top: 15px;
-    margin-bottom: 0px;
+    margin-bottom: 5px;
     text-align: -moz-left;
     align-self: center;
 }

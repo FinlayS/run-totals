@@ -27,7 +27,7 @@ const RunTotalsForm = () => {
     }
 
     fetchData().then(() => {
-      console.log('got the runs', runs)
+      console.log('got the runs')
     });
     return () => {
       console.log('RunTotalsForm unmounts')

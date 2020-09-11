@@ -26,7 +26,7 @@ const Laps = (id) => {
     }
 
     fetchData().then(() => {
-      console.log('got the laps', laps)
+      console.log('got the laps')
     });
     return () => {
       console.log('laps unmounts')

@@ -17,6 +17,9 @@ const AddLap = (id) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const laps = useContext(RunContext)
+  const nextLap = laps.laps.length +1
+
 
   const addLap = async (e) => {
     let lap
@@ -26,7 +29,7 @@ const AddLap = (id) => {
       lap = await postLap(
         {
           runId,
-          lapNo,
+          lapNo: nextLap,
           lapActive,
           lapTime,
           lapDistance
@@ -41,7 +44,7 @@ const AddLap = (id) => {
           type: 'ADD_LAP',
           _id,
           runId,
-          lapNo,
+          lapNo: nextLap,
           lapActive,
           lapTime,
           lapDistance}
@@ -51,6 +54,7 @@ const AddLap = (id) => {
       setLapActive(false)
       setLapTime('')
       setLapDistance('')
+
     }
   }
 
@@ -77,8 +81,8 @@ const AddLap = (id) => {
                 type='text'
                 className='input-group'
                 id='lapNo'
-                value={lapNo}
-                onChange={(e) => setLapNo(e.target.value)}
+                value={nextLap}
+                disabled
               />
             </Col>
 

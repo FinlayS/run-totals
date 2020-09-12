@@ -8,7 +8,7 @@ import RunContext from '../../context/runContext';
 const AddLap = (id) => {
   const run_id = id.children[1]
   const {dispatch} = useContext(RunContext)
-  const [runId, setRunId] = useState(run_id)
+  const [runId] = useState(run_id)
   const [lapNo, setLapNo] = useState('')
   const [lapActive, setLapActive] = useState(false)
   const [lapTime, setLapTime] = useState('')
@@ -49,7 +49,6 @@ const AddLap = (id) => {
           lapTime,
           lapDistance}
           )
-      setRunId('')
       setLapNo('')
       setLapActive(false)
       setLapTime('')
@@ -111,7 +110,7 @@ const AddLap = (id) => {
             <Col className='col-md-3 mb-3 md-form'>
               <label htmlFor='distance'>Distance</label>
               <input
-                type='text'
+                type='number'
                 className='input-group'
                 id='distance'
                 value={lapDistance}

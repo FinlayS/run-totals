@@ -1,8 +1,10 @@
 import React, { useContext, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import { Button, Modal, Row, Col } from 'react-bootstrap';
+import NumberFormat from "react-number-format";
 
 import { postLap } from '../../routers/api/laps'
+import { timeInputFormat } from "../../../utils/utils";
 import RunContext from '../../context/runContext';
 
 const AddLap = (id) => {
@@ -18,8 +20,7 @@ const AddLap = (id) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const laps = useContext(RunContext)
-  const nextLap = laps.laps.length +1
-
+  const nextLap = laps.laps.length + 1
 
   const addLap = async (e) => {
     let lap
@@ -47,8 +48,9 @@ const AddLap = (id) => {
           lapNo: nextLap,
           lapActive,
           lapTime,
-          lapDistance}
-          )
+          lapDistance
+        }
+      )
       setLapNo('')
       setLapActive(false)
       setLapTime('')
@@ -74,8 +76,8 @@ const AddLap = (id) => {
 
         <Modal.Body>
           <Row className='form-row'>
-            <Col className='col-md-3 mb-3 md-form'>
-              <label htmlFor='lapNo'>Lap No</label>
+            <Col className='col-md-1 mb-1 md-form'>
+              <label htmlFor='lapNo'>Lap</label>
               <input
                 type='text'
                 className='input-group'
@@ -98,8 +100,10 @@ const AddLap = (id) => {
 
             <Col className='col-md-3 mb-3 md-form'>
               <label htmlFor='time'>Time</label>
-              <input
-                type='text'
+              <NumberFormat
+                format={timeInputFormat}
+                placeholder="hh:mm:ss"
+                mask={['h', 'h', 'm', 'm', 's', 's']}
                 className='input-group'
                 id='time'
                 value={lapTime}
@@ -109,7 +113,7 @@ const AddLap = (id) => {
 
             <Col className='col-md-3 mb-3 md-form'>
               <label htmlFor='distance'>Distance</label>
-              <input
+              <NumberFormat
                 type='number'
                 className='input-group'
                 id='distance'

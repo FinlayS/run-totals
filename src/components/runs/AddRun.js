@@ -1,12 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { Button, Modal, Row, Col, Container } from 'react-bootstrap';
+import NumberFormat from "react-number-format";
 import moment from 'moment';
 
 import { postRun } from '../../routers/api/runs'
 import RunContext from '../../context/runContext';
 
 const AddRun = () => {
-  const today = moment().format('DD/MM/YYYY')
+  const today = moment().format('DD/MM/YY')
   const {dispatch} = useContext(RunContext)
   const [description, setDescription] = useState('')
   const [date, setDate] = useState(today)
@@ -71,8 +72,10 @@ const AddRun = () => {
 
             <Col className='col-md-4 mb-1 md-form'>
               <label htmlFor='runDate'>Date</label>
-              <input
-                type='text'
+              <NumberFormat
+                format="##/##/##"
+                placeholder="DD/MM/YY"
+                mask={['D', 'D', 'M', 'M', 'Y', 'Y']}
                 className='input-group'
                 id='runDate'
                 value={date}

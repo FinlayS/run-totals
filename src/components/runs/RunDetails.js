@@ -6,6 +6,7 @@ import RunContext from '../../context/runContext';
 
 import Laps from '../laps/Laps';
 import RunSummary from './RunSummary';
+import moment from "moment";
 
 const RunDetails = ({run}) => {
 
@@ -30,7 +31,7 @@ const RunDetails = ({run}) => {
     <Container>
       <Row className='run-row' key={run._id}>
         <Col> {run.description}</Col>
-        <Col xs={4}> {run.date}</Col>
+        <Col xs={4}> {moment(run.runDate).format('DD/MM/YY')}</Col>
         <Col xs={2}>
           <button
             className='btn btn-link'

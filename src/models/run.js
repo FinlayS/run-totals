@@ -11,6 +11,10 @@ const Run = mongoose.model('Run', {
     required: true,
     trim: true
   },
+  runDate: {
+    type: Number,
+    required: true
+  },
   owner: {
     type: mongoose.Schema.Types.ObjectID,
     required: true,

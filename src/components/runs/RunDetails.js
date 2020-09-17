@@ -31,7 +31,7 @@ const RunDetails = ({run}) => {
     <Container>
       <Row className='run-row' key={run._id}>
         <Col> {run.description}</Col>
-        <Col xs={4}> {moment(run.runDate).format('DD/MM/YY')}</Col>
+        <Col xs={4}> {moment(run.runDate).format('DD/MM/YYYY')}</Col>
         <Col xs={2}>
           <button
             className='btn btn-link'

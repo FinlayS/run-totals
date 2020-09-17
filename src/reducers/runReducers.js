@@ -12,7 +12,6 @@ const runReducer = (state, action) => {
         {
           _id: action._id,
           description: action.description,
-          date: action.date,
           runDate: action.runDate
         }
       ]

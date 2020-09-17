@@ -25,7 +25,7 @@ const AddRun = () => {
     e.preventDefault()
 
     try {
-      run = await postRun({description, date, runDate})
+      run = await postRun({description, runDate})
     } catch (e) {
       console.log(e.data)
     }
@@ -35,7 +35,6 @@ const AddRun = () => {
         {
           type: 'ADD_RUN',
           description,
-          date,
           runDate,
           _id
         })

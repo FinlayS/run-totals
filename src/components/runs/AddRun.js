@@ -18,11 +18,14 @@ const AddRun = () => {
   const handleShow = () => setShow(true);
 
   const addRun = async (e) => {
+
+    const runDate = moment(date,'DD/MM/YY').valueOf()
+
     let run
     e.preventDefault()
 
     try {
-      run = await postRun({description, date})
+      run = await postRun({description, runDate})
     } catch (e) {
       console.log(e.data)
     }
@@ -32,7 +35,7 @@ const AddRun = () => {
         {
           type: 'ADD_RUN',
           description,
-          date,
+          runDate,
           _id
         })
       setDescription('')

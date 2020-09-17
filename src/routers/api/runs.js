@@ -23,7 +23,8 @@ export const postRun = async (data) => {
     response = await axios.post(getUrl('/runs'),
       {
         description: data.description,
-        date: data.date
+        date: data.date,
+        runDate: data.runDate
       },
       {
         headers: {

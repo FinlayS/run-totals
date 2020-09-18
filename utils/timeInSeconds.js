@@ -12,5 +12,5 @@ export function timeInSeconds (time) {
     times[i] = a[i]
   }
 
- return  (times[0] * 360 + times[1] * 60 + times[2]);
+ return  (times[0] * 3600 + times[1] * 60 + times[2]);
 }

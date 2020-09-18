@@ -42,7 +42,7 @@ const RegisterForm = () => {
             ...prevState,
             'successMessage' : 'Registration successful. Redirecting to home page..'
           }))
-          await router.push('/')
+          await router.push('/RunTotalsForm')
           showError(null)
         } else{
           showError(regResp.status, 'Some error occurred');

@@ -11,8 +11,9 @@ export const getRuns = async () => {
         }
       }
     )
+
   } catch (e) {
-    console.log(e.data)
+    return e.response
   }
   return response.data
 }

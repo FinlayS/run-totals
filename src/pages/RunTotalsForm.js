@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer } from 'react';
+import React, {useEffect, useReducer, useState} from 'react';
 import { ContextDevTool } from 'react-context-devtool';
 import Container from 'react-bootstrap/Container';
 
@@ -9,13 +9,24 @@ import RunContext from '../context/runContext';
 import RunList from '../components/runs/RunList';
 import Header from '../components/Header';
 import AddRun from '../components/runs/AddRun';
+import { useRouter } from 'next/router'
 
 const RunTotalsForm = () => {
+  const router = useRouter()
+
   const [runs, dispatch] = useReducer(runReducer, [])
 
   useEffect(() => {
     async function fetchData() {
-      const runs = await getRuns()
+      let runs
+      try {
+        runs = await getRuns()
+        if(runs.status === 401) {
+          await router.push('/Login')
+        }
+      } catch (e) {
+        console.log(e)
+      }
 
       if (runs) {
         dispatch(

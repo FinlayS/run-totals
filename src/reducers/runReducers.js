@@ -1,7 +1,9 @@
 const runReducer = (state, action) => {
   switch (action.type) {
     case 'POPULATE_RUNS':
-      return action.runs
+      return action.runs.sort((a, b) => {
+        return a.runDate < b.runDate ? 1 : -1
+      })
     case 'POPULATE_LAPS':
       return action.laps
     case 'POPULATE_TOTALS':
@@ -14,7 +16,9 @@ const runReducer = (state, action) => {
           description: action.description,
           runDate: action.runDate
         }
-      ]
+      ].sort((a, b) => {
+        return a.runDate < b.runDate ? 1 : -1
+      })
     case 'ADD_LAP':
       return [
         ...state,

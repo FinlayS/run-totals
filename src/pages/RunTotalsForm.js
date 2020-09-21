@@ -30,18 +30,12 @@ const RunTotalsForm = () => {
       }
 
       if (runs) {
-        runs.sort((a, b) => {
-          return a.runDate < b.runDate ? 1 : -1
-        })
         dispatch(
           {
             type: 'POPULATE_RUNS',
             runs
           })
       }
-      runs.sort((a, b) => {
-        return a.runDate < b.runDate ? 1 : -1
-      })
     }
 
     fetchData().then(() => {

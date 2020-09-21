@@ -17,8 +17,9 @@ const RunTotalsForm = () => {
   const [runs, dispatch] = useReducer(runReducer, [])
 
   useEffect(() => {
+    let runs
     async function fetchData() {
-      let runs
+
       try {
         runs = await getRuns()
         if(runs.status === 401) {

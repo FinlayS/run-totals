@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import { Button, Modal, Row, Col } from 'react-bootstrap';
+import {Button, Modal, Row, Col, Container} from 'react-bootstrap';
 import NumberFormat from "react-number-format";
 import moment from 'moment';
 
@@ -8,7 +8,7 @@ import RunContext from '../../context/runContext';
 
 const AddRun = () => {
   const today = moment().format('DD/MM/YY')
-  const { dispatch } = useContext(RunContext)
+  const {dispatch} = useContext(RunContext)
   const [description, setDescription] = useState('')
   const [date, setDate] = useState(today)
   const [id, setId] = useState('')
@@ -47,9 +47,11 @@ const AddRun = () => {
 
   return (
     <>
-      <Button variant='primary' onClick={handleShow}>
-        Add run
-      </Button>
+      <Container>
+        <Button variant='primary' onClick={handleShow}>
+          Add run
+        </Button>
+      </Container>
       <Modal show={show}
              onHide={handleClose}
       >
@@ -94,6 +96,7 @@ const AddRun = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
     </>
   )
 }

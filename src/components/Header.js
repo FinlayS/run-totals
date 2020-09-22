@@ -38,7 +38,6 @@ const Header = () => {
           </Nav>
 
         </Navbar.Collapse>
-        <AddRun/>
       </Navbar>
     </>
   )

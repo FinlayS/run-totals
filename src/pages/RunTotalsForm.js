@@ -8,7 +8,6 @@ import RunContext from '../context/runContext';
 
 import RunList from '../components/runs/RunList';
 import Header from '../components/Header';
-import AddRun from '../components/runs/AddRun';
 import { useRouter } from 'next/router'
 
 const RunTotalsForm = () => {
@@ -55,7 +54,6 @@ const RunTotalsForm = () => {
         <Container>
           <RunList/>
         </Container>
-        <AddRun/>
       </div>
     </RunContext.Provider>
   )

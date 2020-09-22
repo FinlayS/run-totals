@@ -1,6 +1,7 @@
 import React from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { useRouter } from 'next/router'
+import AddRun from '../components/runs/AddRun';
 
 import { userLogout } from '../routers/api/user';
 
@@ -33,8 +34,11 @@ const Header = () => {
               <NavDropdown.Divider/>
               <NavDropdown.Item onSelect={logout}>logout</NavDropdown.Item>
             </NavDropdown>
+
           </Nav>
+
         </Navbar.Collapse>
+        <AddRun/>
       </Navbar>
     </>
   )

@@ -1,14 +1,14 @@
-import React, { useContext, useState } from 'react';
-import { Button, Modal, Row, Col, Container } from 'react-bootstrap';
+import React, {useContext, useState} from 'react';
+import { Button, Modal, Row, Col } from 'react-bootstrap';
 import NumberFormat from "react-number-format";
 import moment from 'moment';
 
-import { postRun } from '../../routers/api/runs'
+import {postRun} from '../../routers/api/runs'
 import RunContext from '../../context/runContext';
 
 const AddRun = () => {
   const today = moment().format('DD/MM/YY')
-  const {dispatch} = useContext(RunContext)
+  const { dispatch } = useContext(RunContext)
   const [description, setDescription] = useState('')
   const [date, setDate] = useState(today)
   const [id, setId] = useState('')
@@ -19,7 +19,7 @@ const AddRun = () => {
 
   const addRun = async (e) => {
 
-    const runDate = moment(date,'DD/MM/YY').valueOf()
+    const runDate = moment(date, 'DD/MM/YY').valueOf()
 
     let run
     e.preventDefault()
@@ -47,12 +47,9 @@ const AddRun = () => {
 
   return (
     <>
-      <Container>
-        <Button variant='primary' onClick={handleShow}>
-          Add run
-        </Button>
-      </Container>
-
+      <Button variant='primary' onClick={handleShow}>
+        Add run
+      </Button>
       <Modal show={show}
              onHide={handleClose}
       >
@@ -96,7 +93,6 @@ const AddRun = () => {
             Save Changes
           </Button>
         </Modal.Footer>
-
       </Modal>
     </>
   )

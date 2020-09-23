@@ -47,14 +47,10 @@ const AddRun = () => {
 
   return (
     <>
-      <Container>
-        <Button variant='primary' onClick={handleShow}>
-          Add run
-        </Button>
-      </Container>
-      <Modal show={show}
-             onHide={handleClose}
-      >
+      <Button variant='primary' onClick={handleShow}>
+        Add run
+      </Button>
+      <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Add a new run</Modal.Title>
         </Modal.Header>

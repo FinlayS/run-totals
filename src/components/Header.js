@@ -40,8 +40,8 @@ const Header = () => {
       <title>Run Totals</title>
       <link rel='icon' type='image/png' href='../../public/favicon.ico'/>
       <Navbar fixed='top' collapseOnSelect expand='lg' bg='dark' variant='dark'>
-        <Navbar.Brand className='navBar-title'>Run Totals</Navbar.Brand>
         <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
+        <Navbar.Brand className='navBar-title'>Run Totals</Navbar.Brand>
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav>
             <NavDropdown title='Account' id='nav-title'>

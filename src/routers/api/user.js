@@ -14,6 +14,7 @@ export const userLogout = async () => {
   } catch (e) {
     console.log(e.data)
   }
+  localStorage.removeItem('token')
 }
 
 export const userLogin = async (payload) => {

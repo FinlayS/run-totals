@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { useRouter } from 'next/router'
 import AddRun from '../components/runs/AddRun';
@@ -7,6 +7,23 @@ import { userLogout } from '../routers/api/user';
 
 const Header = () => {
   const router = useRouter()
+  const [state , setState] = useState({
+    isAuthed: false
+  })
+
+  useEffect(() => {
+    async function getAuthState() {
+      if (window.localStorage.getItem('token')) {
+        setState(prevState => ({
+          ...prevState,
+          isAuthed: true
+        }))
+      }
+    }
+
+    getAuthState().then(() => {
+    });
+  }, [])
 
   const logout = async () => {
     try {
@@ -15,7 +32,6 @@ const Header = () => {
       }
     } catch (e) {
     }
-    localStorage.removeItem('token')
     await router.push('/Home')
   }
 
@@ -29,15 +45,14 @@ const Header = () => {
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav>
             <NavDropdown title='Account' id='nav-title'>
-              <NavDropdown.Item href='/Login'>login</NavDropdown.Item>
-              <NavDropdown.Item href='/Register'>sign up</NavDropdown.Item>
+              <NavDropdown.Item href='/Login' disabled={state.isAuthed}>login</NavDropdown.Item>
+              <NavDropdown.Item href='/Register' disabled={state.isAuthed}>sign up</NavDropdown.Item>
               <NavDropdown.Divider/>
-              <NavDropdown.Item onSelect={logout}>logout</NavDropdown.Item>
+              <NavDropdown.Item onSelect={logout} disabled={!state.isAuthed}>logout</NavDropdown.Item>
             </NavDropdown>
-
           </Nav>
-
         </Navbar.Collapse>
+        {state.isAuthed && <AddRun/>}
       </Navbar>
     </>
   )

@@ -23,7 +23,9 @@ const RunTotalsForm = () => {
       try {
         runs = await getRuns()
         if(runs.status === 401) {
+          localStorage.removeItem('token')
           await router.push('/Login')
+          return
         }
       } catch (e) {
         console.log(e)

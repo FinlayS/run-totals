@@ -45,8 +45,8 @@ const Laps = (id) => {
           <div className='child'>Dist</div>
           <div className='child'>Pace</div>
         </div>
-        {laps.map(({lapActive, lapNo, lapTime, lapDistance}) => (
-          LapDetails(lapActive, lapNo, lapTime, lapDistance)
+        {laps.map(({_id, lapActive, lapNo, lapTime, lapDistance}) => (
+          LapDetails(_id, lapActive, lapNo, lapTime, lapDistance)
         ))}
         <AddLap> {runId} </AddLap>
       </div>

@@ -31,6 +31,20 @@ const runReducer = (state, action) => {
           lapDistance: action.lapDistance
         }
       ]
+    case 'EDIT_LAP_STATUS':
+      return state.map((laps) => {
+        console.log('what a a state', ...state)
+        console.log('reducer', laps._id, action._id)
+        if (laps._id === action._id) {
+          console.log('GOT THE BLOODY LAP', laps._id, action._id)
+          return {
+            ...laps,
+            ...action.lapActive
+          }
+        } else {
+          return laps
+        }
+      });
     case 'REMOVE_RUN':
       return state.filter((run) => run._id !== action._id)
     default:

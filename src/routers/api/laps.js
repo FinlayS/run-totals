@@ -42,3 +42,24 @@ export const postLap = async (data) => {
   }
   return response.data
 }
+
+export const editLap = async (id, data) => {
+  let response
+  try {
+    response = await axios.patch(getUrl(`/laps/${id}`),
+      {
+        lapActive: data.lapActive,
+        lapTime: data.lapTime,
+        lapDistance: data.lapDistance
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      }
+    )
+  } catch (e) {
+    console.log(e.data)
+  }
+  return response.data
+}

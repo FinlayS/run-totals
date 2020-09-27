@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import { Button, Modal, Row, Col } from 'react-bootstrap';
 import NumberFormat from "react-number-format";
 
-import { postLap } from '../../routers/api/laps'
+import {getLaps, postLap} from '../../routers/api/laps'
 import { timeInputFormat } from "../../../utils/utils";
 import RunContext from '../../context/runContext';
 
@@ -11,7 +11,7 @@ const AddLap = (id) => {
   const run_id = id.children[1]
   const {dispatch} = useContext(RunContext)
   const [runId] = useState(run_id)
-  const [lapNo, setLapNo] = useState('')
+  const [, setLapNo] = useState('')
   const [lapActive, setLapActive] = useState(false)
   const [lapTime, setLapTime] = useState('')
   const [lapDistance, setLapDistance] = useState('');
@@ -51,6 +51,12 @@ const AddLap = (id) => {
           lapDistance
         }
       )
+      const laps = await getLaps(runId)
+      dispatch(
+        {
+          type: 'POPULATE_LAPS',
+          laps
+        })
       setLapNo('')
       setLapActive(false)
       setLapTime('')

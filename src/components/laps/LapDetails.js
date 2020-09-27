@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { editLap } from "../../routers/api/laps";
+import { editLap, getLaps } from "../../routers/api/laps";
 import { getPace } from '../../../utils/getPace';
 
-const LapDetails = (_id, lapActive, lapNo, lapTime, lapDistance) => {
+const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance) => {
   const lapPace = getPace(lapTime, lapDistance)
 
   const testID = `lap-no-${lapNo}`
@@ -18,6 +18,7 @@ const LapDetails = (_id, lapActive, lapNo, lapTime, lapDistance) => {
       response = await editLap(_id,{
         lapActive: !changedLapActiveStatus,
       })
+      await getLaps(runId)
     } catch (e) {
       console.log(e.data)
     }

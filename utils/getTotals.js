@@ -16,14 +16,16 @@ export function getLapTotals(laps) {
     laps.forEach((lap) => {
       if (lap.lapActive === true) {
         activeTime = addTimes(activeTime, lap.lapTime);
-        activeDistance = activeDistance + lap.lapDistance;
+        activeDistance = activeDistance + Number(lap.lapDistance);
       }
       totalTime = addTimes(totalTime, lap.lapTime);
-      totalDistance = totalDistance + lap.lapDistance;
+      totalDistance = totalDistance + Number(lap.lapDistance);
     });
   }
-  activeDistance = activeDistance.round(2);
-  totalDistance = totalDistance.round(2)
+  activeDistance = activeDistance
+   .round(2);
+  totalDistance = totalDistance
+   .round(2)
   totalPace = getPace(totalTime, totalDistance)
   activePace = getPace(activeTime, activeDistance)
   return {totalDistance, totalTime, activeTime, activeDistance, totalPace, activePace}

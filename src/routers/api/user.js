@@ -2,8 +2,9 @@ import axios from 'axios'
 import { getUrl } from './utils'
 
 export const userLogout = async () => {
+  let response
   try {
-    await axios.post(getUrl('/users/logout'),
+    response = await axios.post(getUrl('/users/logout'),
       {},
       {
         headers: {
@@ -15,6 +16,7 @@ export const userLogout = async () => {
     console.log(e.data)
   }
   localStorage.removeItem('token')
+  return response
 }
 
 export const userLogin = async (payload) => {
@@ -33,7 +35,7 @@ export const userRegister = async (payload) => {
   try {
     response = await axios.post(getUrl('/users'), {...payload})
   } catch(e) {
-    console.log(e.data)
+    return e
   }
   localStorage.setItem('token', response.data.token)
   return response

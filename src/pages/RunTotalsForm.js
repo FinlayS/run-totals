@@ -50,7 +50,7 @@ const RunTotalsForm = () => {
   return (
     <RunContext.Provider value={{runs, dispatch}}>
       <ContextDevTool context={RunContext} id='runs' displayName='Run Context'/>
-      <Header/>
+      <Header authed={true}/>
       <h3>Runs</h3>
       <div>
         <Container>

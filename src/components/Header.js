@@ -21,7 +21,7 @@ const Header = (authed) => {
       console.log(e)
     }
   }
-  
+
   return (
     <>
       <title>Run Totals</title>

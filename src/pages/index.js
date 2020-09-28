@@ -1,12 +1,23 @@
-import React from 'react';
-import Home from './Home';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router'
 
 const Index = () => {
-  return (
-    <div>
-      <Home/>
-    </div>
-  )
+
+  const router = useRouter()
+  useEffect(() => {
+    async function getAuthState() {
+      if (localStorage.getItem('token')) {
+        await router.push('/RunTotalsForm')
+      } else {
+      await router.push('/Login')
+      }
+    }
+
+    getAuthState().then(() => {
+    });
+  }, [])
+
+  return(<></>)
 }
 
 export default Index

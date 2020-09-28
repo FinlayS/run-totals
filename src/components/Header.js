@@ -1,38 +1,25 @@
-import React, {useEffect, useState} from 'react';
+import React, { useState } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { useRouter } from 'next/router'
 import AddRun from '../components/runs/AddRun';
 
 import { userLogout } from '../routers/api/user';
 
-const Header = () => {
+const Header = (authed) => {
   const router = useRouter()
-  const [state , setState] = useState({
-    isAuthed: false
+  const [state] = useState({
+    isAuthed: authed.authed
   })
-
-  useEffect(() => {
-    async function getAuthState() {
-      if (window.localStorage.getItem('token')) {
-        setState(prevState => ({
-          ...prevState,
-          isAuthed: true
-        }))
-      }
-    }
-
-    getAuthState().then(() => {
-    });
-  }, [])
 
   const logout = async () => {
     try {
       const res = await userLogout()
-      if (res.status === 200) {
+      if (res.status === 200 || res.status === 401) {
+        await router.push('/Login')
       }
     } catch (e) {
+      console.log(e)
     }
-    await router.push('/Home')
   }
 
   return (
@@ -52,7 +39,9 @@ const Header = () => {
             </NavDropdown>
           </Nav>
         </Navbar.Collapse>
-        {state.isAuthed && <AddRun/>}
+        { state.isAuthed &&
+        <AddRun/>
+        }
       </Navbar>
     </>
   )

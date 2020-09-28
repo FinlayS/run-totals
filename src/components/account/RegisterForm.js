@@ -51,7 +51,7 @@ const RegisterForm = () => {
       return showError('Please enter valid username and password')
     }
     catch (e) {
-      showError(e.response.data._message)
+      console.log(e)
     }
   }
 

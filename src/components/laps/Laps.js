@@ -36,13 +36,7 @@ const Laps = (id) => {
       }
     }
 
-    fetchData().then(() => {
-      console.log('got the laps')
-
-    });
-    return () => {
-      console.log('laps unmounts')
-    }
+    fetchData().then()
   }, [])
 
   refreshRunTotalsOnChange().then()

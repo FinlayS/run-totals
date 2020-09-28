@@ -38,13 +38,7 @@ const RunTotalsForm = () => {
           })
       }
     }
-
-    fetchData().then(() => {
-      console.log('got the runs')
-    });
-    return () => {
-      console.log('RunTotalsForm unmounts')
-    }
+    fetchData().then()
   }, [])
 
   return (

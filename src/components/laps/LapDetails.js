@@ -3,17 +3,15 @@ import React from 'react';
 import { editLap, getLaps } from "../../routers/api/laps";
 import { getPace } from '../../../utils/getPace';
 
-const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance) => {
+const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatchLaps) => {
   const lapPace = getPace(lapTime, lapDistance)
 
   const testID = `lap-no-${lapNo}`
 
   let changedLapActiveStatus = lapActive
-
   const updateActiveStatus = async () => {
 
     let response
-
     try {
       response = await editLap(_id,{
         lapActive: !changedLapActiveStatus,
@@ -24,6 +22,12 @@ const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance) => {
     }
     if (response) {
       changedLapActiveStatus = response.lapActive
+      const laps = await getLaps(runId)
+      dispatchLaps(
+        {
+          type: 'POPULATE_LAPS',
+          laps
+        })
     }
   }
 

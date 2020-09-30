@@ -5,11 +5,11 @@ import NumberFormat from "react-number-format";
 
 import {getLaps, postLap} from '../../routers/api/laps'
 import { timeInputFormat } from "../../../utils/utils";
-import RunContext from '../../context/runContext';
+import LapContext from '../../context/lapContext';
 
 const AddLap = (id) => {
   const run_id = id.children[1]
-  const {dispatch} = useContext(RunContext)
+  const {laps, dispatchLaps} = useContext(LapContext)
   const [runId] = useState(run_id)
   const [, setLapNo] = useState('')
   const [lapActive, setLapActive] = useState(false)
@@ -19,10 +19,9 @@ const AddLap = (id) => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const laps = useContext(RunContext)
-  const nextLap = laps.laps.length + 1
 
   const addLap = async (e) => {
+    const nextLap = laps.length + 1
     let lap
     e.preventDefault()
 
@@ -40,7 +39,7 @@ const AddLap = (id) => {
     }
     if (lap) {
       const _id = lap._id
-      dispatch(
+      dispatchLaps(
         {
           type: 'ADD_LAP',
           _id,
@@ -52,7 +51,7 @@ const AddLap = (id) => {
         }
       )
       const laps = await getLaps(runId)
-      dispatch(
+      dispatchLaps(
         {
           type: 'POPULATE_LAPS',
           laps
@@ -87,7 +86,7 @@ const AddLap = (id) => {
                 type='text'
                 className='input-group'
                 id='lapNo'
-                value={nextLap}
+                value={laps.length + 1}
                 disabled
               />
             </Col>

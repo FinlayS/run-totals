@@ -8,7 +8,7 @@ import RunContext from '../../context/runContext';
 
 const AddRun = () => {
   const today = moment().format('DD/MM/YY')
-  const {dispatch} = useContext(RunContext)
+  const {dispatchRuns} = useContext(RunContext)
   const [description, setDescription] = useState('')
   const [date, setDate] = useState(today)
   const [id, setId] = useState('')
@@ -31,7 +31,7 @@ const AddRun = () => {
     }
     if (run) {
       const _id = run._id
-      dispatch(
+      dispatchRuns(
         {
           type: 'ADD_RUN',
           description,

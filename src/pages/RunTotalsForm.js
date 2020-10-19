@@ -9,11 +9,14 @@ import RunContext from '../context/runContext';
 import RunList from '../components/runs/RunList';
 import Header from '../components/Header';
 import { useRouter } from 'next/router'
+import lapReducer from "../reducers/lapReducer";
+import LapContext from "../context/lapContext";
 
 const RunTotalsForm = () => {
   const router = useRouter()
 
-  const [runs, dispatch] = useReducer(runReducer, [])
+  const [runs, dispatchRuns] = useReducer(runReducer, [])
+  const [laps, dispatchLaps] = useReducer(lapReducer, [])
 
   useEffect(() => {
     let runs
@@ -31,7 +34,7 @@ const RunTotalsForm = () => {
       }
 
       if (runs) {
-        dispatch(
+        dispatchRuns(
           {
             type: 'POPULATE_RUNS',
             runs
@@ -42,8 +45,10 @@ const RunTotalsForm = () => {
   }, [])
 
   return (
-    <RunContext.Provider value={{runs, dispatch}}>
+    <RunContext.Provider value={{runs, dispatchRuns}}>
       <ContextDevTool context={RunContext} id='runs' displayName='Run Context'/>
+      <LapContext.Provider value={{laps, dispatchLaps}}>
+      <ContextDevTool context={LapContext} id='laps' displayName='Lap Context'/>
       <Header authed={true}/>
       <h3>Runs</h3>
       <div>
@@ -51,6 +56,7 @@ const RunTotalsForm = () => {
           <RunList/>
         </Container>
       </div>
+        </LapContext.Provider>
     </RunContext.Provider>
   )
 }

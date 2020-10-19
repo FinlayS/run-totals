@@ -9,7 +9,7 @@ import moment from "moment";
 
 const RunDetails = ({run}) => {
 
-  const {dispatch} = useContext(RunContext)
+  const { dispatchRuns } = useContext(RunContext)
 
   const removeRun = async () => {
     let r = confirm('Confirm you wish to delete this run');
@@ -21,7 +21,7 @@ const RunDetails = ({run}) => {
         console.log(e.data)
       }
       if (response) {
-        dispatch({type: 'REMOVE_RUN', _id: run._id})
+        dispatchRuns({type: 'REMOVE_RUN', _id: run._id})
       }
     }
   }

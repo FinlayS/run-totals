@@ -1,49 +1,40 @@
-import React, { useEffect, useReducer, useState } from 'react';
-import { ContextDevTool } from 'react-context-devtool';
+import React, { useEffect, useReducer } from 'react';
 
 import { getLaps } from '../../routers/api/laps';
 import { getLapTotals } from '../../../utils/getTotals';
-import runReducer from '../../reducers/runReducers';
-import RunContext from '../../context/runContext';
 
 import LapDetails from './LapDetails';
 import AddLap from './AddLap';
-let allTotals, allLaps
+import lapReducer from "../../reducers/lapReducer";
+import LapContext from "../../context/lapContext";
+import { ContextDevTool } from "react-context-devtool";
+
+let allTotals;
 
 const Laps = (id) => {
-  const [laps, dispatch] = useReducer(runReducer, [])
-  const [, setTotals] =useState({})
+  const [laps, dispatchLaps] = useReducer(lapReducer, [])
   const runId = id.children
 
-  const refreshRunTotalsOnChange  = async () => {
-    if (laps && laps!==allLaps) {
-      allTotals = await getLapTotals(laps)
-      return allTotals
-    }
-  }
+  allTotals = getLapTotals(laps)
 
   useEffect(() => {
     async function fetchData() {
       const allLaps = await getLaps(runId)
       if (allLaps) {
-         allTotals = await getLapTotals(allLaps)
-        dispatch(
+        dispatchLaps(
           {
             type: 'POPULATE_LAPS',
             laps: allLaps
           })
-        setTotals(allTotals)
       }
     }
 
     fetchData().then()
   }, [])
 
-  refreshRunTotalsOnChange().then()
-
   return (
-    <RunContext.Provider value={{laps, dispatch}}>
-      <ContextDevTool context={RunContext} id='laps' displayName='Lap Context'/>
+    <LapContext.Provider value={{laps, dispatchLaps}}>
+      <ContextDevTool context={LapContext} id='laps' displayName='Lap Context'/>
       <div>
         <div className='flex-table'>
           <div className='child'>Lap</div>
@@ -53,7 +44,7 @@ const Laps = (id) => {
           <div className='child'>Pace</div>
         </div>
         {laps.map(({runId, _id, lapActive, lapNo, lapTime, lapDistance}) => (
-          LapDetails(runId, _id, lapActive, lapNo, lapTime, lapDistance)
+          LapDetails(runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatchLaps)
         ))}
         <AddLap> {runId} </AddLap>
       </div>
@@ -104,7 +95,7 @@ const Laps = (id) => {
           </table>
         </div>)
       }
-    </RunContext.Provider>
+    </LapContext.Provider>
   )
 }
 

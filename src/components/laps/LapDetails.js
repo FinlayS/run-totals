@@ -16,13 +16,12 @@ const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatch
       response = await editLap(_id,{
         lapActive: !changedLapActiveStatus,
       })
-      await getLaps(runId)
     } catch (e) {
       console.log(e.data)
     }
     if (response) {
       changedLapActiveStatus = response.lapActive
-      const laps = await getLaps(runId)
+     const laps = await getLaps(runId)
       dispatchLaps(
         {
           type: 'POPULATE_LAPS',

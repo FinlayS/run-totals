@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer } from 'react';
 
 import { getLaps } from '../../routers/api/laps';
 import { getLapTotals } from '../../../utils/getTotals';
@@ -7,40 +7,30 @@ import LapDetails from './LapDetails';
 import AddLap from './AddLap';
 import lapReducer from "../../reducers/lapReducer";
 import LapContext from "../../context/lapContext";
-import {ContextDevTool} from "react-context-devtool";
+import { ContextDevTool } from "react-context-devtool";
 
-let allTotals, allLaps
+let allTotals;
 
 const Laps = (id) => {
   const [laps, dispatchLaps] = useReducer(lapReducer, [])
-  const [, setTotals] = useState({})
   const runId = id.children
 
-  const refreshRunTotalsOnChange = async () => {
-    if (laps && laps !== allLaps) {
-      allTotals = await getLapTotals(laps)
-      return allTotals
-    }
-  }
+  allTotals = getLapTotals(laps)
 
   useEffect(() => {
     async function fetchData() {
       const allLaps = await getLaps(runId)
       if (allLaps) {
-        allTotals = await getLapTotals(allLaps)
         dispatchLaps(
           {
             type: 'POPULATE_LAPS',
             laps: allLaps
           })
-        setTotals(allTotals)
       }
     }
 
     fetchData().then()
   }, [])
-
-  refreshRunTotalsOnChange().then()
 
   return (
     <LapContext.Provider value={{laps, dispatchLaps}}>
@@ -56,7 +46,7 @@ const Laps = (id) => {
         {laps.map(({runId, _id, lapActive, lapNo, lapTime, lapDistance}) => (
           LapDetails(runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatchLaps)
         ))}
-        <AddLap > {runId} </AddLap>
+        <AddLap> {runId} </AddLap>
       </div>
       {allTotals && (
         <div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { useRouter } from 'next/router'
-import { userLogin } from '../../routers/api/user';
+import { userLogin } from '../../api/user';
 
 const LoginForm = () => {
 

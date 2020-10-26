@@ -1,7 +1,7 @@
 import React, { useEffect, useReducer } from 'react';
 
-import { getLaps } from '../../routers/api/laps';
-import { getLapTotals } from '../../../utils/getTotals';
+import { getLaps } from '../../api/laps';
+import { getLapTotals } from '../../utils/getTotals';
 
 import LapDetails from './LapDetails';
 import AddLap from './AddLap';

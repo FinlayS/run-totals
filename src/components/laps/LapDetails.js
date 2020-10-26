@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { editLap, getLaps } from "../../routers/api/laps";
-import { getPace } from '../../../utils/getPace';
+import { editLap, getLaps } from "../../api/laps";
+import { getPace } from '../../utils/getPace';
 
 const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatchLaps) => {
   const lapPace = getPace(lapTime, lapDistance)

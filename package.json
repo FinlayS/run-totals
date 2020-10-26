@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: none test specified\" && exit 1",
+    "test": "jest",
     "dev": "next",
     "dev-server": "nodemon src/index.js",
     "build": "next build",
@@ -36,6 +36,15 @@
     "validator": "^13.1.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/plugin-transform-react-jsx": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@testing-library/dom": "^7.26.3",
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.0",
+    "@types/jest": "^26.0.15",
+    "babel-jest": "^26.6.1",
+    "jest": "^26.6.1",
     "nodemon": "^2.0.4"
   }
 }

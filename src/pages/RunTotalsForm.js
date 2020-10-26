@@ -2,7 +2,7 @@ import React, {useEffect, useReducer} from 'react';
 import { ContextDevTool } from 'react-context-devtool';
 import Container from 'react-bootstrap/Container';
 
-import { getRuns } from '../routers/api/runs';
+import { getRuns } from '../api/runs';
 import runReducer from '../reducers/runReducers';
 import RunContext from '../context/runContext';
 

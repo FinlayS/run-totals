@@ -1,9 +1,9 @@
-import React, {useContext, useState} from 'react';
-import {Button, Modal, Row, Col} from 'react-bootstrap';
+import React, { useContext, useState } from 'react';
+import { Button, Modal, Row, Col } from 'react-bootstrap';
 import NumberFormat from "react-number-format";
 import moment from 'moment';
 
-import {postRun} from '../../routers/api/runs'
+import { postRun } from '../../api/runs'
 import RunContext from '../../context/runContext';
 
 const AddRun = () => {
@@ -11,7 +11,7 @@ const AddRun = () => {
   const {dispatchRuns} = useContext(RunContext)
   const [description, setDescription] = useState('')
   const [date, setDate] = useState(today)
-  const [id, setId] = useState('')
+  const [, setId] = useState('')
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

@@ -1,4 +1,4 @@
-import {timeInSeconds} from './timeInSeconds'
+import { timeInSeconds } from './timeInSeconds'
 
 export const getPace = (totalTime, totalDistance) => {
   if (totalTime && totalDistance) {

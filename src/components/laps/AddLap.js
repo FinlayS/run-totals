@@ -3,8 +3,8 @@ import Container from 'react-bootstrap/Container';
 import { Button, Modal, Row, Col } from 'react-bootstrap';
 import NumberFormat from "react-number-format";
 
-import {getLaps, postLap} from '../../routers/api/laps'
-import { timeInputFormat } from "../../../utils/utils";
+import { getLaps, postLap } from '../../api/laps'
+import { timeInputFormat } from "../../utils/utils";
 import LapContext from '../../context/lapContext';
 
 const AddLap = (id) => {

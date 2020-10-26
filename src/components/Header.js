@@ -3,7 +3,7 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { useRouter } from 'next/router'
 import AddRun from '../components/runs/AddRun';
 
-import { userLogout } from '../routers/api/user';
+import { userLogout } from '../api/user';
 
 const Header = (authed) => {
   const router = useRouter()

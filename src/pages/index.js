@@ -7,7 +7,7 @@ const Index = () => {
   useEffect(() => {
     async function getAuthState() {
       if (localStorage.getItem('token')) {
-        await router.push('/RunTotalsForm')
+        await router.push('/runs-main')
       } else {
       await router.push('/Login')
       }

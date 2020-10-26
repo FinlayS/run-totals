@@ -1,7 +1,7 @@
 import React from "react";
 import { act, render, screen } from "@testing-library/react"
 
-import Login from "../../pages/Login";
+import Login from "../../pages/login";
 
 describe('Login page test', () => {
   it('should show email share message', async () => {

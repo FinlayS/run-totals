@@ -42,7 +42,7 @@ const LoginForm = () => {
             ...prevState,
             'successMessage' : 'Login successful. Redirecting to home page..'
           }))
-          await router.push('/RunTotalsForm')
+          await router.push('/runs-main')
         } else{
           showError(logInResp.status, 'Some error occurred');
         }
@@ -60,7 +60,7 @@ const LoginForm = () => {
   }
 
   const redirectToLogin = async () => {
-    await router.push('/Register');
+    await router.push('/register');
   }
 
   return(

@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.5.2",
@@ -38,7 +39,6 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-react-jsx": "^7.12.1",
-    "@babel/preset-env": "^7.12.1",
     "@testing-library/dom": "^7.26.3",
     "@testing-library/jest-dom": "^5.11.5",
     "@testing-library/react": "^11.1.0",

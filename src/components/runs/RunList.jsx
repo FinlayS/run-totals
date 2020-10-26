@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import RunContext from '../../context/runContext';
 
-import RunDetails from '../../components/runs/RunDetails';
+import RunDetails from './RunDetails';
 
 const RunList = () => {
 

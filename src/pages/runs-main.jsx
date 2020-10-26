@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import lapReducer from "../reducers/lapReducer";
 import LapContext from "../context/lapContext";
 
-const RunTotalsForm = () => {
+const RunsMain = () => {
   const router = useRouter()
 
   const [runs, dispatchRuns] = useReducer(runReducer, [])
@@ -61,4 +61,4 @@ const RunTotalsForm = () => {
   )
 }
 
-export default RunTotalsForm
+export default RunsMain

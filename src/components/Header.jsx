@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 import { useRouter } from 'next/router'
-import AddRun from '../components/runs/AddRun';
+import AddRun from './runs/AddRun';
 
 import { userLogout } from '../api/user';
 
@@ -15,7 +15,7 @@ const Header = (authed) => {
     try {
       const res = await userLogout()
       if (res.status === 200 || res.status === 401) {
-        await router.push('/Login')
+        await router.push('/login')
       }
     } catch (e) {
       console.log(e)
@@ -32,8 +32,8 @@ const Header = (authed) => {
         <Navbar.Collapse id='responsive-navbar-nav'>
           <Nav>
             <NavDropdown title='Account' id='nav-title'>
-              <NavDropdown.Item href='/Login' disabled={state.isAuthed}>login</NavDropdown.Item>
-              <NavDropdown.Item href='/Register' disabled={state.isAuthed}>sign up</NavDropdown.Item>
+              <NavDropdown.Item href='/login' disabled={state.isAuthed}>login</NavDropdown.Item>
+              <NavDropdown.Item href='/register' disabled={state.isAuthed}>sign up</NavDropdown.Item>
               <NavDropdown.Divider/>
               <NavDropdown.Item onSelect={logout} disabled={!state.isAuthed}>logout</NavDropdown.Item>
             </NavDropdown>

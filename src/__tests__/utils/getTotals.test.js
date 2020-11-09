@@ -126,7 +126,7 @@ test('should return total distance when no time passed', () => {
     });
 })
 
-test('Can return HH values', () => {
+test('should return HH values', () => {
   expect(getLapTotals([
     {
       lapActive: true,
@@ -149,7 +149,7 @@ test('Can return HH values', () => {
     });
 })
 
-test('Can return more than 24hrs', () => {
+test('should return more than 24hrs', () => {
   expect(getLapTotals([
     {
       lapActive: false,

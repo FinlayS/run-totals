@@ -5,7 +5,7 @@ Number.prototype.round = function (places) {
   return +(Math.round(this + 'e+' + places) + 'e-' + places);
 }
 
-export function getLapTotals(laps) {
+export const getLapTotals = (laps) => {
   let activeTime = '';
   let totalTime = '';
   let activeDistance = 0;
@@ -29,11 +29,4 @@ export function getLapTotals(laps) {
   totalPace = getPace(totalTime, totalDistance)
   activePace = getPace(activeTime, activeDistance)
   return {totalDistance, totalTime, activeTime, activeDistance, totalPace, activePace}
-}
-
-export function toSeconds(h, m, s) {
-  h = parseInt(h) || 0;
-  m = parseInt(m) || 0;
-  s = parseInt(s) || 0;
-  return h * 3600 + m * 60 + s;
 }

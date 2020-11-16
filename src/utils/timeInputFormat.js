@@ -13,9 +13,9 @@ const limit = (val, max) => {
 }
 
 export const timeInputFormat = (val) => {
-  let hh = limit(val.substring(0, 2), '59');
+  let hh = limit(val.substring(0, 2), '99');
   let mm = limit(val.substring(2, 4), '59');
   let ss = limit(val.substring(4, 6), '59');
 
-  return hh + (mm.length ? ':' + mm : '') + (ss.length ? ':' + ss : '')
+  return hh + (mm.length ? ':' + mm : ':' + '00') + (ss.length ? ':' + ss : ':' + '00')
 }

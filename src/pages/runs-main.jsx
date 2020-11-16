@@ -26,7 +26,7 @@ const RunsMain = () => {
         runs = await getRuns()
         if(runs.status === 401) {
           localStorage.removeItem('token')
-          await router.push('/Login')
+          await router.push('/login')
           return
         }
       } catch (e) {

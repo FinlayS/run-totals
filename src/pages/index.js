@@ -9,7 +9,7 @@ const Index = () => {
       if (localStorage.getItem('token')) {
         await router.push('/runs-main')
       } else {
-      await router.push('/Login')
+      await router.push('/login')
       }
     }
 

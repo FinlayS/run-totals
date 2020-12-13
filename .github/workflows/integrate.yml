@@ -9,13 +9,13 @@ jobs:
   test_pull_request:
     runs-on: ubuntu-latest
     steps:
-      - shell: pwsh
-        env:
-          MONGODB_URL: ${{ secrets.MONGODB_URL }}
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - name: Test and build
+          env:
+            MONGODB_URL: ${{ secrets.MONGODB_URL }}
       - run: npm ci
       - run: npm test
       - run: npm start

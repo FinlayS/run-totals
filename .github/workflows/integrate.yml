@@ -15,7 +15,8 @@ jobs:
           node-version: 12
       - name: Test and build
       - env:
-          FIXER_IO_ACCESS_TOKEN: ${{ secrets.FIXER_IO_ACCESS_TOKEN }}
+          MONGODB_URL: ${{ secrets.MONGODB_URL }}
+      - run: echo $MONGODB_URL
       - run: npm ci
       - run: npm test
       - run: npm start

@@ -13,6 +13,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
+      - shell: pwsh
+        env:
+          MONGODB_URL: ${{ secrets.MONGODB_URL }}
       - run: npm ci
       - run: npm test
-      - run: npm start
+      - run: npm start "$env:MONGODB_URL"

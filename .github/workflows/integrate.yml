@@ -14,9 +14,6 @@ jobs:
         with:
           node-version: 12
       - name: Test and build
-      - run: echo $MONGODB_URL
-        env:
-          MONGODB_URL: ${{ secrets.MONGODB_URL }}
       - run: npm ci
       - run: npm test
       - run: npm start

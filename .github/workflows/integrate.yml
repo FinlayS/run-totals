@@ -9,6 +9,7 @@ jobs:
   test_pull_request:
     runs-on: ubuntu-latest
     steps:
+      - shell: pwsh
         env:
           MONGODB_URL: ${{ secrets.MONGODB_URL }}
       - uses: actions/checkout@v2

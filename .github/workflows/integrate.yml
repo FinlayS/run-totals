@@ -15,11 +15,3 @@ jobs:
           node-version: 12
       - run: npm ci
       - run: npm test
-
-  build_pull_request:
-  steps:
-    - name: echo secret
-      env:
-        MONGODB_URL: ${{ secrets.MONGODB_URL }}
-      run: |
-        echo "$env:MONGODB_URL"

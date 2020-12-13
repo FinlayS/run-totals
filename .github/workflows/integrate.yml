@@ -17,6 +17,9 @@ jobs:
       - run: npm test
 
   build_pull_request:
-    runs-on: ubuntu-latest
-    steps:
-      - run: npm start
+  steps:
+    - shell: pwsh
+        env:
+          MONGODB_URL: ${{ secrets.MONGODB_URL }}
+        run: |
+          echo "$env:MONGODB_URL"

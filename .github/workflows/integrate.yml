@@ -19,7 +19,7 @@ jobs:
   build_pull_request:
   steps:
     - shell: pwsh
-        env:
-          MONGODB_URL: ${{ secrets.MONGODB_URL }}
-        run: |
-          echo "$env:MONGODB_URL"
+      env:
+        MONGODB_URL: ${{ secrets.MONGODB_URL }}
+      run: |
+        echo "$env:MONGODB_URL"

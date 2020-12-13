@@ -7,7 +7,7 @@ on:
 
 jobs:
   test_pull_request:
-    runs-on: ubunto_latest
+    runs-on: ubunto-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1

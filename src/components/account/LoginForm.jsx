@@ -7,7 +7,7 @@ import { userLogin } from '../../api/user';
 
 const LoginForm = () => {
   const methods = useFormContext();
-  const { errors, formState, watch } = methods;
+  // const { errors, formState, watch } = methods;
   const router = useRouter()
   const [state , setState] = useState({
     email : '',

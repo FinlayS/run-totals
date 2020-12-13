@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { useFormContext } from "react-hook-form";
 
 import { useRouter } from 'next/router'
 import { userLogin } from '../../api/user';
 
-
 const LoginForm = () => {
-  const methods = useFormContext();
-  // const { errors, formState, watch } = methods;
+
   const router = useRouter()
   const [state , setState] = useState({
     email : '',
@@ -66,10 +63,9 @@ const LoginForm = () => {
     await router.push('/register');
   }
 
-
   return(
     <div className='card col-12 col-lg-4 login-card mt-2 hv-center'>
-      <form {...{methods}}>
+      <form>
         <div className='form-group text-left'>
           <label htmlFor='exampleInputEmail1'>Email address</label>
           <input type='email'

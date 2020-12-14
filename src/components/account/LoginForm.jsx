@@ -1,9 +1,23 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { loginValidation } from "../../validation/login";
 
 import { useRouter } from 'next/router'
 import { userLogin } from '../../api/user';
 
 const LoginForm = () => {
+  const methods = useForm({
+    resolver: yupResolver(loginValidation),
+    mode: "onBlur"
+  });
+
+  const email = methods.watch('email')
+  const password = methods.watch('password')
+  const hasNoErrors = Object.keys(methods.errors).length === 0;
+  const canContinue = hasNoErrors && email && password;
+
+  console.log("email", email,  "password", password, "hasNoErrors", hasNoErrors, "canContinue", canContinue)
 
   const router = useRouter()
   const [state , setState] = useState({
@@ -65,12 +79,13 @@ const LoginForm = () => {
 
   return(
     <div className='card col-12 col-lg-4 login-card mt-2 hv-center'>
-      <form>
+      <form {...{methods}}>
         <div className='form-group text-left'>
           <label htmlFor='exampleInputEmail1'>Email address</label>
           <input type='email'
                  className='form-control'
                  id='email'
+                 name='email'
                  aria-describedby='emailHelp'
                  placeholder='Enter email'
                  value={state.email}
@@ -83,6 +98,7 @@ const LoginForm = () => {
           <input type='password'
                  className='form-control'
                  id='password'
+                 name='password'
                  placeholder='Password'
                  value={state.password}
                  onChange={handleChange}

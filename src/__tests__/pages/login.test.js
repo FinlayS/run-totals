@@ -1,10 +1,15 @@
 import React from 'react';
-import {act, fireEvent, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Login from '../../pages/login';
-import {userLogin} from "../../api/user";
+import { userLogin } from '../../api/user';
+
 
 jest.mock('../../api/user', () => ({ userLogin: jest.fn() }));
+
+const login = jest.fn(async ({ onValidLoginRequest }) => {
+  onValidLoginRequest();
+});
 
 let emailInput, loginPage, passwordInput, loginButton;
 
@@ -101,7 +106,7 @@ describe('Login page tests', () => {
     })
   })
 
-  describe('Client side validation', () => {
+  describe('Server side validation', () => {
     it('should call login function', async () => {
       userEvent.type(emailInput, validEmailInput)
       userEvent.type(passwordInput, validPasswordInput)
@@ -114,6 +119,22 @@ describe('Login page tests', () => {
           'password': validPasswordInput
         }
       )
+    })
+
+    it("cannot", async () => {
+      login.mockReturnValueOnce({
+        response: { status: 401, data: { code: "UserNotFound" } }
+      })
+
+      userEvent.type(emailInput, validEmailInput)
+      userEvent.type(passwordInput, validPasswordInput)
+      await act(async () => userEvent.click(loginButton))
+
+      expect(
+        screen.getByText('Invalid login')
+      ).toBeInTheDocument();
+
+
     })
   })
 

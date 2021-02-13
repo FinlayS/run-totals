@@ -1,4 +1,4 @@
-import { validationSchema } from '../../validation/login'
+import { loginValidation } from '../../validation/login'
 
 const validInput = {
   email: "validEmail@test.com",
@@ -67,7 +67,7 @@ describe('Login', () => {
       },
   ].forEach(testCase => {
       it(`should return false for ${testCase.name}`, () => {
-        expect(validationSchema.isValidSync(testCase.formData)).toBeFalsy();
+        expect(loginValidation.isValidSync(testCase.formData)).toBeFalsy();
       });
     });
   })
@@ -77,7 +77,7 @@ describe('Login', () => {
       { name: "valid form", formData: validInput },
     ].forEach(testCase => {
       it(`should return true for ${testCase.name}`, () => {
-        expect(validationSchema.isValidSync(testCase.formData)).toBeTruthy();
+        expect(loginValidation.isValidSync(testCase.formData)).toBeTruthy();
       });
     });
   })

@@ -9,15 +9,15 @@ import { userLogin } from '../../api/user';
 const LoginForm = () => {
   const methods = useForm({
     resolver: yupResolver(loginValidation),
-    mode: "onBlur"
+    mode: "onBlur",
+    reValidateMode: "onChange"
   });
 
   const email = methods.watch('email')
   const password = methods.watch('password')
   const hasNoErrors = Object.keys(methods.errors).length === 0;
   const canContinue = hasNoErrors && email && password;
-
-  console.log("email", email,  "password", password, "hasNoErrors", hasNoErrors, "canContinue", canContinue)
+  const {register, handleSubmit, errors,} = methods;
 
   const router = useRouter()
   const [state , setState] = useState({
@@ -27,14 +27,6 @@ const LoginForm = () => {
     error: ''
   })
 
-  const handleChange = (e) => {
-    const {id , value} = e.target
-    setState(prevState => ({
-      ...prevState,
-      [id] : value
-    }))
-  }
-
   const showError = (msg) => {
     setState(prevState => ({
       ...prevState,
@@ -42,12 +34,12 @@ const LoginForm = () => {
     }))
   }
 
-  const sendDetailsToServer = async () => {
+  const sendDetailsToServer = async (e) => {
     try {
-      if(state.email.length && state.password.length) {
+      if(e.email.length && e.password.length) {
         const payload={
-          'email':state.email,
-          'password':state.password,
+          'email':e.email,
+          'password':e.password,
         }
         const logInResp = await userLogin(payload)
         if(logInResp.status === 200){
@@ -69,8 +61,7 @@ const LoginForm = () => {
   }
 
   const handleSubmitClick = async (e) => {
-    e.preventDefault();
-    await sendDetailsToServer()
+    await sendDetailsToServer(e)
   }
 
   const redirectToLogin = async () => {
@@ -79,35 +70,41 @@ const LoginForm = () => {
 
   return(
     <div className='card col-12 col-lg-4 login-card mt-2 hv-center'>
-      <form {...{methods}}>
+      <form onSubmit={handleSubmit(handleSubmitClick)}>
         <div className='form-group text-left'>
           <label htmlFor='exampleInputEmail1'>Email address</label>
-          <input type='email'
-                 className='form-control'
+          <input className='form-control'
+                 data-testid='email-input'
                  id='email'
                  name='email'
                  aria-describedby='emailHelp'
                  placeholder='Enter email'
-                 value={state.email}
-                 onChange={handleChange}
+                 ref={register}
           />
           <small id='emailHelp' className='form-text text-muted'>We'll never share your email with anyone else.</small>
+          <div className='alert alert-danger mt-2' style={{display: errors.email ? 'block' : 'none' }} role='alert'>
+            {errors.email && errors.email.message}
+          </div>
         </div>
         <div className='form-group text-left'>
           <label htmlFor='exampleInputPassword1'>Password</label>
           <input type='password'
                  className='form-control'
                  id='password'
+                 data-testid='password-input'
                  name='password'
                  placeholder='Password'
-                 value={state.password}
-                 onChange={handleChange}
+                 ref={register}
           />
+        </div>
+        <div className='alert alert-danger mt-2' style={{display: errors.password ? 'block' : 'none' }} role='alert'>
+          {errors.password && errors.password.message}
         </div>
         <button
           type='submit'
           className='btn btn-primary'
-          onClick={handleSubmitClick}
+          name='login'
+          disabled={!canContinue}
         >
           Login
         </button>

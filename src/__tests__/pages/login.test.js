@@ -123,7 +123,7 @@ describe('Login page tests', () => {
 
     it("cannot", async () => {
       login.mockReturnValueOnce({
-        response: { status: 401, data: { code: "UserNotFound" } }
+        response: { status: 400, data: { code: "UserNotFound" } }
       })
 
       userEvent.type(emailInput, validEmailInput)

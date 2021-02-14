@@ -1,9 +1,23 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { loginValidation } from "../../validation/login";
 
 import { useRouter } from 'next/router'
 import { userLogin } from '../../api/user';
 
 const LoginForm = () => {
+  const methods = useForm({
+    resolver: yupResolver(loginValidation),
+    mode: "onBlur",
+    reValidateMode: "onChange"
+  });
+
+  const email = methods.watch('email')
+  const password = methods.watch('password')
+  const hasNoErrors = Object.keys(methods.errors).length === 0;
+  const canContinue = hasNoErrors && email && password;
+  const {register, handleSubmit, errors,} = methods;
 
   const router = useRouter()
   const [state , setState] = useState({
@@ -13,12 +27,8 @@ const LoginForm = () => {
     error: ''
   })
 
-  const handleChange = (e) => {
-    const {id , value} = e.target
-    setState(prevState => ({
-      ...prevState,
-      [id] : value
-    }))
+  const resetServerError = () => {
+    showError(null)
   }
 
   const showError = (msg) => {
@@ -29,34 +39,31 @@ const LoginForm = () => {
   }
 
   const sendDetailsToServer = async () => {
+    resetServerError()
+
     try {
-      if(state.email.length && state.password.length) {
-        const payload={
-          'email':state.email,
-          'password':state.password,
-        }
-        const logInResp = await userLogin(payload)
-        if(logInResp.status === 200){
-          showError(null)
-          setState(prevState => ({
-            ...prevState,
-            'successMessage' : 'Login successful. Redirecting to home page..'
-          }))
-          await router.push('/runs-main')
-        } else{
-          showError(logInResp.status, 'Some error occurred');
+      const payload = { email, password,}
+
+      const logInResp = await userLogin(payload)
+
+      if (logInResp.status === 200) {
+        setState(prevState => ({
+          ...prevState,
+          'successMessage': 'Login successful. Redirecting to home page..'
+        }))
+        await router.push('/runs-main')
+      } else {
+        if (logInResp.response.status) {
+          showError(logInResp.response.data.error.message);
         }
       }
-      return showError('Please enter valid username and password')
-    }
-    catch (e) {
-      showError('Invalid login')
+    } catch (e) {
+      showError('Sorry, something went wrong')
     }
   }
 
   const handleSubmitClick = async (e) => {
-    e.preventDefault();
-    await sendDetailsToServer()
+    await sendDetailsToServer(e)
   }
 
   const redirectToLogin = async () => {
@@ -65,33 +72,43 @@ const LoginForm = () => {
 
   return(
     <div className='card col-12 col-lg-4 login-card mt-2 hv-center'>
-      <form>
+      <form onSubmit={handleSubmit(handleSubmitClick)}>
         <div className='form-group text-left'>
           <label htmlFor='exampleInputEmail1'>Email address</label>
-          <input type='email'
-                 className='form-control'
+          <input className='form-control'
+                 data-testid='email-input'
                  id='email'
+                 name='email'
                  aria-describedby='emailHelp'
                  placeholder='Enter email'
-                 value={state.email}
-                 onChange={handleChange}
+                 onChange={resetServerError}
+                 ref={register}
           />
           <small id='emailHelp' className='form-text text-muted'>We'll never share your email with anyone else.</small>
+          <div className='alert alert-danger mt-2' style={{display: errors.email ? 'block' : 'none' }} role='alert'>
+            {errors.email && errors.email.message}
+          </div>
         </div>
         <div className='form-group text-left'>
           <label htmlFor='exampleInputPassword1'>Password</label>
           <input type='password'
                  className='form-control'
                  id='password'
+                 data-testid='password-input'
+                 name='password'
                  placeholder='Password'
-                 value={state.password}
-                 onChange={handleChange}
+                 onChange={resetServerError}
+                 ref={register}
           />
+        </div>
+        <div className='alert alert-danger mt-2' style={{display: errors.password ? 'block' : 'none' }} role='alert'>
+          {errors.password && errors.password.message}
         </div>
         <button
           type='submit'
           className='btn btn-primary'
-          onClick={handleSubmitClick}
+          name='login'
+          disabled={!canContinue}
         >
           Login
         </button>
@@ -106,7 +123,6 @@ const LoginForm = () => {
         <span>Don't have an account? </span>
         <span className='loginText' onClick={() => redirectToLogin()}>sign up here</span>
       </div>
-
     </div>
   )
 }

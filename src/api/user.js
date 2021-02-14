@@ -24,8 +24,9 @@ export const userLogin = async (payload) => {
   try {
     response = await axios.post(getUrl('/users/login'), {...payload})
   } catch(e) {
-    console.log(e.data)
+    return e
   }
+
   localStorage.setItem('token', response.data.token)
   return response
 }

@@ -76,7 +76,7 @@ userSchema.methods.generateAuthToken = async function () {
 
 userSchema.statics.findByCredentials = async (email, password) => {
   const user = await User.findOne({ email })
-  const errorMessage = {'error': {'message':'Email and password combination incorrect'}}
+  const errorMessage = {'error': {'message':'Please enter a valid email and password'}}
 
   if (!user) {
     return errorMessage

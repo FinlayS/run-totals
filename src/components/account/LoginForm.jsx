@@ -33,30 +33,28 @@ const LoginForm = () => {
       error : msg
     }))
   }
+  
+  const sendDetailsToServer = async () => {
+    showError(null)
 
-  const sendDetailsToServer = async (e) => {
     try {
-      if(e.email.length && e.password.length) {
-        const payload={
-          'email':e.email,
-          'password':e.password,
-        }
-        const logInResp = await userLogin(payload)
-        if(logInResp.status === 200){
-          showError(null)
-          setState(prevState => ({
-            ...prevState,
-            'successMessage' : 'Login successful. Redirecting to home page..'
-          }))
-          await router.push('/runs-main')
-        } else{
-          showError(logInResp.status, 'Some error occurred');
+      const payload = { email, password,}
+
+      const logInResp = await userLogin(payload)
+
+      if (logInResp.status === 200) {
+        setState(prevState => ({
+          ...prevState,
+          'successMessage': 'Login successful. Redirecting to home page..'
+        }))
+        await router.push('/runs-main')
+      } else {
+        if (logInResp.response.status) {
+          showError(logInResp.response.data.error.message);
         }
       }
-      return showError('Please enter valid username and password')
-    }
-    catch (e) {
-      showError('Invalid login')
+    } catch (e) {
+      showError('Sorry, something went wrong')
     }
   }
 
@@ -119,7 +117,6 @@ const LoginForm = () => {
         <span>Don't have an account? </span>
         <span className='loginText' onClick={() => redirectToLogin()}>sign up here</span>
       </div>
-
     </div>
   )
 }

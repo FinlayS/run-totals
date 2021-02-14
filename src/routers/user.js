@@ -28,7 +28,7 @@ router.post('/users/login', async (req, res) =>{
     res.send({ user, token })
 
   } catch (e) {
-    return res.status(400).send(user)
+    return res.status(401).send(user)
   }
 })
 

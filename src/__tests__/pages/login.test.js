@@ -4,12 +4,7 @@ import userEvent from '@testing-library/user-event'
 import Login from '../../pages/login';
 import { userLogin } from '../../api/user';
 
-
 jest.mock('../../api/user', () => ({ userLogin: jest.fn() }));
-
-const login = jest.fn(async ({ onValidLoginRequest }) => {
-  onValidLoginRequest();
-});
 
 let emailInput, loginPage, passwordInput, loginButton;
 
@@ -107,6 +102,9 @@ describe('Login page tests', () => {
   })
 
   describe('Server side validation', () => {
+    beforeEach(() => {
+      userLogin.mockReset();
+    })
     it('should call login function', async () => {
       userEvent.type(emailInput, validEmailInput)
       userEvent.type(passwordInput, validPasswordInput)
@@ -121,20 +119,53 @@ describe('Login page tests', () => {
       )
     })
 
-    it("cannot", async () => {
-      login.mockReturnValueOnce({
-        response: { status: 400, data: { code: "UserNotFound" } }
-      })
+    it("should show general error message", async () => {
+      // userLogin.mockReset();
+      userLogin.mockRejectedValue();
 
       userEvent.type(emailInput, validEmailInput)
       userEvent.type(passwordInput, validPasswordInput)
       await act(async () => userEvent.click(loginButton))
 
       expect(
-        screen.getByText('Invalid login')
+        screen.getByText('Sorry, something went wrong')
       ).toBeInTheDocument();
+    })
 
+    it("should show server error message", async () => {
+      // userLogin.mockReset();
+      userLogin.mockResolvedValueOnce({
+        response: {
+          status: 401,
+          data: {
+            error:
+              { message: "invalidLoginMessage" }
+          }
+        }
+      });
 
+      userEvent.type(emailInput, validEmailInput)
+      userEvent.type(passwordInput, validPasswordInput)
+      await act(async () => userEvent.click(loginButton))
+
+      expect(
+        screen.getByText('invalidLoginMessage')
+      ).toBeInTheDocument();
+    })
+
+    it("should successful login message", async () => {
+      // userLogin.mockReset();
+      userLogin.mockResolvedValueOnce({
+         status: 200
+      });
+
+      userEvent.type(emailInput, validEmailInput)
+      userEvent.type(passwordInput, validPasswordInput)
+      await act(async () => userEvent.click(loginButton))
+
+      expect(
+        screen.getByText('Login successful. Redirecting to home page..')
+      ).toBeInTheDocument();
     })
   })
 

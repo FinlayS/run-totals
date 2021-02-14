@@ -27,15 +27,19 @@ const LoginForm = () => {
     error: ''
   })
 
+  const resetServerError = () => {
+    showError(null)
+  }
+
   const showError = (msg) => {
     setState(prevState => ({
       ...prevState,
       error : msg
     }))
   }
-  
+
   const sendDetailsToServer = async () => {
-    showError(null)
+    resetServerError()
 
     try {
       const payload = { email, password,}
@@ -77,6 +81,7 @@ const LoginForm = () => {
                  name='email'
                  aria-describedby='emailHelp'
                  placeholder='Enter email'
+                 onChange={resetServerError}
                  ref={register}
           />
           <small id='emailHelp' className='form-text text-muted'>We'll never share your email with anyone else.</small>
@@ -92,6 +97,7 @@ const LoginForm = () => {
                  data-testid='password-input'
                  name='password'
                  placeholder='Password'
+                 onChange={resetServerError}
                  ref={register}
           />
         </div>

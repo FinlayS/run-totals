@@ -120,7 +120,6 @@ describe('Login page tests', () => {
     })
 
     it("should show general error message", async () => {
-      // userLogin.mockReset();
       userLogin.mockRejectedValue();
 
       userEvent.type(emailInput, validEmailInput)
@@ -133,7 +132,6 @@ describe('Login page tests', () => {
     })
 
     it("should show server error message", async () => {
-      // userLogin.mockReset();
       userLogin.mockResolvedValueOnce({
         response: {
           status: 401,
@@ -153,8 +151,33 @@ describe('Login page tests', () => {
       ).toBeInTheDocument();
     })
 
+    it("should clear server error on re-input", async () => {
+      userLogin.mockResolvedValueOnce({
+        response: {
+          status: 401,
+          data: {
+            error:
+              { message: "invalidLoginMessage" }
+          }
+        }
+      });
+
+      userEvent.type(emailInput, validEmailInput)
+      userEvent.type(passwordInput, validPasswordInput)
+      await act(async () => userEvent.click(loginButton))
+
+      expect(
+        screen.getByText('invalidLoginMessage')
+      ).toBeInTheDocument();
+
+      userEvent.type(emailInput, validEmailInput)
+      expect(
+        screen.queryByText('invalidLoginMessage')
+      ).not.toBeInTheDocument()
+
+    })
+
     it("should successful login message", async () => {
-      // userLogin.mockReset();
       userLogin.mockResolvedValueOnce({
          status: 200
       });

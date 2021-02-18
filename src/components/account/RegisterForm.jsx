@@ -1,9 +1,27 @@
 import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import { yupResolver } from '@hookform/resolvers/yup';
 
+import { registerValidation } from "../../validation/register";
 import { userRegister } from '../../api/user';
 
 const RegisterForm = () => {
+  const methods = useForm({
+    resolver: yupResolver(registerValidation),
+    mode: "onBlur",
+    reValidateMode: "onChange"
+  });
+
+  const email = methods.watch('email')
+  const password = methods.watch('password')
+  const confirmPassword = methods.watch('confirmPassword')
+  const hasNoErrors = Object.keys(methods.errors).length === 0;
+  const canContinue = hasNoErrors && email && password && confirmPassword;
+  const {register, handleSubmit, errors,} = methods;
+
+  console.log('email', email, 'password', password, 'errors', errors, 'canContinue', canContinue)
+
   const router = useRouter()
   const [state , setState] = useState({
     email : '',
@@ -13,15 +31,10 @@ const RegisterForm = () => {
     error: ''
   })
 
-  const handleChange = (e) => {
+  const resetServerError = () => {
     showError(null)
-    const {id , value} = e.target
-    setState(prevState => ({
-      ...prevState,
-      [id] : value
-    }))
   }
-
+  
   const showError = (msg) => {
     setState(prevState => ({
       ...prevState,
@@ -30,37 +43,33 @@ const RegisterForm = () => {
   }
 
   const sendDetailsToServer = async () => {
+    resetServerError()
     try {
-      if(state.email.length && state.password.length) {
-        const payload={
-          'email':state.email,
-          'password':state.password,
-        }
-       const regResp = await userRegister( payload)
+      const payload = { email, password,}
+
+      const regResp = await userRegister(payload)
+
         if(regResp.status === 201){
           setState(prevState => ({
             ...prevState,
             'successMessage' : 'Registration successful. Redirecting to home page..'
           }))
           await router.push('/runs-main')
-          showError(null)
         } else{
-          showError(regResp.status, 'Some error occurred');
+          if (regResp.response.status) {
+            showError(regResp.response.data.error.message);
+          }
         }
-      }
-      return showError('Please enter valid username and password')
     }
     catch (e) {
-      console.log(e)
+      showError('Sorry, something went wrong')
     }
   }
 
-  const handleSubmitClick = async (e) => {
-    e.preventDefault();
-    if(state.password === state.confirmPassword) {
+  const handleSubmitClick = async () => {
+    if(password === confirmPassword) {
       await sendDetailsToServer()
     } else {
-      console.log(state.password, state.confirmPassword)
       showError('Passwords do not match');
     }
   }
@@ -71,43 +80,55 @@ const RegisterForm = () => {
 
   return(
     <div className='card col-12 col-lg-4 login-card mt-2 hv-center'>
-      <form>
+      <form onSubmit={handleSubmit(handleSubmitClick)}>
         <div className='form-group text-left'>
           <label htmlFor='exampleInputEmail1'>Email address</label>
-          <input type='email'
-                 className='form-control'
+          <input className='form-control'
                  id='email'
+                 name='email'
                  aria-describedby='emailHelp'
                  placeholder='Enter email'
-                 value={state.email}
-                 onChange={handleChange}
+                 onChange={resetServerError}
+                 ref={register}
           />
           <small id='emailHelp' className='form-text text-muted'>We'll never share your email with anyone else.</small>
+          <div className='alert alert-danger mt-2' style={{display: errors.email ? 'block' : 'none' }} role='alert'>
+            {errors.email && errors.email.message}
+          </div>
         </div>
         <div className='form-group text-left'>
           <label htmlFor='exampleInputPassword1'>Password</label>
           <input type='password'
                  className='form-control'
                  id='password'
+                 name='password'
                  placeholder='Password'
-                 value={state.password}
-                 onChange={handleChange}
+                 onChange={resetServerError}
+                 ref={register}
           />
+        </div>
+        <div className='alert alert-danger mt-2' style={{display: errors.password ? 'block' : 'none' }} role='alert'>
+          {errors.password && errors.password.message}
         </div>
         <div className='form-group text-left'>
           <label htmlFor='exampleInputPassword1'>Confirm Password</label>
           <input type='password'
                  className='form-control'
                  id='confirmPassword'
+                 name='confirmPassword'
                  placeholder='Confirm Password'
-                 value={state.confirmPassword}
-                 onChange={handleChange}
+                 onChange={resetServerError}
+                 ref={register}
           />
+        </div>
+        <div className='alert alert-danger mt-2' style={{display: errors.confirmPassword ? 'block' : 'none' }} role='alert'>
+          {errors.confirmPassword && errors.confirmPassword.message}
         </div>
         <button
           type='submit'
           className='btn btn-primary'
-          onClick={handleSubmitClick}
+          name='register'
+          disabled={!canContinue}
         >
           Register
         </button>

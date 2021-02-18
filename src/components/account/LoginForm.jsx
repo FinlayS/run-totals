@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { loginValidation } from "../../validation/login";
-
 import { useRouter } from 'next/router'
+import { yupResolver } from '@hookform/resolvers/yup';
+
+import { loginValidation } from "../../validation/login";
 import { userLogin } from '../../api/user';
 
 const LoginForm = () => {
@@ -40,7 +40,6 @@ const LoginForm = () => {
 
   const sendDetailsToServer = async () => {
     resetServerError()
-
     try {
       const payload = { email, password,}
 

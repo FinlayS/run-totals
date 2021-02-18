@@ -10,6 +10,7 @@ let emailInput, loginPage, passwordInput, loginButton;
 
 const validEmailInput = 'valid@email.com';
 const validPasswordInput = 'validPassw0rd';
+const invalidLoginMessage = 'login attempt is invalid'
 
 const elementContainers = async () => {
   emailInput = screen.getByTestId('email-input');
@@ -137,7 +138,7 @@ describe('Login page tests', () => {
           status: 401,
           data: {
             error:
-              { message: "invalidLoginMessage" }
+              { message: invalidLoginMessage }
           }
         }
       });
@@ -147,7 +148,7 @@ describe('Login page tests', () => {
       await act(async () => userEvent.click(loginButton))
 
       expect(
-        screen.getByText('invalidLoginMessage')
+        screen.getByText(invalidLoginMessage)
       ).toBeInTheDocument();
     })
 
@@ -157,7 +158,7 @@ describe('Login page tests', () => {
           status: 401,
           data: {
             error:
-              { message: "invalidLoginMessage" }
+              { message: invalidLoginMessage }
           }
         }
       });
@@ -167,12 +168,12 @@ describe('Login page tests', () => {
       await act(async () => userEvent.click(loginButton))
 
       expect(
-        screen.getByText('invalidLoginMessage')
+        screen.getByText(invalidLoginMessage)
       ).toBeInTheDocument();
 
       userEvent.type(emailInput, validEmailInput)
       expect(
-        screen.queryByText('invalidLoginMessage')
+        screen.queryByText(invalidLoginMessage)
       ).not.toBeInTheDocument()
 
     })

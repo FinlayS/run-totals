@@ -75,11 +75,7 @@ userSchema.methods.generateAuthToken = async function () {
   try {
     await user.save()
   } catch(e) {
-    // getErrorMessage(e)
-    // console.log('USER', e.code, e)
-    // throw new Error({'error': {'message':'Please enter a valid email and password'}})
      return getErrorMessage(e)
-
   }
 
   return token

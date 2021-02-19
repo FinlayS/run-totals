@@ -41,9 +41,7 @@ const LoginForm = () => {
   const sendDetailsToServer = async () => {
     resetServerError()
     try {
-      const payload = { email, password,}
-
-      const logInResp = await userLogin(payload)
+      const logInResp = await userLogin({ email, password })
 
       if (logInResp.status === 200) {
         setState(prevState => ({

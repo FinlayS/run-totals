@@ -20,8 +20,6 @@ const RegisterForm = () => {
   const canContinue = hasNoErrors && email && password && confirmPassword;
   const {register, handleSubmit, errors,} = methods;
 
-  console.log('email', email, 'password', password, 'errors', errors, 'canContinue', canContinue)
-
   const router = useRouter()
   const [state , setState] = useState({
     email : '',
@@ -34,7 +32,7 @@ const RegisterForm = () => {
   const resetServerError = () => {
     showError(null)
   }
-  
+
   const showError = (msg) => {
     setState(prevState => ({
       ...prevState,
@@ -45,9 +43,7 @@ const RegisterForm = () => {
   const sendDetailsToServer = async () => {
     resetServerError()
     try {
-      const payload = { email, password,}
-
-      const regResp = await userRegister(payload)
+      const regResp = await userRegister({ email, password })
 
         if(regResp.status === 201){
           setState(prevState => ({
@@ -57,7 +53,7 @@ const RegisterForm = () => {
           await router.push('/runs-main')
         } else{
           if (regResp.response.status) {
-            showError(regResp.response.data.error.message);
+            showError(regResp.response.data.message);
           }
         }
     }

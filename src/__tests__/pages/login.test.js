@@ -45,7 +45,7 @@ describe('Login page tests', () => {
         .toBeTruthy()
     })
 
-    it('should remder disabled login button', async () => {
+    it('should render disabled login button', async () => {
       expect(loginButton).toBeDisabled();
     })
   })
@@ -82,13 +82,13 @@ describe('Login page tests', () => {
       expect(loginButton).toBeDisabled();
     })
 
-    it('should show invalid password warning', async () => {
+    it('should show password too short warning', async () => {
       userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, 'invalidPassword')
+      userEvent.type(passwordInput, 'invalid')
       await act(async () => fireEvent.blur(passwordInput))
 
       expect(
-        screen.getByText('Must Contain 8 characters, one uppercase and one number')
+        screen.getByText('Must be at least 8 characters')
       ).toBeInTheDocument();
 
       expect(loginButton).toBeDisabled();

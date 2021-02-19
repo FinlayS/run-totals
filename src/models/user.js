@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const Lap = require('../models/lap')
 const Run = require('../models/run')
+const getErrorMessage = require('../utils/handleErrors')
+
 
 const jwtSecret = process.env.JWT_SECRET
 
@@ -29,7 +31,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: true,
-    minlength: 7,
+    minlength: 8,
     trim: true,
     validate(value) {
       if (value.toLowerCase().includes('password')) {
@@ -69,7 +71,16 @@ userSchema.methods.generateAuthToken = async function () {
   const token = jwt.sign({ _id: user._id.toString() }, jwtSecret)
 
   user.tokens = user.tokens.concat({ token })
-  await user.save()
+
+  try {
+    await user.save()
+  } catch(e) {
+    // getErrorMessage(e)
+    // console.log('USER', e.code, e)
+    // throw new Error({'error': {'message':'Please enter a valid email and password'}})
+     return getErrorMessage(e)
+
+  }
 
   return token
 }

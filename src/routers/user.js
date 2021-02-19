@@ -4,13 +4,19 @@ const auth = require('../middleware/authentication')
 const User = require('../models/user')
 
 router.post('/users', async (req, res) => {
+  let token
   const user = new User(req.body)
 
   try {
-    const token = await user.generateAuthToken()
-    res.status(201).send({ user, token })
+    token = await user.generateAuthToken()
+
+    if(!token.errors) {
+      res.status(201).send({ user, token })
+    } else {
+      return  res.status(400).send(token.errors)
+    }
   } catch (e) {
-    res.status(400).send(e)
+    return res.status(500)
   }
 })
 

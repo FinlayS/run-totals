@@ -1,11 +1,12 @@
-import { loginValidation } from '../../validation/login'
+import { registerValidation } from '../../validation/register'
 
 const validInput = {
-  email: "validEmail@test.com",
-  password: "Passw0rd"
+  email: 'validEmail@test.com',
+  password: 'Passw0rd',
+  confirmPassword: 'Passw0rd'
 };
 
-describe('Login', () => {
+describe('Register', () => {
   describe('invalid form data', () => {
     [
       { name: "empty form", formData: {} },
@@ -44,9 +45,30 @@ describe('Login', () => {
           password: "Sh0rt"
         }
       },
-  ].forEach(testCase => {
+      {
+        name: "invalid password: no uppercase",
+        formData: {
+          email: validInput.email,
+          password: "n0uppercase"
+        }
+      },
+      {
+        name: "invalid password: no lowercase",
+        formData: {
+          email: validInput.email,
+          password: "ALLUPPERC4SE"
+        }
+      },
+      {
+        name: "invalid password: no number",
+        formData: {
+          email: validInput.email,
+          password: "NoNumber"
+        }
+      },
+    ].forEach(testCase => {
       it(`should return false for ${testCase.name}`, () => {
-        expect(loginValidation.isValidSync(testCase.formData)).toBeFalsy();
+        expect(registerValidation.isValidSync(testCase.formData)).toBeFalsy();
       });
     });
   })
@@ -56,7 +78,7 @@ describe('Login', () => {
       { name: "valid form", formData: validInput },
     ].forEach(testCase => {
       it(`should return true for ${testCase.name}`, () => {
-        expect(loginValidation.isValidSync(testCase.formData)).toBeTruthy();
+        expect(registerValidation.isValidSync(testCase.formData)).toBeTruthy();
       });
     });
   })

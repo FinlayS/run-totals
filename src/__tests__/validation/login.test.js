@@ -44,27 +44,6 @@ describe('Login', () => {
           password: "Sh0rt"
         }
       },
-      {
-        name: "invalid password: no uppercase",
-        formData: {
-          email: validInput.email,
-          password: "n0uppercase"
-        }
-      },
-      {
-        name: "invalid password: no lowercase",
-        formData: {
-          email: validInput.email,
-          password: "ALLUPPERC4SE"
-        }
-      },
-      {
-        name: "invalid password: no number",
-        formData: {
-          email: validInput.email,
-          password: "NoNumber"
-        }
-      },
   ].forEach(testCase => {
       it(`should return false for ${testCase.name}`, () => {
         expect(loginValidation.isValidSync(testCase.formData)).toBeFalsy();

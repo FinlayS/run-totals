@@ -1,5 +1,5 @@
 import React from 'react';
-import {act, fireEvent, render, screen, waitFor} from '@testing-library/react'
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Login from '../../pages/login';
 import { userLogin } from '../../api/user';
@@ -195,4 +195,4 @@ describe('Login page tests', () => {
       ).toBeInTheDocument();
     })
   })
-})  
+})

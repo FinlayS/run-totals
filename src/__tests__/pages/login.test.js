@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, fireEvent, render, screen } from '@testing-library/react'
+import {act, fireEvent, render, screen, waitFor} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Login from '../../pages/login';
 import { userLogin } from '../../api/user';
@@ -109,6 +109,7 @@ describe('Login page tests', () => {
     it('should call login function', async () => {
       userEvent.type(emailInput, validEmailInput)
       userEvent.type(passwordInput, validPasswordInput)
+
       await act(async () => userEvent.click(loginButton))
 
       expect(userLogin).toBeCalledTimes(1)
@@ -125,11 +126,12 @@ describe('Login page tests', () => {
 
       userEvent.type(emailInput, validEmailInput)
       userEvent.type(passwordInput, validPasswordInput)
-      await act(async () => userEvent.click(loginButton))
 
-      expect(
-        screen.getByText('Sorry, something went wrong')
-      ).toBeInTheDocument();
+      await act(async () => userEvent.click(loginButton))
+      await waitFor(() => screen.getByRole('alert'))
+
+      expect(screen.getByRole('alert'))
+        .toHaveTextContent('Sorry, something went wrong')
     })
 
     it("should show server error message", async () => {
@@ -145,11 +147,12 @@ describe('Login page tests', () => {
 
       userEvent.type(emailInput, validEmailInput)
       userEvent.type(passwordInput, validPasswordInput)
-      await act(async () => userEvent.click(loginButton))
 
-      expect(
-        screen.getByText(invalidLoginMessage)
-      ).toBeInTheDocument();
+      await act(async () => userEvent.click(loginButton))
+      await waitFor(() => screen.getByRole('alert'))
+
+      expect(screen.getByRole('alert'))
+        .toHaveTextContent(invalidLoginMessage)
     })
 
     it("should clear server error on re-input", async () => {
@@ -165,17 +168,17 @@ describe('Login page tests', () => {
 
       userEvent.type(emailInput, validEmailInput)
       userEvent.type(passwordInput, validPasswordInput)
-      await act(async () => userEvent.click(loginButton))
 
-      expect(
-        screen.getByText(invalidLoginMessage)
-      ).toBeInTheDocument();
+      await act(async () => userEvent.click(loginButton))
+      await waitFor(() => screen.getByRole('alert'))
+
+      expect(screen.getByRole('alert'))
+        .toHaveTextContent(invalidLoginMessage)
 
       userEvent.type(emailInput, validEmailInput)
       expect(
         screen.queryByText(invalidLoginMessage)
       ).not.toBeInTheDocument()
-
     })
 
     it("should successful login message", async () => {
@@ -192,5 +195,4 @@ describe('Login page tests', () => {
       ).toBeInTheDocument();
     })
   })
-
 })  

@@ -83,38 +83,6 @@ describe('Register', () => {
         }
       },
       {
-        name: "invalid confirm password: too short",
-        formData: {
-          email: validInput.email,
-          password: validInput.password,
-          confirmPassword: "Sh0rt"
-        }
-      },
-      {
-        name: "invalid confirm password: no uppercase",
-        formData: {
-          email: validInput.email,
-          password: validInput.password,
-          confirmPassword: "n0uppercase"
-        }
-      },
-      {
-        name: "invalid confirm password: no lowercase",
-        formData: {
-          email: validInput.email,
-          password: validInput.password,
-          confirmPassword: "ALLUPPERC4SE"
-        }
-      },
-      {
-        name: "invalid confirm password: no number",
-        formData: {
-          email: validInput.email,
-          password: validInput.password,
-          confirmPassword: "NoNumber"
-        }
-      },
-      {
         name: "invalid confirm password: empty string",
         formData: {
           email: validInput.email,

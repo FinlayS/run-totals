@@ -17,7 +17,7 @@ const LoginForm = () => {
   const password = methods.watch('password')
   const hasNoErrors = Object.keys(methods.errors).length === 0;
   const canContinue = hasNoErrors && email && password;
-  const {register, handleSubmit, errors,} = methods;
+  const { register, handleSubmit, errors } = methods;
 
   const router = useRouter()
   const [state , setState] = useState({
@@ -110,10 +110,14 @@ const LoginForm = () => {
           Login
         </button>
       </form>
-      <div className='alert alert-success mt-2' style={{display: state.successMessage ? 'block' : 'none' }} role='alert'>
+      <div className='alert alert-success mt-2'
+           style={{display: state.successMessage ? 'block' : 'none' }}
+           role='alert'>
         {state.successMessage}
       </div>
-      <div className='alert alert-danger mt-2' style={{display: state.error ? 'block' : 'none' }} role='alert'>
+      <div className='alert alert-danger mt-2'
+           style={{display: state.error ? 'block' : 'none' }}
+           role='alert'>
         {state.error}
       </div>
       <div className='mt-2'>

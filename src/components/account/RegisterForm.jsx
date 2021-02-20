@@ -18,7 +18,7 @@ const RegisterForm = () => {
   const confirmPassword = methods.watch('confirmPassword')
   const hasNoErrors = Object.keys(methods.errors).length === 0;
   const canContinue = hasNoErrors && email && password && confirmPassword;
-  const {register, handleSubmit, errors,} = methods;
+  const { register, handleSubmit, errors } = methods;
 
   const router = useRouter()
   const [state , setState] = useState({
@@ -53,18 +53,17 @@ const RegisterForm = () => {
           await router.push('/runs-main')
         } else{
           if (regResp.response.status) {
-            showError(regResp.response.data.message);
+            showError(regResp.response.data.error.message);
           }
         }
-    }
-    catch (e) {
+    } catch (e) {
       showError('Sorry, something went wrong')
     }
   }
 
-  const handleSubmitClick = async () => {
+  const handleSubmitClick = async (e) => {
     if(password === confirmPassword) {
-      await sendDetailsToServer()
+      await sendDetailsToServer(e)
     } else {
       showError('Passwords do not match');
     }
@@ -80,6 +79,7 @@ const RegisterForm = () => {
         <div className='form-group text-left'>
           <label htmlFor='exampleInputEmail1'>Email address</label>
           <input className='form-control'
+                 data-testid='email-input'
                  id='email'
                  name='email'
                  aria-describedby='emailHelp'
@@ -88,36 +88,44 @@ const RegisterForm = () => {
                  ref={register}
           />
           <small id='emailHelp' className='form-text text-muted'>We'll never share your email with anyone else.</small>
-          <div className='alert alert-danger mt-2' style={{display: errors.email ? 'block' : 'none' }} role='alert'>
+          <div className='alert alert-danger mt-2'
+               style={{display: errors.email ? 'block' : 'none' }}
+               role='alert'>
             {errors.email && errors.email.message}
           </div>
         </div>
         <div className='form-group text-left'>
           <label htmlFor='exampleInputPassword1'>Password</label>
           <input type='password'
+                 data-testid='password-input'
                  className='form-control'
                  id='password'
                  name='password'
-                 placeholder='Password'
+                 placeholder='Enter password'
                  onChange={resetServerError}
                  ref={register}
           />
         </div>
-        <div className='alert alert-danger mt-2' style={{display: errors.password ? 'block' : 'none' }} role='alert'>
+        <div className='alert alert-danger mt-2'
+             style={{display: errors.password ? 'block' : 'none' }}
+             role='alert'>
           {errors.password && errors.password.message}
         </div>
         <div className='form-group text-left'>
           <label htmlFor='exampleInputPassword1'>Confirm Password</label>
           <input type='password'
+                 data-testid='confirmPassword-input'
                  className='form-control'
                  id='confirmPassword'
                  name='confirmPassword'
-                 placeholder='Confirm Password'
+                 placeholder='Confirm password'
                  onChange={resetServerError}
                  ref={register}
           />
         </div>
-        <div className='alert alert-danger mt-2' style={{display: errors.confirmPassword ? 'block' : 'none' }} role='alert'>
+        <div className='alert alert-danger mt-2'
+             style={{display: errors.confirmPassword ? 'block' : 'none' }}
+             role='alert'>
           {errors.confirmPassword && errors.confirmPassword.message}
         </div>
         <button
@@ -129,10 +137,14 @@ const RegisterForm = () => {
           Register
         </button>
       </form>
-      <div className='alert alert-success mt-2' style={{display: state.successMessage ? 'block' : 'none' }} role='alert'>
+      <div className='alert alert-success mt-2'
+           style={{display: state.successMessage ? 'block' : 'none' }}
+           role='alert'>
         {state.successMessage}
       </div>
-      <div className='alert alert-danger mt-2' style={{display: state.error ? 'block' : 'none' }} role='alert'>
+      <div className='alert alert-danger mt-2'
+           style={{display: state.error ? 'block' : 'none' }}
+           role='alert'>
         {state.error}
       </div>
       <div className='mt-2'>

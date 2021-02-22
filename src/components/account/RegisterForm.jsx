@@ -45,8 +45,8 @@ const RegisterForm = () => {
     try {
       const regResp = await userRegister({ email, password })
         if(regResp.status === 201){
-          await router.push("/runs-main")
           setLoader(false)
+          await router.push("/runs-main")
         } else{
           if (regResp.response.status) {
             showError(regResp.response.data.error.message);
@@ -54,8 +54,9 @@ const RegisterForm = () => {
         }
     } catch (e) {
       showError("Sorry, something went wrong")
+    } finally {
+      setLoader(false)
     }
-    setLoader(false)
   }
 
   const handleSubmitClick = async (e) => {
@@ -137,10 +138,10 @@ const RegisterForm = () => {
             <div
               className="loader"
               data-testid="loader"
-              style={{ marginLeft: "17px" }}
             />
           )}
-          Register
+          {loader}
+          {!loader && <>Register</>}
         </button>
       </form>
       <div className="alert alert-success mt-2"

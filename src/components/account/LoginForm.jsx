@@ -43,8 +43,8 @@ const LoginForm = () => {
     try {
       const logInResp = await userLogin({ email, password })
       if (logInResp.status === 200) {
-        await router.push("/runs-main")
         setLoader(false)
+        await router.push("/runs-main")
       } else {
         if (logInResp.response.status) {
           showError(logInResp.response.data.error.message);
@@ -52,8 +52,9 @@ const LoginForm = () => {
       }
     } catch (e) {
       showError("Sorry, something went wrong")
+    } finally {
+      setLoader(false)
     }
-    setLoader(false)
   }
 
   const handleSubmitClick = async (e) => {
@@ -111,10 +112,10 @@ const LoginForm = () => {
             <div
               className="loader"
               data-testid="loader"
-              style={{ marginLeft: "10px" }}
             />
           )}
-          Login
+          {loader}
+          {!loader && <>Login</>}
         </button>
       </form>
       <div className="alert alert-success mt-2"

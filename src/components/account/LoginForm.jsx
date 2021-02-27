@@ -37,6 +37,7 @@ const LoginForm = () => {
       ...prevState,
       error : msg
     }));
+    setLoader(false)
   };
 
   const sendDetailsToServer = async () => {
@@ -47,14 +48,12 @@ const LoginForm = () => {
       } else {
         if (logInResp.response.status) {
           showError(logInResp.response.data.error.message);
-          setLoader(false);
         }
       }
     } catch (e) {
       showError("Sorry, something went wrong")
-      setLoader(false);
     } finally {
-      loader ? setLoader(false) : true
+      loader ? setLoader(false) : null
     }
   }
 

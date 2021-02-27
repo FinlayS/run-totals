@@ -39,6 +39,7 @@ const RegisterForm = () => {
       ...prevState,
       error : msg
     }));
+    setLoader(false);
   };
 
   const sendDetailsToServer = async () => {
@@ -49,15 +50,13 @@ const RegisterForm = () => {
         } else{
           if (regResp.response.status) {
             showError(regResp.response.data.error.message);
-            setLoader(false);
           }
         }
     } catch (e) {
       showError("Sorry, something went wrong")
-      setLoader(false);
     }
     finally {
-      loader ? setLoader(false) : true
+      loader ? setLoader(false) : null
     }
   }
 

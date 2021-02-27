@@ -50,29 +50,10 @@ const Laps = (id) => {
       </div>
       {allTotals && (
         <div>
-          <style jsx>{`
-      table {
-        padding-top: 30px;
-        }
-        th {
-          background: LightPink;
-          width: 150px;
-          max-width: 150px;
-          text-align: left;
-          font-weight: bold;
-        }
-          td {
-          width: 150px;
-          max-width: 150px;
-          text-align: left;
-          font-weight: bold;
-          color: grey;
-        }
-      `}</style>
           <table id='lapTotals'>
             <tbody>
             <tr>
-              <th></th>
+              <th/>
               <th>Total</th>
               <th>Active</th>
             </tr>

@@ -31,47 +31,47 @@ const RegisterForm = () => {
   const { register, handleSubmit, errors } = methods;
 
   const resetServerError = () => {
-    showError(null)
-  }
+    showError(null);
+  };
 
   const showError = (msg) => {
     setState(prevState => ({
       ...prevState,
       error : msg
-    }))
-  }
+    }));
+  };
 
   const sendDetailsToServer = async () => {
     try {
       const regResp = await userRegister({ email, password })
         if(regResp.status === 201){
-          setLoader(false)
-          await router.push("/runs-main")
+          setLoader(false);
+          await router.push("/runs-main");
         } else{
           if (regResp.response.status) {
             showError(regResp.response.data.error.message);
+            setLoader(false);
           }
         }
     } catch (e) {
       showError("Sorry, something went wrong")
-    } finally {
-      setLoader(false)
+      setLoader(false);
     }
   }
 
   const handleSubmitClick = async (e) => {
-    resetServerError()
+    resetServerError();
     if(password === confirmPassword) {
-      setLoader(true)
-      await sendDetailsToServer(e)
+      setLoader(true);
+      await sendDetailsToServer(e);
     } else {
       showError("Passwords do not match");
     }
-  }
+  };
 
   const redirectToLogin = async () => {
     await router.push("/login");
-  }
+  };
 
   return(
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">

@@ -29,43 +29,43 @@ const LoginForm = () => {
   const { register, handleSubmit, errors } = methods;
 
   const resetServerError = () => {
-    showError(null)
+    showError(null);
   }
 
   const showError = (msg) => {
     setState(prevState => ({
       ...prevState,
       error : msg
-    }))
-  }
+    }));
+  };
 
   const sendDetailsToServer = async () => {
     try {
       const logInResp = await userLogin({ email, password })
       if (logInResp.status === 200) {
-        setLoader(false)
-        await router.push("/runs-main")
+        setLoader(false);
+        await router.push("/runs-main");
       } else {
         if (logInResp.response.status) {
           showError(logInResp.response.data.error.message);
+          setLoader(false);
         }
       }
     } catch (e) {
       showError("Sorry, something went wrong")
-    } finally {
-      setLoader(false)
+      setLoader(false);
     }
   }
 
   const handleSubmitClick = async (e) => {
-    resetServerError()
-    setLoader(true)
-    await sendDetailsToServer(e)
-  }
+    resetServerError();
+    setLoader(true);
+    await sendDetailsToServer(e);
+  };
 
   const redirectToLogin = async () => {
     await router.push("/register");
-  }
+  };
 
   return(
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">

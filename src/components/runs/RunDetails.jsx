@@ -5,6 +5,7 @@ import { deleteRun } from '../../api/runs';
 import RunContext from '../../context/runContext';
 
 import Laps from '../laps/Laps';
+import EditRun from './EditRun';
 import moment from "moment";
 
 const RunDetails = ({run}) => {
@@ -40,6 +41,7 @@ const RunDetails = ({run}) => {
             onClick={removeRun}
           >x
           </button>
+          <EditRun key={run._id} run={run}/>
         </Col>
       </Row>
       <Laps >{run._id}</Laps>

@@ -45,7 +45,6 @@ const RegisterForm = () => {
     try {
       const regResp = await userRegister({ email, password })
         if(regResp.status === 201){
-          setLoader(false);
           await router.push("/runs-main");
         } else{
           if (regResp.response.status) {
@@ -56,6 +55,9 @@ const RegisterForm = () => {
     } catch (e) {
       showError("Sorry, something went wrong")
       setLoader(false);
+    }
+    finally {
+      loader ? setLoader(false) : true
     }
   }
 

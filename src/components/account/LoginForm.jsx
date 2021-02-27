@@ -43,7 +43,6 @@ const LoginForm = () => {
     try {
       const logInResp = await userLogin({ email, password })
       if (logInResp.status === 200) {
-        setLoader(false);
         await router.push("/runs-main");
       } else {
         if (logInResp.response.status) {
@@ -54,6 +53,8 @@ const LoginForm = () => {
     } catch (e) {
       showError("Sorry, something went wrong")
       setLoader(false);
+    } finally {
+      loader ? setLoader(false) : true
     }
   }
 

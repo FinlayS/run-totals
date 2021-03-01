@@ -3,8 +3,9 @@ import { Button, Modal, Row, Col } from 'react-bootstrap';
 import NumberFormat from "react-number-format";
 import moment from 'moment';
 
-import { patchRun } from '../../api/runs'
+import { deleteRun, patchRun } from '../../api/runs'
 import RunContext from '../../context/runContext';
+import {EditIcon, BinIcon, CloseIcon, SaveIcon} from "../../../public/icons/icons";
 
 const EditRun = ({ run }) => {
   const { dispatchRuns } = useContext(RunContext)
@@ -16,12 +17,9 @@ const EditRun = ({ run }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const editRun = async (e) => {
+  const editRun = async () => {
     const runDate = moment(date, 'DD/MM/YY').valueOf()
-
     let run
-    e.preventDefault()
-
     try {
       run = await patchRun({ description, runDate }, runId)
     } catch (e) {
@@ -44,14 +42,42 @@ const EditRun = ({ run }) => {
     }
   }
 
+  const removeRun = async () => {
+    let r = confirm('Confirm you wish to delete this run');
+    if (r === true) {
+      let response
+      try {
+        response = await deleteRun(run._id)
+      } catch (e) {
+        console.log(e.data)
+      }
+      if (response) {
+        dispatchRuns({type: 'REMOVE_RUN', _id: run._id})
+      }
+    }
+  }
+
   return (
     <>
-      <Button variant='outline-dark' onClick={handleShow}>
-        E
-      </Button>
+      <button
+        className='btn btn-link'
+        data-toggle='tooltip'
+        data-placement='right'
+        title='Edit Run'
+        onClick={handleShow}>
+        <EditIcon/>
+      </button>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header>
+
           <Modal.Title>Edit this run</Modal.Title>
+          <Button
+            variant='secondary'
+            size={"sm"}
+            onClick={handleClose}
+          >
+            <CloseIcon/>
+          </Button>
         </Modal.Header>
 
         <Modal.Body>
@@ -83,11 +109,18 @@ const EditRun = ({ run }) => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant='secondary' onClick={handleClose}>
-            Close
+          <Button
+            variant='danger'
+            onClick={removeRun}>
+            <BinIcon/>
+              &nbsp; Delete
           </Button>
-          <Button variant='primary' onClick={editRun} type='submit'>
-            Save Changes
+          <Button
+            variant='success'
+            type='submit'
+            onClick={editRun} >
+            <SaveIcon/>
+            &nbsp; Save
           </Button>
         </Modal.Footer>
       </Modal>

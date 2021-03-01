@@ -1,3 +1,8 @@
+.btn-link {
+    color: gray;
+    border: none;
+}
+
 .container {
     padding: 5px;
     width: 100%;
@@ -6,47 +11,16 @@
     margin-bottom: 30px;
 }
 
-.text-title {
-    display: flex;
-    flex: 0 0 100%;
+.child {
+    display: inline-block;
     font-family: 'Open Sans', Arial, serif;
-    font-size: 20px;
-    color: black;
-    justify-content: space-between;
-    background-color: greenyellow;
-    padding: 8px;
-    margin-top: 25px;
-    margin-bottom: 20px;
-    align-self: center;
-}
-
-.run-row {
-    display: flex;
-    flex: 0 0 65%;
-    font-family: 'Open Sans', Arial, serif;
-    font-size: 20px;
-    font-weight: bold;
-    color: gray;
-    justify-content: space-between;
-    background-color: greenyellow;
-    margin-top: 15px;
-    margin-bottom: 5px;
-    text-align: -moz-left;
-    align-self: center;
-}
-
-.login-title {
-    display: flex;
-    flex: 0 0 100%;
-    font-family: 'Open Sans', Arial, serif;
-    font-size: 20px;
-    justify-content: center;
-    background-color: skyblue;
-    color: white;
-    padding: 8px;
-    margin: 110px 20px 20px;
-    text-align: center;
-    align-self: center;
+    width: 20%;
+    max-height: 25px;
+    font-size: 15px;
+    color: #FFF;
+    text-align: left;
+    padding: 2px;
+    margin: 5px;
 }
 
 .flex-container {
@@ -68,16 +42,28 @@
     margin: 1px;
 }
 
-.child {
-    display: inline-block;
+.loginText {
+    color: #007bff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-title {
+    display: flex;
+    flex: 0 0 100%;
     font-family: 'Open Sans', Arial, serif;
-    width: 20%;
-    max-height: 25px;
-    font-size: 15px;
-    color: #FFF;
-    text-align: left;
-    padding: 2px;
-    margin: 5px;
+    font-size: 20px;
+    justify-content: center;
+    background-color: skyblue;
+    color: white;
+    padding: 8px;
+    margin: 110px 20px 20px;
+    text-align: center;
+    align-self: center;
+}
+
+.modal-footer {
+    justify-content: space-around;
 }
 
 .navBar-title {
@@ -85,15 +71,39 @@
     color: #FFF;
 }
 
-.loginText {
-    color: #007bff;
+.run-row {
+    display: flex;
+    flex: 0 0 65%;
+    font-family: 'Open Sans', Arial, serif;
+    font-size: 20px;
     font-weight: bold;
-    cursor: pointer;
+    color: gray;
+    justify-content: space-between;
+    background-color: greenyellow;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    text-align: -moz-left;
+    align-self: center;
+}
+
+.text-title {
+    display: flex;
+    flex: 0 0 100%;
+    font-family: 'Open Sans', Arial, serif;
+    font-size: 20px;
+    color: black;
+    justify-content: space-between;
+    background-color: greenyellow;
+    padding: 8px;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    align-self: center;
 }
 
 table {
     padding-top: 30px;
 }
+
 th {
     background: LightPink;
     width: 150px;
@@ -101,6 +111,7 @@ th {
     text-align: left;
     font-weight: bold;
 }
+
 td {
     width: 150px;
     max-width: 150px;

@@ -9,8 +9,7 @@ import { userRegister } from "../../api/user";
 const RegisterForm = () => {
   const methods = useForm({
     resolver: yupResolver(registerValidation),
-    mode: "onBlur",
-    reValidateMode: "onChange"
+    mode: "onTouched",
   });
 
   const router = useRouter()

@@ -80,29 +80,31 @@ const AddLap = (id) => {
 
         <Modal.Body>
           <Row className='form-row'>
-            <Col className='col-md-1 mb-1 md-form'>
+            <Col className='col-md-3 center'>
               <label htmlFor='lapNo'>Lap</label>
+              <div>
               <input
                 type='text'
-                className='input-group'
+                className='input-group-lap center'
                 id='lapNo'
                 value={laps.length + 1}
                 disabled
               />
+                </div>
             </Col>
 
-            <Col className='col-md-3 mb-1 md-form'>
+            <Col className='col-md-1 center'>
               <label htmlFor='active'>Active?</label>
               <input
                 type='checkbox'
-                className='form-check'
+                className='form-check-inline'
                 id='active'
                 value={lapActive}
                 onChange={(e) => setLapActive(e.target.checked)}
               />
             </Col>
 
-            <Col className='col-md-3 mb-3 md-form'>
+            <Col className='col-md-6'>
               <label htmlFor='time'>Time</label>
               <NumberFormat
                 format={timeInputFormat}
@@ -115,7 +117,7 @@ const AddLap = (id) => {
               />
             </Col>
 
-            <Col className='col-md-3 mb-3 md-form'>
+            <Col className='col-md-1'>
               <label htmlFor='distance'>Distance</label>
               <NumberFormat
                 type='number'

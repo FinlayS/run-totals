@@ -57,7 +57,7 @@ const AddRun = () => {
 
         <Modal.Body>
           <Row className='form-row'>
-            <Col className='col-md-8 mb-3 md-form'>
+            <Col className='col-md-10 mb-3'>
               <label htmlFor='runDescription'>Describe your run</label>
               <input
                 type='text'
@@ -68,7 +68,7 @@ const AddRun = () => {
               />
             </Col>
 
-            <Col className='col-md-4 mb-1 md-form'>
+            <Col className='col-md-2 mb-3'>
               <label htmlFor='runDate'>Date</label>
               <NumberFormat
                 format="##/##/##"

@@ -9,8 +9,7 @@ import { userLogin } from "../../api/user";
 const LoginForm = () => {
   const methods = useForm({
     resolver: yupResolver(loginValidation),
-    mode: "onBlur",
-    reValidateMode: "onChange"
+    mode: "onTouched",
   });
 
   const router = useRouter()

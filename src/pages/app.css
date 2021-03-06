@@ -10,6 +10,9 @@
     background: white;
     margin-bottom: 30px;
 }
+.center {
+    text-align: center;
+}
 
 .child {
     display: inline-block;
@@ -42,6 +45,10 @@
     margin: 1px;
 }
 
+.input-group-lap {
+    width: 40%;
+}
+
 .loginText {
     color: #007bff;
     font-weight: bold;
@@ -60,6 +67,10 @@
     margin: 110px 20px 20px;
     text-align: center;
     align-self: center;
+}
+
+.modal-body {
+    padding: 2rem;
 }
 
 .modal-footer {
@@ -84,6 +95,13 @@
     margin-bottom: 5px;
     text-align: -moz-left;
     align-self: center;
+}
+
+.svg-align {
+    width:16px;
+    height:16px;
+    fill: currentColor;
+    vertical-align: text-bottom;
 }
 
 .text-title {

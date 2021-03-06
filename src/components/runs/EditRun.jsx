@@ -82,7 +82,7 @@ const EditRun = ({ run }) => {
 
         <Modal.Body>
           <Row className='form-row'>
-            <Col className='col-md-8 mb-3 md-form'>
+            <Col className='col-9'>
               <label htmlFor='runDescription'>Describe your run</label>
               <input
                 type='text'
@@ -93,13 +93,13 @@ const EditRun = ({ run }) => {
               />
             </Col>
 
-            <Col className='col-md-4 mb-1 md-form'>
+            <Col className='col'>
               <label htmlFor='runDate'>Date</label>
               <NumberFormat
                 format="##/##/##"
                 placeholder="DD/MM/YY"
                 mask={['D', 'D', 'M', 'M', 'Y', 'Y']}
-                className='input-group'
+                className='input-group center'
                 id='runDate'
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
@@ -113,7 +113,7 @@ const EditRun = ({ run }) => {
             variant='danger'
             onClick={removeRun}>
             <BinIcon/>
-              &nbsp; Delete
+              &nbsp; Delete Run
           </Button>
           <Button
             variant='success'

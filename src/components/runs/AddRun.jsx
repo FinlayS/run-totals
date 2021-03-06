@@ -5,6 +5,7 @@ import moment from 'moment';
 
 import { postRun } from '../../api/runs'
 import RunContext from '../../context/runContext';
+import {CloseIcon, SaveIcon} from "../../../public/icons/icons";
 
 const AddRun = () => {
   const today = moment().format('DD/MM/YY')
@@ -51,13 +52,20 @@ const AddRun = () => {
         Add run
       </Button>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header>
           <Modal.Title>Add a new run</Modal.Title>
+          <Button
+            variant='secondary'
+            size={"sm"}
+            onClick={handleClose}
+          >
+            <CloseIcon/>
+          </Button>
         </Modal.Header>
 
         <Modal.Body>
           <Row className='form-row'>
-            <Col className='col-md-10 mb-3'>
+            <Col className='col-9'>
               <label htmlFor='runDescription'>Describe your run</label>
               <input
                 type='text'
@@ -68,13 +76,13 @@ const AddRun = () => {
               />
             </Col>
 
-            <Col className='col-md-2 mb-3'>
+            <Col className='col'>
               <label htmlFor='runDate'>Date</label>
               <NumberFormat
                 format="##/##/##"
                 placeholder="DD/MM/YY"
                 mask={['D', 'D', 'M', 'M', 'Y', 'Y']}
-                className='input-group'
+                className='input-group center'
                 id='runDate'
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
@@ -84,11 +92,12 @@ const AddRun = () => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant='secondary' onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant='primary' onClick={addRun} type='submit'>
-            Save Changes
+          <Button
+            variant='success'
+            type='submit'
+            onClick={addRun} >
+            <SaveIcon/>
+            &nbsp; Save
           </Button>
         </Modal.Footer>
       </Modal>

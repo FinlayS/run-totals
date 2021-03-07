@@ -63,3 +63,19 @@ export const patchLap = async (id, data) => {
   }
   return response.data
 }
+
+export const deleteLap = async (id) => {
+  let response
+  try {
+    response = await axios.delete(getUrl(`/laps/${id}`),
+      {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      }
+    )
+  } catch (e) {
+    console.log(e.data)
+  }
+  return response.data
+}

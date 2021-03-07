@@ -17,6 +17,24 @@ const runReducer = (state, action) => {
       })
     case 'REMOVE_RUN':
       return state.filter((run) => run._id !== action._id)
+    case 'EDIT_RUN':
+      return state.map((run) => {
+        if (run._id === action._id) {
+          return {
+            ...run, ...{
+              description: action.description,
+              runDate: action.runDate
+            }
+          }
+        } else {
+            return run
+        }
+
+      });
+    case 'SORT_RUNS':
+      return state.sort((a, b) => {
+        return a.runDate < b.runDate ? 1 : -1
+      })
     default:
       return state
   }

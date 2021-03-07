@@ -9,8 +9,7 @@ import { userLogin } from "../../api/user";
 const LoginForm = () => {
   const methods = useForm({
     resolver: yupResolver(loginValidation),
-    mode: "onBlur",
-    reValidateMode: "onChange"
+    mode: "onTouched",
   });
 
   const router = useRouter()
@@ -37,23 +36,23 @@ const LoginForm = () => {
       ...prevState,
       error : msg
     }));
+    setLoader(false)
   };
 
   const sendDetailsToServer = async () => {
     try {
       const logInResp = await userLogin({ email, password })
       if (logInResp.status === 200) {
-        setLoader(false);
         await router.push("/runs-main");
       } else {
         if (logInResp.response.status) {
           showError(logInResp.response.data.error.message);
-          setLoader(false);
         }
       }
     } catch (e) {
       showError("Sorry, something went wrong")
-      setLoader(false);
+    } finally {
+      loader ? setLoader(false) : null
     }
   }
 

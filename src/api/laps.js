@@ -43,7 +43,7 @@ export const postLap = async (data) => {
   return response.data
 }
 
-export const editLap = async (id, data) => {
+export const patchLap = async (id, data) => {
   let response
   try {
     response = await axios.patch(getUrl(`/laps/${id}`),

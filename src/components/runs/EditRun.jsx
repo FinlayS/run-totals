@@ -3,30 +3,25 @@ import { Button, Modal, Row, Col } from 'react-bootstrap';
 import NumberFormat from "react-number-format";
 import moment from 'moment';
 
-import { postRun } from '../../api/runs'
+import { deleteRun, patchRun } from '../../api/runs'
 import RunContext from '../../context/runContext';
-import {CloseIcon, SaveIcon} from "../../../public/icons/icons";
+import {EditIcon, BinIcon, CloseIcon, SaveIcon} from "../../../public/icons/icons";
 
-const AddRun = () => {
-  const today = moment().format('DD/MM/YY')
-  const {dispatchRuns} = useContext(RunContext)
-  const [description, setDescription] = useState('')
-  const [date, setDate] = useState(today)
-  const [, setId] = useState('')
+const EditRun = ({ run }) => {
+  const { dispatchRuns } = useContext(RunContext)
+  const [description, setDescription] = useState(run.description)
+  const [date, setDate] = useState(moment(run.runDate).format('DD/MM/YY'))
+  const [runId] = useState(run._id)
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const addRun = async (e) => {
-
+  const editRun = async () => {
     const runDate = moment(date, 'DD/MM/YY').valueOf()
-
     let run
-    e.preventDefault()
-
     try {
-      run = await postRun({description, runDate})
+      run = await patchRun({ description, runDate }, runId)
     } catch (e) {
       console.log(e.data)
     }
@@ -34,26 +29,48 @@ const AddRun = () => {
       const _id = run._id
       dispatchRuns(
         {
-          type: 'ADD_RUN',
+          type: 'EDIT_RUN',
           description,
           runDate,
           _id
         })
-      setDescription('')
-      setId('')
-      setDate(today)
+      dispatchRuns(
+        {
+          type: 'SORT_RUNS',
+        })
       setShow(false)
+    }
+  }
+
+  const removeRun = async () => {
+    let r = confirm('Confirm you wish to delete this run');
+    if (r === true) {
+      let response
+      try {
+        response = await deleteRun(run._id)
+      } catch (e) {
+        console.log(e.data)
+      }
+      if (response) {
+        dispatchRuns({type: 'REMOVE_RUN', _id: run._id})
+      }
     }
   }
 
   return (
     <>
-      <Button variant='primary' onClick={handleShow}>
-        Add run
-      </Button>
-      <Modal show={show} onHide={handleClose}>
+      <button
+        className='btn btn-link'
+        data-toggle='tooltip'
+        data-placement='right'
+        title='Edit Run'
+        onClick={handleShow}>
+        <EditIcon/>
+      </button>
+      <Modal show={show} onHide={handleClose}
+      >
         <Modal.Header>
-          <Modal.Title>Add a new run</Modal.Title>
+          <Modal.Title>Edit this run</Modal.Title>
           <Button
             variant='secondary'
             size={"sm"}
@@ -93,9 +110,15 @@ const AddRun = () => {
 
         <Modal.Footer>
           <Button
+            variant='danger'
+            onClick={removeRun}>
+            <BinIcon/>
+              &nbsp; Delete Run
+          </Button>
+          <Button
             variant='success'
             type='submit'
-            onClick={addRun} >
+            onClick={editRun} >
             <SaveIcon/>
             &nbsp; Save
           </Button>
@@ -106,4 +129,4 @@ const AddRun = () => {
   )
 }
 
-export default AddRun
+export default EditRun

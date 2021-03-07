@@ -9,8 +9,7 @@ import { userRegister } from "../../api/user";
 const RegisterForm = () => {
   const methods = useForm({
     resolver: yupResolver(registerValidation),
-    mode: "onBlur",
-    reValidateMode: "onChange"
+    mode: "onTouched",
   });
 
   const router = useRouter()
@@ -39,23 +38,24 @@ const RegisterForm = () => {
       ...prevState,
       error : msg
     }));
+    setLoader(false);
   };
 
   const sendDetailsToServer = async () => {
     try {
       const regResp = await userRegister({ email, password })
         if(regResp.status === 201){
-          setLoader(false);
           await router.push("/runs-main");
         } else{
           if (regResp.response.status) {
             showError(regResp.response.data.error.message);
-            setLoader(false);
           }
         }
     } catch (e) {
       showError("Sorry, something went wrong")
-      setLoader(false);
+    }
+    finally {
+      loader ? setLoader(false) : null
     }
   }
 

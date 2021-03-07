@@ -24,7 +24,26 @@ export const postRun = async (data) => {
     response = await axios.post(getUrl('/runs'),
       {
         description: data.description,
-        date: data.date,
+        runDate: data.runDate
+      },
+      {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      }
+    )
+  } catch (e) {
+    console.log(e.data)
+  }
+  return response.data
+}
+
+export const patchRun = async (data, id) => {
+  let response
+  try {
+    response = await axios.patch(getUrl(`/runs/${id}`),
+      {
+        description: data.description,
         runDate: data.runDate
       },
       {

@@ -3,6 +3,11 @@
     border: none;
 }
 
+.btn-link-white {
+    color: white;
+    border: none;
+}
+
 .container {
     padding: 5px;
     width: 100%;

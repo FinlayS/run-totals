@@ -67,9 +67,9 @@ const EditRun = ({ run }) => {
         onClick={handleShow}>
         <EditIcon/>
       </button>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={show} onHide={handleClose}
+      >
         <Modal.Header>
-
           <Modal.Title>Edit this run</Modal.Title>
           <Button
             variant='secondary'

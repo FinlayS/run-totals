@@ -1,7 +1,8 @@
 import React from 'react';
 
-import { editLap, getLaps } from "../../api/laps";
+import { patchLap, getLaps } from "../../api/laps";
 import { getPace } from '../../utils/getPace';
+import EditLap from "../laps/EditLap";
 
 const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatchLaps) => {
   const lapPace = getPace(lapTime, lapDistance)
@@ -13,7 +14,7 @@ const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatch
 
     let response
     try {
-      response = await editLap(_id,{
+      response = await patchLap(_id,{
         lapActive: !changedLapActiveStatus,
       })
     } catch (e) {
@@ -45,6 +46,7 @@ const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatch
         <div className='child' id='lap-time'>{lapTime}</div>
         <div className='child' id='lap-distance'>{lapDistance}</div>
         <div className='child' id='lap-pace'>{lapPace}</div>
+        <EditLap lap={{runId, _id, lapActive, lapNo, lapTime, lapDistance}}/>
       </div>
     </div>
   )

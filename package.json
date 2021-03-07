@@ -55,5 +55,8 @@
     "hooks": {
       "pre-push": "npm test"
     }
+  },
+  "engines": {
+    "node": "14.x"
   }
 }

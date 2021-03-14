@@ -50,7 +50,7 @@ const RunsMain = () => {
       <LapContext.Provider value={{laps, dispatchLaps}}>
       <ContextDevTool context={LapContext} id='laps' displayName='Lap Context'/>
       <Header authed={true}/>
-      <h3>Runs</h3>
+      {/*<h3>Runs</h3>*/}
       <div>
         <Container>
           <RunList/>

@@ -6,8 +6,11 @@ import EditLap from "../laps/EditLap";
 
 const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatchLaps) => {
   const lapPace = getPace(lapTime, lapDistance)
-
   const testID = `lap-no-${lapNo}`
+
+  const condColour = () => {
+    return lapActive ? 'child yg' : 'child co'
+  }
 
   let changedLapActiveStatus = lapActive
   const updateActiveStatus = async () => {
@@ -43,9 +46,9 @@ const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatch
             onClick={updateActiveStatus}
           />
         </div>
-        <div className='child' id='lap-time'>{lapTime}</div>
-        <div className='child' id='lap-distance'>{lapDistance}</div>
-        <div className='child' id='lap-pace'>{lapPace}</div>
+        <div className={ condColour() } id='lap-time'>{lapTime}</div>
+        <div className={ condColour() } id='lap-distance'>{lapDistance}</div>
+        <div className={ condColour() } id='lap-pace'>{lapPace}</div>
         <EditLap lap={{runId, _id, lapActive, lapNo, lapTime, lapDistance}}/>
       </div>
     </div>

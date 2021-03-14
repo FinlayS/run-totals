@@ -26,7 +26,7 @@ const Header = (authed) => {
     <>
       <title>Run Totals</title>
       <link rel='icon' type='image/png' href='../../public/favicon.ico'/>
-      <Navbar fixed='top' collapseOnSelect expand='lg' bg='dark' variant='dark'>
+      <Navbar sticky='top' collapseOnSelect expand='lg' bg='dark' variant='dark'>
         <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
         <Navbar.Brand className='navBar-title'>Run Totals</Navbar.Brand>
         <Navbar.Collapse id='responsive-navbar-nav'>

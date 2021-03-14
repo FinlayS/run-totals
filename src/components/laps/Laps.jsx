@@ -32,6 +32,8 @@ const Laps = (id) => {
     fetchData().then()
   }, [])
 
+  console.log(allTotals.totalPace)
+
   return (
     <LapContext.Provider value={{laps, dispatchLaps}}>
       <ContextDevTool context={LapContext} id='laps' displayName='Lap Context'/>
@@ -42,35 +44,36 @@ const Laps = (id) => {
           <div className='child'>Time</div>
           <div className='child'>Dist</div>
           <div className='child'>Pace</div>
+          <div className='child-wide'/>
         </div>
         {laps.map(({runId, _id, lapActive, lapNo, lapTime, lapDistance}) => (
           LapDetails(runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatchLaps)
         ))}
         <AddLap> {runId} </AddLap>
       </div>
-      {allTotals && (
+      {allTotals.totalPace && (
         <div>
           <table id='lapTotals'>
             <tbody>
-            <tr>
+            <tr className="lbc">
               <th/>
               <th>Total</th>
               <th>Active</th>
             </tr>
             <tr>
-              <td>Time:</td>
-              <td>{allTotals.totalTime}</td>
-              <td>{allTotals.activeTime}</td>
+              <td className="lct">Time:</td>
+              <td className="co">{allTotals.totalTime}</td>
+              <td className="yg">{allTotals.activeTime}</td>
             </tr>
             <tr>
-              <td>Dist:</td>
-              <td>{allTotals.totalDistance} Miles</td>
-              <td>{allTotals.activeDistance} Miles</td>
+              <td className="lct">Dist:</td>
+              <td className="co">{allTotals.totalDistance} Miles</td>
+              <td className="yg">{allTotals.activeDistance} Miles</td>
             </tr>
             <tr>
-              <td>Pace:</td>
-              <td>{allTotals.totalPace}</td>
-              <td>{allTotals.activePace}</td>
+              <td className="lct">Pace:</td>
+              <td className="co">{allTotals.totalPace}</td>
+              <td className="yg">{allTotals.activePace}</td>
             </tr>
             </tbody>
           </table>

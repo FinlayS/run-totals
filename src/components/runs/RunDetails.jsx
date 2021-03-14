@@ -7,11 +7,16 @@ import moment from "moment";
 
 const RunDetails = ({run}) => {
   return (
-    <Container>
-      <Row className='run-row' key={run._id}>
-        <Col> {run.description}</Col>
-        <Col xs={4}> {moment(run.runDate).format('DD/MM/YYYY')}</Col>
-        <Col xs={2}>
+    <Container className="run-container">
+      <Row className='flex-table run-row-header' key={run._id}>
+        <Col>
+            {run.description}
+        </Col>
+        <Col
+          xs={4}> {moment(run.runDate).format('DD/MM/YYYY')}
+        </Col>
+        <Col className="col-2-run-header"
+          xs={2}>
           <EditRun key={run._id} run={run}/>
         </Col>
       </Row>

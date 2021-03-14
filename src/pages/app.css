@@ -2,6 +2,12 @@ body {
     background-color: dimgray;
 }
 
+.backgroundLemon {
+    background-color: lemonchiffon;
+    opacity: 75%;
+    color: black;
+}
+
 .btn-link {
     color: #e2e2e2;
     border: none;
@@ -32,7 +38,11 @@ body {
     margin-bottom: 30px;
 }
 
-.center {
+.center-self {
+    align-self: center;
+}
+
+.center-text {
     text-align: center;
 }
 
@@ -53,14 +63,6 @@ body {
     margin: 5px;
 }
 
-.text-left {
-    text-align: end;
-}
-
-.col {
-    align-self: center;
-}
-
 .col-2-run-header {
     max-width: 55px;
 }
@@ -69,8 +71,7 @@ body {
     display: flex;
     justify-content: space-between;
     background-color: darkslategray;
-    padding: 2px;
-    margin: 2px;
+    margin: 3px;
 }
 
 .flex-table {
@@ -148,29 +149,25 @@ td {
     color: #e2e2e2;
 }
 
-.yg {
-    color: yellow;
-    opacity: 75%;
-    font-weight: bold;
-
-}
-
-.co {
+.textCoral {
     color: coral;
     opacity: 85%;
     font-weight: bold;
-
 }
 
-.lbc {
-    background-color: lemonchiffon;
-    opacity: 75%;
+.textGreen {
+    color: lawngreen;
+    opacity: 85%;
+    font-weight: bold;
 }
 
-.lct {
+.text-right {
+    text-align: end;
+}
+
+.textLemon {
     color: lemonchiffon;
     opacity: 75%;
-
 }
 
 .loader {

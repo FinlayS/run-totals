@@ -9,10 +9,10 @@ const RunDetails = ({run}) => {
   return (
     <Container className="run-container">
       <Row className='flex-table run-row-header' key={run._id}>
-        <Col>
+        <Col className="center-self">
             {run.description}
         </Col>
-        <Col
+        <Col className="center-self text-right"
           xs={4}> {moment(run.runDate).format('DD/MM/YYYY')}
         </Col>
         <Col className="col-2-run-header"

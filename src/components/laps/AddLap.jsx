@@ -80,12 +80,12 @@ const AddLap = (id) => {
 
         <Modal.Body>
           <Row className='form-row'>
-            <Col className='col-md-3 center'>
+            <Col className='col-md-3 center-text'>
               <label htmlFor='lapNo'>Lap</label>
               <div>
               <input
                 type='text'
-                className='input-group-lap center'
+                className='input-group-lap center-text'
                 id='lapNo'
                 value={laps.length + 1}
                 disabled
@@ -93,7 +93,7 @@ const AddLap = (id) => {
                 </div>
             </Col>
 
-            <Col className='col-md-1 center'>
+            <Col className='col-md-1 center-text'>
               <label htmlFor='active'>Active?</label>
               <input
                 type='checkbox'

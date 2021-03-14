@@ -1,5 +1,5 @@
 body {
-    background-color: dimgray;
+    background-color: darkgray;
 }
 
 .backgroundLemon {
@@ -71,6 +71,7 @@ body {
     display: flex;
     justify-content: space-between;
     background-color: darkslategray;
+    opacity: 80%;
     margin: 3px;
 }
 
@@ -112,7 +113,7 @@ body {
     background: linear-gradient(
             55deg, #343a40, transparent
     );
-    padding: 8px;
+    padding: 5px 5px 30px
 }
 
 .run-row-header {

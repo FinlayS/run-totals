@@ -2,6 +2,15 @@ body {
     background-color: dimgray;
 }
 
+.alert {
+    padding: .4rem 1.25rem;
+    margin-right: 30px;
+}
+
+.btn-danger {
+    margin-right: 30px;
+}
+
 .btn-link {
     color: #e2e2e2;
     border: none;

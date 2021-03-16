@@ -14,7 +14,7 @@ const LoginForm = () => {
 
   const router = useRouter()
   const [loader, setLoader] = useState(false);
-  const [state , setState] = useState({
+  const [state, setState] = useState({
     email : "",
     password : "",
     successMessage: null,

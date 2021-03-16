@@ -1,49 +1,42 @@
-import { runValidation } from '../../validation/run'
+import { runValidation } from "../../validation/run"
 
 const validInput = {
-  runDescription: "bob",
-  runDate: "252424a2525"
+  description: "Run Fast",
+  date: "01/01/21"
 };
 
-describe('Login', () => {
-  describe('invalid form data', () => {
+describe("Add Run", () => {
+  describe("invalid form data", () => {
     [
       { name: "empty form", formData: {} },
       {
-        name: "invalid email: missing '@'",
+        name: "invalid date",
         formData: {
-          runDescription: "a",
-          runDate: '25/12111/1999'
+          description: validInput.description,
+          date: "3/13/23"
         }
       },
-      // {
-      //   name: "invalid email: missing domain",
-      //   formData: {
-      //     email: "test@email",
-      //     password: validInput.password
-      //   }
-      // },
-      // {
-      //   name: "invalid email: missing server",
-      //   formData: {
-      //     email: "test@.com",
-      //     password: validInput.password
-      //   }
-      // },
-      // {
-      //   name: "invalid email: empty string",
-      //   formData: {
-      //     email: "",
-      //     password: validInput.password
-      //   }
-      // },
-      // {
-      //   name: "invalid password: too short",
-      //   formData: {
-      //     email: validInput.email,
-      //     password: "Sh0rt"
-      //   }
-      // },
+      {
+        name: "incomplete date",
+        formData: {
+          description: validInput.description,
+          date: "3/13/YY"
+        }
+      },
+      {
+        name: "empty date",
+        formData: {
+          description: validInput.description,
+          date: ""
+        }
+      },
+      {
+        name: "empty description",
+        formData: {
+          description: "",
+          date: validInput.date
+        }
+      },
     ].forEach(testCase => {
       it(`should return false for ${testCase.name}`, () => {
         expect(runValidation.isValidSync(testCase.formData)).toBeFalsy();
@@ -51,7 +44,7 @@ describe('Login', () => {
     });
   })
 
-  describe('valid form data', () => {
+  describe("valid form data", () => {
     [
       { name: "valid form", formData: validInput },
     ].forEach(testCase => {

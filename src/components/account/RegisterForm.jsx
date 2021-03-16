@@ -76,7 +76,7 @@ const RegisterForm = () => {
   return(
     <div className="card col-12 col-lg-4 login-card mt-2 hv-center">
       <form onSubmit={handleSubmit(handleSubmitClick)}>
-        <div className="form-group text-left">
+        <div className="form-group text-right">
           <label htmlFor="exampleInputEmail1">Email address</label>
           <input className="form-control"
                  data-testid="email-input"
@@ -94,7 +94,7 @@ const RegisterForm = () => {
             {errors.email && errors.email.message}
           </div>
         </div>
-        <div className="form-group text-left">
+        <div className="form-group text-right">
           <label htmlFor="exampleInputPassword1">Password</label>
           <input type="password"
                  data-testid="password-input"

@@ -6,6 +6,7 @@ import NumberFormat from "react-number-format";
 import { getLaps, postLap } from '../../api/laps'
 import { timeInputFormat } from "../../utils/timeInputFormat";
 import LapContext from '../../context/lapContext';
+import { CloseIcon, SaveIcon } from "../../../public/icons/icons";
 
 const AddLap = (id) => {
   const run_id = id.children[1]
@@ -70,22 +71,26 @@ const AddLap = (id) => {
           + lap
         </Button>
       </Container>
-
-      <Modal show={show}
-             onHide={handleClose}
-      >
-        <Modal.Header closeButton>
+      <Modal show={ show } onHide={ handleClose }>
+        <Modal.Header>
           <Modal.Title>Add a new lap</Modal.Title>
+          <Button
+            variant="secondary"
+            size={ "sm" }
+            onClick={ handleClose }
+          >
+            <CloseIcon/>
+          </Button>
         </Modal.Header>
 
         <Modal.Body>
           <Row className='form-row'>
-            <Col className='col-md-3 center'>
+            <Col className='col-md-3 center-text'>
               <label htmlFor='lapNo'>Lap</label>
               <div>
               <input
                 type='text'
-                className='input-group-lap center'
+                className='input-group-lap center-text'
                 id='lapNo'
                 value={laps.length + 1}
                 disabled
@@ -93,11 +98,11 @@ const AddLap = (id) => {
                 </div>
             </Col>
 
-            <Col className='col-md-1 center'>
+            <Col className='col-md-1 center-text'>
               <label htmlFor='active'>Active?</label>
               <input
                 type='checkbox'
-                className='form-check-inline'
+                className='form-check'
                 id='active'
                 value={lapActive}
                 onChange={(e) => setLapActive(e.target.checked)}
@@ -131,11 +136,18 @@ const AddLap = (id) => {
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant='secondary' onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant='primary' onClick={addLap} type='submit'>
-            Add
+          {/*<Button*/}
+          {/*  variant='secondary'*/}
+          {/*  onClick={ handleClose }>*/}
+          {/*  Close*/}
+          {/*</Button>*/}
+          <Button
+            variant='success'
+            onClick={addLap}
+            type='submit'
+          >
+            <SaveIcon/>
+            &nbsp; Save
           </Button>
         </Modal.Footer>
 

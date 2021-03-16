@@ -93,13 +93,13 @@ const EditRun = ({ run }) => {
               />
             </Col>
 
-            <Col className="col">
+            <Col className="center-self">
               <label htmlFor="runDate">Date</label>
               <NumberFormat
                 format="##/##/##"
                 placeholder="DD/MM/YY"
                 mask={ ["D", "D", "M", "M", "Y", "Y"] }
-                className="input-group center"
+                className="input-group center-text"
                 id="runDate"
                 value={ date }
                 onChange={ (e) => setDate(e.target.value) }

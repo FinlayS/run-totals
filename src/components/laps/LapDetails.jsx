@@ -9,7 +9,7 @@ const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatch
   const testID = `lap-no-${lapNo}`
 
   const condColour = () => {
-    return lapActive ? 'child yg' : 'child co'
+    return lapActive ? 'child textGreen' : 'child textCoral'
   }
 
   let changedLapActiveStatus = lapActive

@@ -55,25 +55,25 @@ const Laps = (id) => {
         <div>
           <table id='lapTotals'>
             <tbody>
-            <tr className="lbc">
+            <tr className="backgroundLemon">
               <th/>
               <th>Total</th>
               <th>Active</th>
             </tr>
             <tr>
-              <td className="lct">Time:</td>
-              <td className="co">{allTotals.totalTime}</td>
-              <td className="yg">{allTotals.activeTime}</td>
+              <td className="textLemon">Time:</td>
+              <td className="textCoral">{allTotals.totalTime}</td>
+              <td className="textGreen">{allTotals.activeTime}</td>
             </tr>
             <tr>
-              <td className="lct">Dist:</td>
-              <td className="co">{allTotals.totalDistance} Miles</td>
-              <td className="yg">{allTotals.activeDistance} Miles</td>
+              <td className="textLemon">Dist:</td>
+              <td className="textCoral">{allTotals.totalDistance} Miles</td>
+              <td className="textGreen">{allTotals.activeDistance} Miles</td>
             </tr>
             <tr>
-              <td className="lct">Pace:</td>
-              <td className="co">{allTotals.totalPace}</td>
-              <td className="yg">{allTotals.activePace}</td>
+              <td className="textLemon">Pace:</td>
+              <td className="textCoral">{allTotals.totalPace}</td>
+              <td className="textGreen">{allTotals.activePace}</td>
             </tr>
             </tbody>
           </table>

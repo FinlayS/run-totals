@@ -12,7 +12,7 @@ const RunDetails = ({run}) => {
         <Col>
             {run.description}
         </Col>
-        <Col
+        <Col className="text-right"
           xs={4}> {moment(run.runDate).format('DD/MM/YYYY')}
         </Col>
         <Col className="col-2-run-header"

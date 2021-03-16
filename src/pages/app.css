@@ -1,5 +1,5 @@
 body {
-    background-color: darkgray;
+    background-color: #8e8e8e;
 }
 
 .backgroundLemon {
@@ -107,6 +107,19 @@ body {
     margin: 110px 20px 20px;
     text-align: center;
     align-self: center;
+}
+
+.modal-content {
+    background-color: snow;
+    opacity: 90%;
+}
+
+.modal-footer {
+    border-top: 0;
+}
+
+.modal-header {
+    border-bottom: 0;
 }
 
 .run-container {

@@ -1,21 +1,21 @@
 import React, { useContext, useState } from 'react';
-import Container from 'react-bootstrap/Container';
-import { Button, Modal, Row, Col } from 'react-bootstrap';
+import Container from "react-bootstrap/Container";
+import { Button, Modal, Row, Col } from "react-bootstrap";
 import NumberFormat from "react-number-format";
 
-import { getLaps, postLap } from '../../api/laps'
+import { getLaps, postLap } from "../../api/laps"
 import { timeInputFormat } from "../../utils/timeInputFormat";
-import LapContext from '../../context/lapContext';
+import LapContext from "../../context/lapContext";
 import { CloseIcon, SaveIcon } from "../../../public/icons/icons";
 
 const AddLap = (id) => {
   const run_id = id.children[1]
   const {laps, dispatchLaps} = useContext(LapContext)
   const [runId] = useState(run_id)
-  const [, setLapNo] = useState('')
+  const [, setLapNo] = useState("")
   const [lapActive, setLapActive] = useState(false)
-  const [lapTime, setLapTime] = useState('')
-  const [lapDistance, setLapDistance] = useState('');
+  const [lapTime, setLapTime] = useState("")
+  const [lapDistance, setLapDistance] = useState("");
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -42,7 +42,7 @@ const AddLap = (id) => {
       const _id = lap._id
       dispatchLaps(
         {
-          type: 'ADD_LAP',
+          type: "ADD_LAP",
           _id,
           runId,
           lapNo: nextLap,
@@ -54,20 +54,20 @@ const AddLap = (id) => {
       const laps = await getLaps(runId)
       dispatchLaps(
         {
-          type: 'POPULATE_LAPS',
+          type: "POPULATE_LAPS",
           laps
         })
-      setLapNo('')
+      setLapNo("")
       setLapActive(false)
-      setLapTime('')
-      setLapDistance('')
+      setLapTime("")
+      setLapDistance("")
     }
   }
 
   return (
     <>
       <Container>
-        <Button variant='primary' onClick={handleShow}>
+        <Button variant="primary" onClick={handleShow}>
           + lap
         </Button>
       </Container>
@@ -84,50 +84,50 @@ const AddLap = (id) => {
         </Modal.Header>
 
         <Modal.Body>
-          <Row className='form-row'>
-            <Col className='col-md-3 center-text'>
-              <label htmlFor='lapNo'>Lap</label>
+          <Row className="form-row">
+            <Col className="col-md-3 center-text">
+              <label htmlFor="lapNo">Lap</label>
               <div>
               <input
-                type='text'
-                className='input-group-lap center-text'
-                id='lapNo'
+                type="text"
+                className="input-group-lap center-text"
+                id="lapNo"
                 value={laps.length + 1}
                 disabled
               />
                 </div>
             </Col>
 
-            <Col className='col-md-1 center-text'>
-              <label htmlFor='active'>Active?</label>
+            <Col className="col-md-1 center-text">
+              <label htmlFor="active">Active?</label>
               <input
-                type='checkbox'
-                className='form-check'
-                id='active'
+                type="checkbox"
+                className="form-check"
+                id="active"
                 value={lapActive}
                 onChange={(e) => setLapActive(e.target.checked)}
               />
             </Col>
 
-            <Col className='col-md-6'>
-              <label htmlFor='time'>Time</label>
+            <Col className="col-md-6">
+              <label htmlFor="time">Time</label>
               <NumberFormat
                 format={timeInputFormat}
                 placeholder="hh:mm:ss"
-                mask={['h', 'h', 'm', 'm', 's', 's']}
-                className='input-group'
-                id='time'
+                mask={["h", "h", "m", "m", "s", "s"]}
+                className="input-group"
+                id="time"
                 value={lapTime}
                 onChange={(e) => setLapTime(e.target.value)}
               />
             </Col>
 
-            <Col className='col-md-1'>
-              <label htmlFor='distance'>Distance</label>
+            <Col className="col-md-1">
+              <label htmlFor="distance">Distance</label>
               <NumberFormat
-                type='number'
-                className='input-group'
-                id='distance'
+                type="number"
+                className="input-group"
+                id="distance"
                 value={lapDistance}
                 onChange={(e) => setLapDistance(e.target.value)}
               />
@@ -136,15 +136,10 @@ const AddLap = (id) => {
         </Modal.Body>
 
         <Modal.Footer>
-          {/*<Button*/}
-          {/*  variant='secondary'*/}
-          {/*  onClick={ handleClose }>*/}
-          {/*  Close*/}
-          {/*</Button>*/}
           <Button
-            variant='success'
+            variant="success"
             onClick={addLap}
-            type='submit'
+            type="submit"
           >
             <SaveIcon/>
             &nbsp; Save

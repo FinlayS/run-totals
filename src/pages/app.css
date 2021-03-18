@@ -1,7 +1,3 @@
-body {
-    background-color: #8e8e8e;
-}
-
 .alert {
     padding: .4rem 1.25rem;
     margin-right: 30px;
@@ -11,6 +7,10 @@ body {
     background-color: lemonchiffon;
     opacity: 75%;
     color: black;
+}
+
+.backgroundGrey {
+    background-color: #8e8e8e;
 }
 
 .btn-danger {
@@ -38,6 +38,25 @@ body {
 
 .btn-primary:hover {
     background-color: cadetblue;
+}
+
+.btn-primary-account {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary-account:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+.btn-primary-account:focus, .btn-primary-account.focus {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+    box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
 }
 
 .container {
@@ -129,6 +148,10 @@ body {
 
 .modal-header {
     border-bottom: 0;
+}
+
+.padding-inherit {
+    padding: inherit;
 }
 
 .run-container {

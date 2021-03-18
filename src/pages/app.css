@@ -98,8 +98,8 @@
 .flex-container {
     display: flex;
     justify-content: space-between;
-    background-color: darkslategray;
-    opacity: 80%;
+    background-color: #294242;
+    opacity: 85%;
     margin: 3px;
 }
 
@@ -197,13 +197,12 @@ td {
 
 .textCoral {
     color: coral;
-    opacity: 85%;
     font-weight: bold;
 }
 
 .textGreen {
     color: lawngreen;
-    opacity: 85%;
+    opacity: 95%;
     font-weight: bold;
 }
 

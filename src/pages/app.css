@@ -3,14 +3,20 @@
     margin-right: 30px;
 }
 
-.backgroundLemon {
+.background-lemon {
     background-color: lemonchiffon;
     opacity: 75%;
     color: black;
 }
 
-.backgroundGrey {
+.background-grey {
     background-color: #8e8e8e;
+}
+
+.background-slate-grey {
+    background-color: #294242;
+    opacity: 85%;
+    margin: 3px;
 }
 
 .btn-danger {
@@ -98,9 +104,6 @@
 .flex-container {
     display: flex;
     justify-content: space-between;
-    background-color: #294242;
-    opacity: 85%;
-    margin: 3px;
 }
 
 .flex-table {
@@ -195,12 +198,12 @@ td {
     color: #e2e2e2;
 }
 
-.textCoral {
+.text-coral {
     color: coral;
     font-weight: bold;
 }
 
-.textGreen {
+.text-green {
     color: lawngreen;
     opacity: 95%;
     font-weight: bold;
@@ -210,7 +213,7 @@ td {
     text-align: end;
 }
 
-.textLemon {
+.text-lemon {
     color: lemonchiffon;
     opacity: 75%;
 }

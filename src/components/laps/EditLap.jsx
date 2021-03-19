@@ -108,12 +108,12 @@ const AddLap = ({ lap }) => {
                 type="checkbox"
                 className="form-check"
                 id="active"
-                value={ lapActive }
+                defaultChecked={ lapActive }
                 onChange={ (e) => setLapActive(e.target.checked) }
               />
             </Col>
 
-            <Col className="col-md-6">
+            <Col className="col-md-3">
               <label htmlFor="time">Time</label>
               <NumberFormat
                 format={ timeInputFormat }
@@ -126,7 +126,7 @@ const AddLap = ({ lap }) => {
               />
             </Col>
 
-            <Col className="col-md-1">
+            <Col className="col-md-2">
               <label htmlFor="distance">Distance</label>
               <NumberFormat
                 type="number"

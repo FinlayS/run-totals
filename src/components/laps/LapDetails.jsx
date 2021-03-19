@@ -9,7 +9,7 @@ const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatch
   const testID = `lap-no-${lapNo}`
 
   const condColour = () => {
-    return lapActive ? 'child textGreen' : 'child textCoral'
+    return lapActive ? 'child text-green' : 'child text-coral'
   }
 
   let changedLapActiveStatus = lapActive
@@ -36,7 +36,7 @@ const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatch
 
   return (
     <div key={lapNo}>
-      <div className='flex-container' testid={testID}>
+      <div className='flex-container background-slate-grey' testid={testID}>
         <div className='child' id='lap-no'>{lapNo} </div>
         <div className='child' id='is-active'>
           <input

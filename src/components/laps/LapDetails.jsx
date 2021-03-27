@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
 import { patchLap, getLaps } from "../../api/laps";
-import { getPace } from '../../utils/getPace';
+import { getPace } from "../../utils/getPace";
 import EditLap from "../laps/EditLap";
 
 const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatchLaps) => {
   const lapPace = getPace(lapTime, lapDistance)
-  const testID = `lap-no-${lapNo}`
+  const testID = `lap-no-${ lapNo }`
 
   const condColour = () => {
     return lapActive ? 'child text-green' : 'child text-coral'
@@ -17,7 +17,7 @@ const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatch
 
     let response
     try {
-      response = await patchLap(_id,{
+      response = await patchLap(_id, {
         lapActive: !changedLapActiveStatus,
       })
     } catch (e) {
@@ -25,10 +25,10 @@ const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatch
     }
     if (response) {
       changedLapActiveStatus = response.lapActive
-     const laps = await getLaps(runId)
+      const laps = await getLaps(runId)
       dispatchLaps(
         {
-          type: 'POPULATE_LAPS',
+          type: "POPULATE_LAPS",
           laps
         })
     }
@@ -42,14 +42,14 @@ const LapDetails = (runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatch
           <input
             name="is-active"
             type="checkbox"
-            defaultChecked={lapActive}
-            onClick={updateActiveStatus}
+            defaultChecked={ lapActive }
+            onClick={ updateActiveStatus }
           />
         </div>
-        <div className={ condColour() } id='lap-time'>{lapTime}</div>
-        <div className={ condColour() } id='lap-distance'>{lapDistance}</div>
-        <div className={ condColour() } id='lap-pace'>{lapPace}</div>
-        <EditLap lap={{runId, _id, lapActive, lapNo, lapTime, lapDistance}}/>
+        <div className={ condColour() } id="lap-time">{ lapTime }</div>
+        <div className={ condColour() } id="lap-distance">{ lapDistance }</div>
+        <div className={ condColour() } id="lap-pace">{ lapPace }</div>
+        <EditLap lap={ { runId, _id, lapActive, lapNo, lapTime, lapDistance } }/>
       </div>
     </div>
   )

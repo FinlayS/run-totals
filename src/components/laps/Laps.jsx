@@ -1,21 +1,25 @@
-import React, { useEffect, useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from "react";
+import { ContextDevTool } from "react-context-devtool";
 
-import { getLaps } from '../../api/laps';
-import { getLapTotals } from '../../utils/getTotals';
+import { getLaps } from "../../api/laps";
+import { getLapTotals } from "../../utils/getTotals";
 
-import LapDetails from './LapDetails';
-import AddLap from './AddLap';
+import LapDetails from "./LapDetails";
+import AddLap from "./AddLap";
 import lapReducer from "../../reducers/lapReducer";
 import LapContext from "../../context/lapContext";
-import { ContextDevTool } from "react-context-devtool";
+import { CollapseIcon, ExpandIcon } from "../../../public/icons/icons";
 
 let allTotals;
 
 const Laps = (id) => {
   const [laps, dispatchLaps] = useReducer(lapReducer, [])
+  const [showLaps, setShowLaps] = useState( false);
   const runId = id.children
 
   allTotals = getLapTotals(laps)
+
+  const toggleShowLaps = () => setShowLaps(!showLaps);
 
   useEffect(() => {
     async function fetchData() {
@@ -23,42 +27,58 @@ const Laps = (id) => {
       if (allLaps) {
         dispatchLaps(
           {
-            type: 'POPULATE_LAPS',
+            type: "POPULATE_LAPS",
             laps: allLaps
           })
+      } else {
+        setShowLaps(true)
       }
     }
 
     fetchData().then()
   }, [])
 
-  console.log(allTotals.totalPace)
-
   return (
-    <LapContext.Provider value={{laps, dispatchLaps}}>
-      <ContextDevTool context={LapContext} id='laps' displayName='Lap Context'/>
+    <LapContext.Provider value={ { laps, dispatchLaps } }>
+      <ContextDevTool context={ LapContext } id="laps" displayName="Lap Context"/>
+      { showLaps && (
       <div>
-        <div className='flex-table'>
-          <div className='child'>Lap</div>
-          <div className='child'>Act?</div>
-          <div className='child'>Time</div>
-          <div className='child'>Dist</div>
-          <div className='child'>Pace</div>
-          <div className='child-wide'/>
+        <div className="flex-table">
+          <div className="child">Lap</div>
+          <div className="child">Act?</div>
+          <div className="child">Time</div>
+          <div className="child">Dist</div>
+          <div className="child">Pace</div>
+          <div className="child-wide"/>
         </div>
-        {laps.map(({runId, _id, lapActive, lapNo, lapTime, lapDistance}) => (
-          LapDetails(runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatchLaps)
-        ))}
-        <AddLap> {runId} </AddLap>
+        { laps &&  (
+          laps.map(({ runId, _id, lapActive, lapNo, lapTime, lapDistance }) => (
+            LapDetails(runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatchLaps)
+          ))
+        ) }
+        <AddLap> { runId } </AddLap>
       </div>
-      {allTotals.totalPace && (
+      )}
+      { allTotals.totalPace && (
         <div>
-          <table id='lapTotals'>
+          <table id="lapTotals">
             <tbody>
             <tr className="background-lemon">
               <th/>
               <th>Total</th>
               <th>Active</th>
+              <th>
+                <button
+                  className="btn btn-bold"
+                  data-toggle="tooltip"
+                  data-placement="right"
+                  onClick={ toggleShowLaps }
+                  type="submit"
+                >
+                  Laps &nbsp;
+                  { showLaps ? <CollapseIcon/> : <ExpandIcon/>}
+                </button>
+              </th>
             </tr>
             <tr>
               <td className="text-lemon">Time:</td>

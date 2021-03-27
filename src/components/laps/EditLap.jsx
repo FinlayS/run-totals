@@ -7,7 +7,6 @@ import { timeInputFormat } from "../../utils/timeInputFormat";
 import LapContext from "../../context/lapContext";
 import { EditIcon, BinIcon, CloseIcon, SaveIcon } from "../../../public/icons/icons";
 
-
 const AddLap = ({ lap }) => {
   const { laps, dispatchLaps } = useContext(LapContext)
   const [lapActive, setLapActive] = useState(lap.lapActive)
@@ -61,7 +60,6 @@ const AddLap = ({ lap }) => {
     }
   }
 
-
   return (
     <>
       <button
@@ -73,8 +71,9 @@ const AddLap = ({ lap }) => {
         <EditIcon/>
       </button>
 
-      <Modal show={ show }
-             onHide={ handleClose }
+      <Modal
+        show={ show }
+        onHide={ handleClose }
       >
         <Modal.Header>
           <Modal.Title>Edit lap</Modal.Title>

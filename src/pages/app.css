@@ -173,11 +173,19 @@
     opacity: 75%;
     font-weight: bolder;
     align-items: center;
+    margin-bottom: 8px;
 }
 
 .svg-align {
     width:16px;
     height:16px;
+    fill: currentColor;
+    vertical-align: text-bottom;
+}
+
+.svg-bold-align  {
+    width: 1.5em;
+    height: 1.5em;
     fill: currentColor;
     vertical-align: text-bottom;
 }

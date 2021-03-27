@@ -67,7 +67,7 @@ const Laps = (id) => {
               <th/>
               <th>Total</th>
               <th>Active</th>
-              <th>
+              <th className="text-right">
                 <button
                   className="btn btn-bold"
                   data-toggle="tooltip"
@@ -75,7 +75,6 @@ const Laps = (id) => {
                   onClick={ toggleShowLaps }
                   type="submit"
                 >
-                  Laps &nbsp;
                   { showLaps ? <CollapseIcon/> : <ExpandIcon/>}
                 </button>
               </th>

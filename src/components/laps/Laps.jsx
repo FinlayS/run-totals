@@ -1,5 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { ContextDevTool } from "react-context-devtool";
+import { Accordion, Button } from "react-bootstrap";
 
 import { getLaps } from "../../api/laps";
 import { getLapTotals } from "../../utils/getTotals";
@@ -14,12 +15,17 @@ let allTotals;
 
 const Laps = (id) => {
   const [laps, dispatchLaps] = useReducer(lapReducer, [])
-  const [showLaps, setShowLaps] = useState( false);
+  const [showLaps, setShowLaps] = useState(false);
   const runId = id.children
+  let defaultToggleState
 
   allTotals = getLapTotals(laps)
 
-  const toggleShowLaps = () => setShowLaps(!showLaps);
+  !!allTotals.totalPace ? defaultToggleState = "1" : defaultToggleState = "0"
+
+  const toggleShowLaps = () => {
+    setShowLaps(!showLaps)
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -41,24 +47,36 @@ const Laps = (id) => {
   return (
     <LapContext.Provider value={ { laps, dispatchLaps } }>
       <ContextDevTool context={ LapContext } id="laps" displayName="Lap Context"/>
-      { showLaps && (
-      <div>
-        <div className="flex-table">
-          <div className="child">Lap</div>
-          <div className="child">Act?</div>
-          <div className="child">Time</div>
-          <div className="child">Dist</div>
-          <div className="child">Pace</div>
-          <div className="child-wide"/>
-        </div>
-        { laps &&  (
-          laps.map(({ runId, _id, lapActive, lapNo, lapTime, lapDistance }) => (
-            LapDetails(runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatchLaps)
-          ))
-        ) }
-        <AddLap> { runId } </AddLap>
-      </div>
-      )}
+      <Accordion defaultActiveKey={ defaultToggleState }>
+        <Accordion.Toggle
+          className="toggle-btn btn-bold btn-sm"
+          data-placement="right"
+          as={ Button }
+          variant="link"
+          eventKey={ defaultToggleState }
+          onClick={ toggleShowLaps }
+        >
+          { showLaps ? <CollapseIcon/> : <ExpandIcon/> }
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey={ defaultToggleState }>
+          <div>
+            <div className="flex-table">
+              <div className="child">Lap</div>
+              <div className="child">Act?</div>
+              <div className="child">Time</div>
+              <div className="child">Dist</div>
+              <div className="child">Pace</div>
+              <div className="child-wide"/>
+            </div>
+            { laps && (
+              laps.map(({ runId, _id, lapActive, lapNo, lapTime, lapDistance }) => (
+                LapDetails(runId, _id, lapActive, lapNo, lapTime, lapDistance, dispatchLaps)
+              ))
+            ) }
+            <AddLap> { runId } </AddLap>
+          </div>
+        </Accordion.Collapse>
+      </Accordion>
       { allTotals.totalPace && (
         <div>
           <table id="lapTotals">
@@ -67,32 +85,21 @@ const Laps = (id) => {
               <th/>
               <th>Total</th>
               <th>Active</th>
-              <th className="text-right">
-                <button
-                  className="btn btn-bold"
-                  data-toggle="tooltip"
-                  data-placement="right"
-                  onClick={ toggleShowLaps }
-                  type="submit"
-                >
-                  { showLaps ? <CollapseIcon/> : <ExpandIcon/>}
-                </button>
-              </th>
             </tr>
             <tr>
               <td className="text-lemon">Time:</td>
-              <td className="text-coral">{allTotals.totalTime}</td>
-              <td className="text-green">{allTotals.activeTime}</td>
+              <td className="text-coral">{ allTotals.totalTime }</td>
+              <td className="text-green">{ allTotals.activeTime }</td>
             </tr>
             <tr>
               <td className="text-lemon">Dist:</td>
-              <td className="text-coral">{allTotals.totalDistance} Miles</td>
-              <td className="text-green">{allTotals.activeDistance} Miles</td>
+              <td className="text-coral">{ allTotals.totalDistance } Miles</td>
+              <td className="text-green">{ allTotals.activeDistance } Miles</td>
             </tr>
             <tr>
               <td className="text-lemon">Pace:</td>
-              <td className="text-coral">{allTotals.totalPace}</td>
-              <td className="text-green">{allTotals.activePace}</td>
+              <td className="text-coral">{ allTotals.totalPace }</td>
+              <td className="text-green">{ allTotals.activePace }</td>
             </tr>
             </tbody>
           </table>

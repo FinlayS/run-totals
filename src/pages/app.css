@@ -69,6 +69,10 @@
     box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
 }
 
+.card-header {
+    padding: unset;
+}
+
 .container {
     padding: 8px;
     width: 100%;
@@ -232,6 +236,10 @@ td {
 .text-lemon {
     color: lemonchiffon;
     opacity: 75%;
+}
+
+.toggle-btn {
+    margin: .0175rem .0rem .5rem .6rem;
 }
 
 .loader {

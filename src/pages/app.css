@@ -144,6 +144,10 @@
     align-self: center;
 }
 
+.margin-unset {
+    margin: 4px 4px 4px 14px
+}
+
 .modal-content {
     background-color: snow;
     opacity: 90%;

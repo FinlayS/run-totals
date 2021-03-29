@@ -45,8 +45,31 @@ describe("Runs Main: Initial render", () => {
     expect(getLaps).toHaveBeenCalledTimes(2)
   })
 
-  it("should display correct totals", async () =>{
+  it("should display correct totals for run 1", async () =>{
     await elementContainers()
+    expect(totalTime[0]).toHaveTextContent("00:05:45")
     expect(totalDistance[0]).toHaveTextContent("1.4 Miles")
+    expect(totalPace[0]).toHaveTextContent("00:04:06")
+  })
+
+  it("should display correct 'active' totals for run 1", async () =>{
+    await elementContainers()
+    expect(activeTime[0]).toHaveTextContent("00:05:45")
+    expect(activeDistance[0]).toHaveTextContent("1.4 Miles")
+    expect(activePace[0]).toHaveTextContent("00:04:06")
+  })
+
+  it("should display correct totals for run 2", async () =>{
+    await elementContainers()
+    expect(totalTime[1]).toHaveTextContent("00:13:15")
+    expect(totalDistance[1]).toHaveTextContent("6.8 Miles")
+    expect(totalPace[1]).toHaveTextContent("00:01:57")
+  })
+
+  it("should display correct 'active' totals for run 2", async () =>{
+    await elementContainers()
+    expect(activeTime[1]).toHaveTextContent("00:03:03")
+    expect(activeDistance[1]).toHaveTextContent("0.8 Miles")
+    expect(activePace[1]).toHaveTextContent("00:03:49")
   })
 })

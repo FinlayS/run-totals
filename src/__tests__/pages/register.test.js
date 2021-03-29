@@ -2,7 +2,7 @@ import React from "react";
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import Register from "../../pages/register";
-import {userLogin, userRegister} from "../../api/user";
+import { userRegister } from "../../api/user";
 
 jest.mock("../../api/user", () => ({ userRegister: jest.fn() }));
 
@@ -187,7 +187,7 @@ describe("Register page tests", () => {
     })
 
     it("should clear server error on re-input", async () => {
-      userRegister.mockResolvedValueOnce({
+        userRegister.mockResolvedValueOnce({
         response: {
           status: 400,
           data: {

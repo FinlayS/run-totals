@@ -1,0 +1,22 @@
+[
+  {
+    "lapActive": true,
+    "_id": "6060a457c9a9fb486500ee61",
+    "runId": "6060a147c9a9fb486500ee60",
+    "lapNo": 1,
+    "lapTime": "00:03:03",
+    "lapDistance": 0.8,
+    "owner": "60329108508faf0868fd0f60",
+    "__v": 0
+  },
+  {
+    "lapActive": false,
+    "_id": "6062187a4c671d5bf8f14f9d",
+    "runId": "6060a147c9a9fb486500ee60",
+    "lapNo": 2,
+    "lapTime": "00:10:12",
+    "lapDistance": 6,
+    "owner": "60329108508faf0868fd0f60",
+    "__v": 0
+  }
+]

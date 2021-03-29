@@ -88,18 +88,18 @@ const Laps = (id) => {
             </tr>
             <tr>
               <td className="text-lemon">Time:</td>
-              <td className="text-coral">{ allTotals.totalTime }</td>
-              <td className="text-green">{ allTotals.activeTime }</td>
+              <td className="text-coral" data-testid="total-time">{ allTotals.totalTime }</td>
+              <td className="text-green" data-testid="active-time">{ allTotals.activeTime }</td>
             </tr>
             <tr>
               <td className="text-lemon">Dist:</td>
-              <td className="text-coral">{ allTotals.totalDistance } Miles</td>
-              <td className="text-green">{ allTotals.activeDistance } Miles</td>
+              <td className="text-coral" data-testid="total-distance">{ allTotals.totalDistance } Miles</td>
+              <td className="text-green" data-testid="active-distance">{ allTotals.activeDistance } Miles</td>
             </tr>
             <tr>
               <td className="text-lemon">Pace:</td>
-              <td className="text-coral">{ allTotals.totalPace }</td>
-              <td className="text-green">{ allTotals.activePace }</td>
+              <td className="text-coral" data-testid="total-pace">{ allTotals.totalPace }</td>
+              <td className="text-green" data-testid="active-pace">{ allTotals.activePace }</td>
             </tr>
             </tbody>
           </table>

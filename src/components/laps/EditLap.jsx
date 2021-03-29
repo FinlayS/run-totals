@@ -128,7 +128,6 @@ const AddLap = ({ lap }) => {
             <Col className="col-md-3 center-text">
               <label htmlFor="distance">Distance</label>
               <NumberFormat
-                type="number"
                 className="input-group"
                 id="distance"
                 value={ lapDistance }

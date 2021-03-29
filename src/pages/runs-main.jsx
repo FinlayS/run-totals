@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer} from "react";
+import React, { useEffect, useReducer } from "react";
 import { ContextDevTool } from "react-context-devtool";
 import Container from "react-bootstrap/Container";
 

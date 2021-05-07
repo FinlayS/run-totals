@@ -10,10 +10,26 @@ import get_lap_1 from "../../../__mocks__/getLaps_1.json"
 jest.mock("../../../api/runs", () => ({ getRuns: jest.fn() }));
 jest.mock("../../../api/laps", () => ({ getLaps: jest.fn() }));
 
-let accountLink, activeDistance, activePace, activeTime, mainPage, totalDistance, totalPace, totalTime
+let addRun, accountNavigation, accountLink, activeDistance, activePace, activeTime, header, mainPage, showLapsToggle,
+  totalDistance, totalPace, totalTime
 
 const elementContainers = async () => {
+  // Header
+  header = screen.getByRole("navigation")
   accountLink = screen.getByRole("button", { name: "Account" });
+  accountNavigation = screen.getByRole("button", { name: "Toggle navigation" });
+  addRun = screen.getByRole("button", { name: "Add run" });
+
+  //Run
+  // edit run {button} (name: "Edit Run"}
+
+
+  //Laps
+  showLapsToggle = screen.getAllByTestId( "expand-collapse-toggle")
+  // edit lap button { name: "Edit Lap" }
+  // add lap button { name: "+ lap }
+
+  // Page totals
   activeDistance = screen.getAllByTestId("active-distance");
   activePace = screen.getAllByTestId("active-pace");
   activeTime = screen.getAllByTestId("active-time");

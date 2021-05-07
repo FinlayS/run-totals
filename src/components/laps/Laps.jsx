@@ -53,6 +53,7 @@ const Laps = (id) => {
           data-placement="right"
           as={ Button }
           variant="link"
+          data-testid="expand-collapse-toggle"
           eventKey={ defaultToggleState }
           onClick={ toggleShowLaps }
         >

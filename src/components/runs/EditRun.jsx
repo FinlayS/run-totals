@@ -69,10 +69,13 @@ const EditRun = ({ run }) => {
       </button>
       <Modal show={ show } onHide={ handleClose }
       >
-        <Modal.Header>
+        <Modal.Header
+          data-testid="edit-run-modal"
+        >
           <Modal.Title>Edit this run</Modal.Title>
           <Button
             variant="secondary"
+            data-testid="edit-run-close-button"
             size={ "sm" }
             onClick={ handleClose }
           >
@@ -88,6 +91,7 @@ const EditRun = ({ run }) => {
                 type="text"
                 className="input-group"
                 id="runDescription"
+                data-testid="run-description-input"
                 value={ description }
                 onChange={ (e) => setDescription(e.target.value) }
               />
@@ -101,6 +105,7 @@ const EditRun = ({ run }) => {
                 mask={ ["D", "D", "M", "M", "Y", "Y"] }
                 className="input-group center-text"
                 id="runDate"
+                data-testid="run-date-input"
                 value={ date }
                 onChange={ (e) => setDate(e.target.value) }
               />
@@ -111,6 +116,7 @@ const EditRun = ({ run }) => {
         <Modal.Footer>
           <Button
             variant="danger"
+            data-testid="edit-run-delete-button"
             onClick={ removeRun }>
             <BinIcon/>
             &nbsp; Delete Run
@@ -118,6 +124,7 @@ const EditRun = ({ run }) => {
           <Button
             variant="success"
             type="submit"
+            data-testid="edit-run-save-button"
             onClick={ editRun }>
             <SaveIcon/>
             &nbsp; Save

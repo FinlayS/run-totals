@@ -68,8 +68,8 @@ describe("Register page tests", () => {
 
   describe("Client side validation", () => {
     it("should show empty email warning", async () => {
-      userEvent.type(passwordInput, validPasswordInput)
-      userEvent.type(confirmPasswordInput, validPasswordInput)
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
+      await act(async () => userEvent.type(confirmPasswordInput, validPasswordInput))
 
       await act(async () => fireEvent.blur(emailInput))
       await waitFor(() => screen.getByRole("alert"))
@@ -79,8 +79,8 @@ describe("Register page tests", () => {
     })
 
     it("should show invalid email warning", async () => {
-      userEvent.type(passwordInput, validPasswordInput)
-      userEvent.type(emailInput, "invalid@email")
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
+      await act(async () => userEvent.type(emailInput, "invalid@email"))
 
       await act(async () => fireEvent.blur(emailInput))
       await waitFor(() => screen.getByRole("alert"))
@@ -90,7 +90,7 @@ describe("Register page tests", () => {
     })
 
     it("should show empty password warning", async () => {
-      userEvent.type(emailInput, validEmailInput)
+      await act(async () => userEvent.type(emailInput, validEmailInput))
 
       await act(async () => fireEvent.blur(passwordInput))
       await waitFor(() => screen.getByRole("alert"))
@@ -100,8 +100,8 @@ describe("Register page tests", () => {
     })
 
     it("should show password invalid warning", async () => {
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, "invalid")
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, "invalid"))
 
       await act(async () => fireEvent.blur(passwordInput))
       await waitFor(() => screen.getByRole("alert"))
@@ -111,7 +111,7 @@ describe("Register page tests", () => {
     })
 
     it("should show empty confirm password warning", async () => {
-      userEvent.type(emailInput, validEmailInput)
+      await act(async () => userEvent.type(emailInput, validEmailInput))
 
       await act(async () => fireEvent.blur(confirmPasswordInput))
       await waitFor(() => screen.getByRole("alert"))
@@ -121,9 +121,9 @@ describe("Register page tests", () => {
     })
 
     it("should enable login button with valid input", async () => {
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, validPasswordInput)
-      userEvent.type(confirmPasswordInput, validPasswordInput)
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
+      await act(async () => userEvent.type(confirmPasswordInput, validPasswordInput))
 
       expect(registerButton).toBeEnabled()
     })
@@ -134,9 +134,9 @@ describe("Register page tests", () => {
       userRegister.mockReset();
     })
     it("should call login function", async () => {
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, validPasswordInput)
-      userEvent.type(confirmPasswordInput, validPasswordInput)
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
+      await act(async () => userEvent.type(confirmPasswordInput, validPasswordInput))
 
       await act(async () => userEvent.click(registerButton))
 
@@ -152,9 +152,9 @@ describe("Register page tests", () => {
     it("should show general error message", async () => {
       userRegister.mockRejectedValue();
 
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, validPasswordInput)
-      userEvent.type(confirmPasswordInput, validPasswordInput)
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
+      await act(async () => userEvent.type(confirmPasswordInput, validPasswordInput))
 
       await act(async () => userEvent.click(registerButton))
       await waitFor(() => screen.getByRole("alert"))
@@ -175,9 +175,9 @@ describe("Register page tests", () => {
         }
       });
 
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, validPasswordInput)
-      userEvent.type(confirmPasswordInput, validPasswordInput)
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
+      await act(async () => userEvent.type(confirmPasswordInput, validPasswordInput))
 
       await act(async () => userEvent.click(registerButton))
       await waitFor(() => screen.getByRole("alert"))
@@ -186,7 +186,7 @@ describe("Register page tests", () => {
         .toHaveTextContent(invalidRegistrationMessage)
     })
 
-    it("should clear server error on re-input", async () => {
+    it("should clear server error on re-input of valid entry", async () => {
         userRegister.mockResolvedValueOnce({
         response: {
           status: 400,
@@ -197,23 +197,23 @@ describe("Register page tests", () => {
         }
       });
 
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, validPasswordInput)
-      userEvent.type(confirmPasswordInput, validPasswordInput)
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
+      await act(async () => userEvent.type(confirmPasswordInput, validPasswordInput))
 
       await act(async () => userEvent.click(registerButton))
       await waitFor(() => screen.getByRole("alert"))
 
-      userEvent.type(emailInput, validEmailInput)
+      await act(async () => userEvent.type(emailInput, '{backspace}m'))
 
       expect(screen.queryAllByRole("alert"))
         .toStrictEqual([])
     })
 
     it("should show password confirmation message", async () => {
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, validPasswordInput)
-      userEvent.type(confirmPasswordInput, "bob")
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
+      await act(async () => userEvent.type(confirmPasswordInput, "bob"))
 
       await act(async () => userEvent.click(registerButton))
       await waitFor(() => screen.getByRole("alert"))
@@ -229,9 +229,9 @@ describe("Register page tests", () => {
         () => new Promise(resolve => setTimeout(() => resolve()))
       );
 
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, validPasswordInput)
-      userEvent.type(confirmPasswordInput, validPasswordInput)
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
+      await act(async () => userEvent.type(confirmPasswordInput, validPasswordInput))
 
       await act(async () => userEvent.click(registerButton))
 
@@ -245,9 +245,9 @@ describe("Register page tests", () => {
         status: 201
       });
 
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, validPasswordInput)
-      userEvent.type(confirmPasswordInput, validPasswordInput)
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
+      await act(async () => userEvent.type(confirmPasswordInput, validPasswordInput))
 
       await act(async () => userEvent.click(registerButton))
 

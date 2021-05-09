@@ -56,7 +56,7 @@ describe("Login page tests", () => {
 
   describe("Client side validation", () => {
     it("should show empty email warning", async () => {
-      userEvent.type(passwordInput, validPasswordInput)
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
       await act(async () => fireEvent.blur(emailInput))
 
       expect(
@@ -66,8 +66,8 @@ describe("Login page tests", () => {
     })
 
     it("should show invalid email warning", async () => {
-      userEvent.type(passwordInput, validPasswordInput)
-      userEvent.type(emailInput, "invalid@email")
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
+      await act(async () => userEvent.type(emailInput, "invalid@email"))
       await act(async () => fireEvent.blur(emailInput))
 
       expect(
@@ -77,7 +77,7 @@ describe("Login page tests", () => {
     })
 
     it("should show empty password warning", async () => {
-      userEvent.type(emailInput, validEmailInput)
+      await act(async () => userEvent.type(emailInput, validEmailInput))
       await act(async () => fireEvent.blur(passwordInput))
       expect(
         screen.getByText("Please enter a valid password")
@@ -87,8 +87,8 @@ describe("Login page tests", () => {
     })
 
     it("should show password too short warning", async () => {
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, "invalid")
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, "invalid"))
       await act(async () => fireEvent.blur(passwordInput))
 
       expect(
@@ -99,8 +99,8 @@ describe("Login page tests", () => {
     })
 
     it("should enable login button with valid input", async () => {
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, validPasswordInput)
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
 
       expect(loginButton).toBeEnabled()
     })
@@ -111,9 +111,8 @@ describe("Login page tests", () => {
       userLogin.mockReset();
     })
     it("should call login function", async () => {
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, validPasswordInput)
-
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
       await act(async () => userEvent.click(loginButton))
 
       expect(userLogin).toBeCalledTimes(1)
@@ -128,8 +127,8 @@ describe("Login page tests", () => {
     it("should show general error message", async () => {
       userLogin.mockRejectedValue();
 
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, validPasswordInput)
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
 
       await act(async () => userEvent.click(loginButton))
       await waitFor(() => screen.getByRole("alert"))
@@ -149,9 +148,8 @@ describe("Login page tests", () => {
         }
       });
 
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, validPasswordInput)
-
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
       await act(async () => userEvent.click(loginButton))
       await waitFor(() => screen.getByRole("alert"))
 
@@ -170,16 +168,16 @@ describe("Login page tests", () => {
         }
       });
 
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, validPasswordInput)
-
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
       await act(async () => userEvent.click(loginButton))
       await waitFor(() => screen.getByRole("alert"))
 
       expect(screen.getByRole("alert"))
         .toHaveTextContent(invalidLoginMessage)
 
-      userEvent.type(emailInput, validEmailInput)
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+
       expect(
         screen.queryByText(invalidLoginMessage)
       ).not.toBeInTheDocument()
@@ -192,8 +190,8 @@ describe("Login page tests", () => {
         () => new Promise(resolve => setTimeout(() => resolve()))
       );
 
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, validPasswordInput)
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
 
       await act(async () => userEvent.click(loginButton))
 
@@ -207,8 +205,8 @@ describe("Login page tests", () => {
          status: 200
       });
 
-      userEvent.type(emailInput, validEmailInput)
-      userEvent.type(passwordInput, validPasswordInput)
+      await act(async () => userEvent.type(emailInput, validEmailInput))
+      await act(async () => userEvent.type(passwordInput, validPasswordInput))
       await act(async () => userEvent.click(loginButton))
 
       expect(

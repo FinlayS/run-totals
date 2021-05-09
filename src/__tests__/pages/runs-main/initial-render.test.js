@@ -20,10 +20,6 @@ const elementContainers = async () => {
   accountNavigation = screen.getByRole("button", { name: "Toggle navigation" });
   addRun = screen.getByRole("button", { name: "Add run" });
 
-  //Run
-  // edit run {button} (name: "Edit Run"}
-
-
   //Laps
   showLapsToggle = screen.getAllByTestId( "expand-collapse-toggle")
   // edit lap button { name: "Edit Lap" }

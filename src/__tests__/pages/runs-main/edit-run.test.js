@@ -1,12 +1,13 @@
 import React from "react";
 import { act, render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event";
+
 import RunsMain from "../../../pages/runs-main";
 import { deleteRun, getRuns, patchRun } from "../../../api/runs";
 import { getLaps } from "../../../api/laps";
 import get_runs from "../../../__mocks__/getRuns.json"
 import get_lap_0 from "../../../__mocks__/getLaps_0.json"
 import get_lap_1 from "../../../__mocks__/getLaps_1.json"
-import userEvent from "@testing-library/user-event";
 
 jest.mock("../../../api/runs", () => ({ getRuns: jest.fn(), patchRun: jest.fn(), deleteRun: jest.fn() }));
 jest.mock("../../../api/laps", () => ({ getLaps: jest.fn() }));

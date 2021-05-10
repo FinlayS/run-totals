@@ -58,10 +58,13 @@ const AddRun = () => {
         Add run
       </Button>
       <Modal show={ show } onHide={ handleClose }>
-        <Modal.Header>
+        <Modal.Header
+          data-testid="add-run-modal"
+        >
           <Modal.Title>Add a new run</Modal.Title>
           <Button
             variant="secondary"
+            data-testid="add-run-close-button"
             size={ "sm" }
             onClick={ handleClose }
           >
@@ -78,6 +81,7 @@ const AddRun = () => {
                   type="text"
                   className="input-group"
                   id="runDescription"
+                  data-testid="add-run-description-input"
                   name="description"
                   ref={ register }
                 />
@@ -91,6 +95,7 @@ const AddRun = () => {
                     mask={ ["D", "D", "M", "M", "Y", "Y"] }
                     className="input-group center-text"
                     id="runDate"
+                    data-testid="add-run-date-input"
                   />
                 } name="date" control={ control }
                 />
@@ -101,7 +106,8 @@ const AddRun = () => {
         </Modal.Body>
 
         <Modal.Footer>
-          <div className="alert alert-danger" style={ { display: errors.description || errors.date ? "block" : "none" } }
+          <div className="alert alert-danger"
+               style={ { display: errors.description || errors.date ? "block" : "none" } }
                role="alert">
             { errors.description && errors.description.message
             || errors.date && errors.date.message
@@ -111,6 +117,7 @@ const AddRun = () => {
           <Button
             variant="success"
             type="button"
+            data-testid="add-run-save-button"
             onClick={ handleSubmit(addRun) }
             disabled={!hasNoErrors}
           >

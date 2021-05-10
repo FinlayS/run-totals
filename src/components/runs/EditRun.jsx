@@ -91,7 +91,7 @@ const EditRun = ({ run }) => {
                 type="text"
                 className="input-group"
                 id="runDescription"
-                data-testid="run-description-input"
+                data-testid="edit-run-description-input"
                 value={ description }
                 onChange={ (e) => setDescription(e.target.value) }
               />
@@ -105,7 +105,7 @@ const EditRun = ({ run }) => {
                 mask={ ["D", "D", "M", "M", "Y", "Y"] }
                 className="input-group center-text"
                 id="runDate"
-                data-testid="run-date-input"
+                data-testid="edit-run-date-input"
                 value={ date }
                 onChange={ (e) => setDate(e.target.value) }
               />

@@ -73,7 +73,6 @@ describe("Runs Main: Add first run", () => {
   it("should have today's date as default placeholder", async () => {
     await openAddRunModal()
 
-    console.log(date.date)
     expect(runDateInput).toHaveValue(date)
   })
 

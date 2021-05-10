@@ -81,7 +81,9 @@ const LoginForm = () => {
                  ref={register}
           />
           <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small>
-          <div className="alert alert-danger mt-2" style={{display: errors.email ? "block" : "none" }} role="alert">
+          <div className="alert alert-danger mt-2"
+               style={{display: errors.email ? "block" : "none" }}
+               role="alert">
             {errors.email && errors.email.message}
           </div>
         </div>
@@ -98,7 +100,9 @@ const LoginForm = () => {
                  ref={register}
           />
         </div>
-        <div className="alert alert-danger mt-2" style={{display: errors.password ? "block" : "none" }} role="alert">
+        <div className="alert alert-danger mt-2"
+             style={{display: errors.password ? "block" : "none" }}
+             role="alert">
           {errors.password && errors.password.message}
         </div>
         <button

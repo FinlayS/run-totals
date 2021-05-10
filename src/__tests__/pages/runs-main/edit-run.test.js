@@ -1,17 +1,24 @@
 import React from "react";
 import { act, render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event";
+
 import RunsMain from "../../../pages/runs-main";
 import { deleteRun, getRuns, patchRun } from "../../../api/runs";
 import { getLaps } from "../../../api/laps";
 import get_runs from "../../../__mocks__/getRuns.json"
 import get_lap_0 from "../../../__mocks__/getLaps_0.json"
 import get_lap_1 from "../../../__mocks__/getLaps_1.json"
-import userEvent from "@testing-library/user-event";
+import moment from "moment";
 
 jest.mock("../../../api/runs", () => ({ getRuns: jest.fn(), patchRun: jest.fn(), deleteRun: jest.fn() }));
 jest.mock("../../../api/laps", () => ({ getLaps: jest.fn() }));
 
-let  editRunButton, editRunModal, editRunModalTitle, editRunCloseButton, editRunDeleteButton, editRunSaveButton, mainPage, runDescriptionInput
+let  editRunButton, editRunModal, editRunModalTitle, editRunCloseButton, editRunDeleteButton, editRunSaveButton, mainPage, runDateInput, runDescriptionInput
+
+const date = moment().format("DD/MM/YY")
+const nextYear = moment(date, "DD/MM/YY")
+  .add(1, 'year')
+  .format("DD/MM/YY")
 
 const editRunButtonContainer = async () => {
   editRunButton = screen.getAllByRole("button", { name: "Edit Run" });
@@ -23,7 +30,9 @@ const elementContainers = async () => {
   editRunCloseButton = screen.getByTestId("edit-run-close-button")
   editRunDeleteButton = screen.getByTestId("edit-run-delete-button")
   editRunSaveButton = screen.getByTestId("edit-run-save-button")
-  runDescriptionInput = screen.getByTestId("run-description-input")
+  runDescriptionInput = screen.getByTestId("edit-run-description-input")
+  runDateInput = screen.getByTestId("edit-run-date-input")
+
 };
 
 const openEditModal = async () => {
@@ -72,6 +81,13 @@ describe("Runs Main: Edit run", () => {
     userEvent.type(runDescriptionInput, " updated")
 
     expect(runDescriptionInput).toHaveValue("top run updated")
+  })
+
+  it("can edit the run date", async () => {
+    await openEditModal()
+    userEvent.type(runDateInput, `{selectall}${nextYear}`)
+
+    expect(runDateInput).toHaveValue(nextYear)
   })
 
   it("should call 'patchRun' with the updated description", async () => {

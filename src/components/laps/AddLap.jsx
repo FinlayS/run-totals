@@ -17,11 +17,13 @@ const AddLap = (id) => {
   const [lapTime, setLapTime] = useState("")
   const [lapDistance, setLapDistance] = useState("");
   const [show, setShow] = useState(false);
+  const [loader, setLoader] = useState(false)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const addLap = async (e) => {
+    setLoader(true)
     const nextLap = laps.length + 1
     let lap
     e.preventDefault()
@@ -62,12 +64,13 @@ const AddLap = (id) => {
       setLapTime("")
       setLapDistance("")
     }
+    setLoader(false)
   }
 
   return (
     <>
       <Container>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary" onClick={ handleShow }>
           + lap
         </Button>
       </Container>
@@ -140,8 +143,17 @@ const AddLap = (id) => {
             onClick={addLap}
             type="submit"
           >
-            <SaveIcon/>
-            &nbsp; Save
+            { loader && (
+              <div
+                className="loader"
+                data-testid="loader"
+              />
+            )}
+            {loader}
+            {!loader && <>
+              <SaveIcon/>
+              &nbsp; Save
+            </>}
           </Button>
         </Modal.Footer>
 

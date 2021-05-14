@@ -165,7 +165,8 @@ const AddLap = ({ lap }) => {
           <Button
             variant="success"
             type="submit"
-            onClick={ updateLap }>
+            onClick={ updateLap }
+          >
             { saveLoader && (
               <div
                 className="loader"

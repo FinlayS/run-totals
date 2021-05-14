@@ -147,6 +147,7 @@ const AddLap = ({ lap }) => {
           { lap.lapNo === laps.length &&
           <Button
             variant="danger"
+            disabled={!!saveLoader}
             onClick={ deleteCurrentLap }
           >
             { deleteLoader && (
@@ -165,6 +166,7 @@ const AddLap = ({ lap }) => {
           <Button
             variant="success"
             type="submit"
+            disabled={!!deleteLoader}
             onClick={ updateLap }
           >
             { saveLoader && (

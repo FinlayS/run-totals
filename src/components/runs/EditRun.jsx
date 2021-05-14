@@ -127,6 +127,7 @@ const EditRun = ({ run }) => {
           <Button
             variant="danger"
             data-testid="edit-run-delete-button"
+            disabled={!!saveLoader}
             onClick={ removeRun }
           >
             { deleteLoader && (
@@ -145,6 +146,7 @@ const EditRun = ({ run }) => {
             variant="success"
             type="submit"
             data-testid="edit-run-save-button"
+            disabled={!!deleteLoader}
             onClick={ editRun }
           >
             { saveLoader && (

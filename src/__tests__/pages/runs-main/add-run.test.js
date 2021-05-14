@@ -98,6 +98,24 @@ describe("Runs Main: Add first run", () => {
     )
   })
 
+  it("should show spinner while saving new run", async () => {
+    jest.useFakeTimers()
+
+    postRun.mockImplementationOnce(
+      () => new Promise(resolve => setTimeout(() => resolve()))
+    );
+
+    await openAddRunModal()
+    userEvent.type(runDescriptionInput, runDescription)
+    await act(async () =>
+      userEvent.click(addRunSaveButton)
+    )
+
+    expect(
+      screen.getByTestId("loader")
+    ).toBeInTheDocument();
+  })
+
   it("can input another date", async () => {
     await openAddRunModal()
     userEvent.type(runDateInput, `{selectall}${nextYear}`)

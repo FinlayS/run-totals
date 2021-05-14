@@ -13,7 +13,8 @@ import moment from "moment";
 jest.mock("../../../api/runs", () => ({ getRuns: jest.fn(), patchRun: jest.fn(), deleteRun: jest.fn() }));
 jest.mock("../../../api/laps", () => ({ getLaps: jest.fn() }));
 
-let  editRunButton, editRunModal, editRunModalTitle, editRunCloseButton, editRunDeleteButton, editRunSaveButton, mainPage, runDateInput, runDescriptionInput
+let editRunButton, editRunModal, editRunModalTitle, editRunCloseButton, editRunDeleteButton, editRunSaveButton,
+  mainPage, runDateInput, runDescriptionInput
 
 const date = moment().format("DD/MM/YY")
 const nextYear = moment(date, "DD/MM/YY")
@@ -25,8 +26,8 @@ const editRunButtonContainer = async () => {
 }
 
 const elementContainers = async () => {
-  editRunModal =  screen.getByTestId( "edit-run-modal")
-  editRunModalTitle = screen.queryByText( "Edit this run")
+  editRunModal = screen.getByTestId("edit-run-modal")
+  editRunModalTitle = screen.queryByText("Edit this run")
   editRunCloseButton = screen.getByTestId("edit-run-close-button")
   editRunDeleteButton = screen.getByTestId("edit-run-delete-button")
   editRunSaveButton = screen.getByTestId("edit-run-save-button")
@@ -57,7 +58,7 @@ describe("Runs Main: Edit run", () => {
   it("'Edit Run' modal is not visible by default", async () => {
     await editRunButtonContainer()
 
-    expect(screen.queryByText( "Edit this run")).not.toBeInTheDocument()
+    expect(screen.queryByText("Edit this run")).not.toBeInTheDocument()
   })
 
   it("should open 'Edit Run' modal", async () => {
@@ -85,7 +86,7 @@ describe("Runs Main: Edit run", () => {
 
   it("can edit the run date", async () => {
     await openEditModal()
-    userEvent.type(runDateInput, `{selectall}${nextYear}`)
+    userEvent.type(runDateInput, `{selectall}${ nextYear }`)
 
     expect(runDateInput).toHaveValue(nextYear)
   })
@@ -105,13 +106,66 @@ describe("Runs Main: Edit run", () => {
     )
   })
 
-  it("should call 'deleteRun'", async () => {
-    window.confirm = jest.fn(() => true) // always click 'yes'
+  it("should show spinner while saving updates", async () => {
+    jest.useFakeTimers()
+
+    patchRun.mockImplementationOnce(
+      () => new Promise(resolve => setTimeout(() => resolve()))
+    );
+
     await openEditModal()
+    userEvent.type(runDescriptionInput, " updated")
     await act(async () =>
-      userEvent.click(editRunDeleteButton)
+      userEvent.click(editRunSaveButton)
     )
 
-    expect(deleteRun).toBeCalledWith("6060a84fc9a9fb486500ee62")
+    expect(screen.getByTestId("loader"))
+      .toBeInTheDocument();
+  })
+
+  it("should disable delete button while saving updates", async () => {
+    jest.useFakeTimers()
+
+    patchRun.mockImplementationOnce(
+      () => new Promise(resolve => setTimeout(() => resolve()))
+    );
+
+    await openEditModal()
+    userEvent.type(runDescriptionInput, " updated")
+    await act(async () =>
+      userEvent.click(editRunSaveButton)
+    )
+
+    expect(editRunDeleteButton).toBeDisabled();
+  })
+
+  describe("Deleting a run", () => {
+    beforeEach(async () => {
+      window.confirm = jest.fn(() => true) // always click 'yes'
+      jest.useFakeTimers()
+
+      deleteRun.mockImplementationOnce(
+        () => new Promise(resolve => setTimeout(() => resolve()))
+      );
+      await openEditModal()
+      await act(async () => userEvent.click(editRunDeleteButton)
+      )
+    })
+
+
+    it("should call 'deleteRun' when clicking delete", async () => {
+
+      expect(deleteRun).toBeCalledWith("6060a84fc9a9fb486500ee62")
+    })
+
+    it("should show spinner while deleting run", async () => {
+
+      expect(screen.getByTestId("loader")).toBeInTheDocument();
+    })
+
+    it("should disable save button while deleting run", async () => {
+
+      expect(editRunSaveButton).toBeDisabled()
+    })
   })
 })

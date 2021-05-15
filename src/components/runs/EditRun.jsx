@@ -13,11 +13,14 @@ const EditRun = ({ run }) => {
   const [date, setDate] = useState(moment(run.runDate).format("DD/MM/YY"))
   const [runId] = useState(run._id)
   const [show, setShow] = useState(false);
+  const [deleteLoader, setDeleteLoader] = useState(false)
+  const [saveLoader, setSaveLoader] = useState(false)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const editRun = async () => {
+    setSaveLoader(true)
     const runDate = moment(date, "DD/MM/YY").valueOf()
     let run
     try {
@@ -40,11 +43,13 @@ const EditRun = ({ run }) => {
         })
       setShow(false)
     }
+    setSaveLoader(false)
   }
 
   const removeRun = async () => {
     let r = confirm("Confirm you wish to delete this run");
     if (r === true) {
+      setDeleteLoader(true)
       let response
       try {
         response = await deleteRun(run._id)
@@ -52,8 +57,13 @@ const EditRun = ({ run }) => {
         console.log(e.data)
       }
       if (response) {
-        dispatchRuns({ type: "REMOVE_RUN", _id: run._id })
+        dispatchRuns(
+          {
+            type: "REMOVE_RUN",
+            _id: run._id
+          })
       }
+      setDeleteLoader(false)
     }
   }
 
@@ -117,17 +127,39 @@ const EditRun = ({ run }) => {
           <Button
             variant="danger"
             data-testid="edit-run-delete-button"
-            onClick={ removeRun }>
-            <BinIcon/>
-            &nbsp; Delete Run
+            disabled={!!saveLoader}
+            onClick={ removeRun }
+          >
+            { deleteLoader && (
+              <div
+                className="loader"
+                data-testid="loader"
+              />
+            )}
+            {deleteLoader}
+            {!deleteLoader && <>
+              <BinIcon/>
+              &nbsp; Delete Run
+            </>}
           </Button>
           <Button
             variant="success"
             type="submit"
             data-testid="edit-run-save-button"
-            onClick={ editRun }>
-            <SaveIcon/>
-            &nbsp; Save
+            disabled={!!deleteLoader}
+            onClick={ editRun }
+          >
+            { saveLoader && (
+              <div
+                className="loader"
+                data-testid="loader"
+              />
+            )}
+            {saveLoader}
+            {!saveLoader && <>
+              <SaveIcon/>
+              &nbsp; Save
+            </>}
           </Button>
         </Modal.Footer>
       </Modal>

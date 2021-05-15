@@ -1,201 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Runs Main: Add first run should match snapshot for empty page 1`] = `
+exports[`Runs Main: Edit run Modal functionality should open 'Edit Run' modal 1`] = `
 Object {
   "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <title>
-        Run Totals
-      </title>
-      <link
-        href="../../public/favicon.ico"
-        rel="icon"
-        type="image/png"
-      />
-      <nav
-        class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"
-        data-testid="nav-bar-header"
-      >
-        <button
-          aria-controls="responsive-navbar-nav"
-          aria-label="Toggle navigation"
-          class="navbar-toggler collapsed"
-          type="button"
-        >
-          <span
-            class="navbar-toggler-icon"
-          />
-        </button>
-        <span
-          class="navBar-title navbar-brand"
-        >
-          Run Totals
-        </span>
-        <div
-          class="navbar-collapse collapse"
-          id="responsive-navbar-nav"
-        >
-          <div
-            class="navbar-nav"
-          >
-            <div
-              class="dropdown nav-item"
-            >
-              <a
-                aria-expanded="false"
-                aria-haspopup="true"
-                class="dropdown-toggle nav-link"
-                href="#"
-                id="nav-title"
-                role="button"
-              >
-                Account
-              </a>
-            </div>
-          </div>
-        </div>
-        <button
-          class="btn btn-primary"
-          type="button"
-        >
-          Add run
-        </button>
-      </nav>
-      <div
-        class="background-grey"
-      >
-        <div
-          class="container"
-        />
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <title>
-      Run Totals
-    </title>
-    <link
-      href="../../public/favicon.ico"
-      rel="icon"
-      type="image/png"
-    />
-    <nav
-      class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"
-      data-testid="nav-bar-header"
-    >
-      <button
-        aria-controls="responsive-navbar-nav"
-        aria-label="Toggle navigation"
-        class="navbar-toggler collapsed"
-        type="button"
-      >
-        <span
-          class="navbar-toggler-icon"
-        />
-      </button>
-      <span
-        class="navBar-title navbar-brand"
-      >
-        Run Totals
-      </span>
-      <div
-        class="navbar-collapse collapse"
-        id="responsive-navbar-nav"
-      >
-        <div
-          class="navbar-nav"
-        >
-          <div
-            class="dropdown nav-item"
-          >
-            <a
-              aria-expanded="false"
-              aria-haspopup="true"
-              class="dropdown-toggle nav-link"
-              href="#"
-              id="nav-title"
-              role="button"
-            >
-              Account
-            </a>
-          </div>
-        </div>
-      </div>
-      <button
-        class="btn btn-primary"
-        type="button"
-      >
-        Add run
-      </button>
-    </nav>
+  "baseElement": <body
+    class="modal-open"
+    style="padding-right: 0px;"
+  >
     <div
-      class="background-grey"
+      aria-hidden="true"
     >
-      <div
-        class="container"
-      />
-    </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
-`;
-
-exports[`Runs Main: Returning user should match snapshot 1`] = `
-Object {
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
       <title>
         Run Totals
       </title>
@@ -206,12 +20,17 @@ Object {
       />
       <nav
         class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"
+        data-margin-right=""
+        data-padding-right=""
         data-testid="nav-bar-header"
+        style=""
       >
         <button
           aria-controls="responsive-navbar-nav"
           aria-label="Toggle navigation"
           class="navbar-toggler collapsed"
+          data-margin-right=""
+          style=""
           type="button"
         >
           <span
@@ -557,7 +376,7 @@ Object {
                 </svg>
               </button>
               <div
-                class="collapsing"
+                class="collapse"
               >
                 <div>
                   <div
@@ -800,8 +619,130 @@ Object {
         </div>
       </div>
     </div>
+    <div
+      class="fade modal-backdrop show"
+    />
+    <div
+      aria-modal="true"
+      class="fade modal show"
+      role="dialog"
+      style="display: block;"
+      tabindex="-1"
+    >
+      <div
+        class="modal-dialog"
+        role="document"
+      >
+        <div
+          class="modal-content"
+        >
+          <div
+            class="modal-header"
+            data-testid="edit-run-modal"
+          >
+            <div
+              class="modal-title h4"
+            >
+              Edit this run
+            </div>
+            <button
+              class="btn btn-secondary btn-sm"
+              data-testid="edit-run-close-button"
+              type="button"
+            >
+              <svg
+                class="bi bi-x-circle-fill svg-align"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            class="modal-body"
+          >
+            <div
+              class="form-row row"
+            >
+              <div
+                class="col-9 col"
+              >
+                <label
+                  for="runDescription"
+                >
+                  Describe your run
+                </label>
+                <input
+                  class="input-group"
+                  data-testid="edit-run-description-input"
+                  id="runDescription"
+                  type="text"
+                  value="top run"
+                />
+              </div>
+              <div
+                class="center-self col"
+              >
+                <label
+                  for="runDate"
+                >
+                  Date
+                </label>
+                <input
+                  class="input-group center-text"
+                  data-testid="edit-run-date-input"
+                  id="runDate"
+                  inputmode="numeric"
+                  placeholder="DD/MM/YY"
+                  type="text"
+                  value="28/03/21"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            class="modal-footer"
+          >
+            <button
+              class="btn btn-danger"
+              data-testid="edit-run-delete-button"
+              type="button"
+            >
+              <svg
+                class="bi bi-trash-fill svg-align"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"
+                />
+              </svg>
+                Delete Run
+            </button>
+            <button
+              class="btn btn-success"
+              data-testid="edit-run-save-button"
+              type="submit"
+            >
+              <svg
+                class="bi bi-save2-fill svg-align"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M8.5 1.5A1.5 1.5 0 0 1 10 0h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h6c-.314.418-.5.937-.5 1.5v6h-2a.5.5 0 0 0-.354.854l2.5 2.5a.5.5 0 0 0 .708 0l2.5-2.5A.5.5 0 0 0 10.5 7.5h-2v-6z"
+                />
+              </svg>
+                Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>,
-  "container": <div>
+  "container": <div
+    aria-hidden="true"
+  >
     <title>
       Run Totals
     </title>
@@ -812,12 +753,17 @@ Object {
     />
     <nav
       class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"
+      data-margin-right=""
+      data-padding-right=""
       data-testid="nav-bar-header"
+      style=""
     >
       <button
         aria-controls="responsive-navbar-nav"
         aria-label="Toggle navigation"
         class="navbar-toggler collapsed"
+        data-margin-right=""
+        style=""
         type="button"
       >
         <span
@@ -1163,7 +1109,7 @@ Object {
               </svg>
             </button>
             <div
-              class="collapsing"
+              class="collapse"
             >
               <div>
                 <div

@@ -13,11 +13,14 @@ const AddLap = ({ lap }) => {
   const [lapTime, setLapTime] = useState(lap.lapTime)
   const [lapDistance, setLapDistance] = useState(lap.lapDistance);
   const [show, setShow] = useState(false);
+  const [deleteLoader, setDeleteLoader] = useState(false)
+  const [saveLoader, setSaveLoader] = useState(false)
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const updateLap = async () => {
+    setSaveLoader(true)
     let response
     try {
       response = await patchLap(lap._id, {
@@ -37,11 +40,13 @@ const AddLap = ({ lap }) => {
         })
       setShow(false)
     }
+    setSaveLoader(false)
   }
 
   const deleteCurrentLap = async () => {
     let r = confirm("Are you sure wish to delete this lap");
     if (r === true) {
+      setDeleteLoader(true)
       let response
       try {
         response = await deleteLap(lap._id)
@@ -57,6 +62,7 @@ const AddLap = ({ lap }) => {
           })
         setShow(false)
       }
+      setDeleteLoader(false)
     }
   }
 
@@ -141,18 +147,39 @@ const AddLap = ({ lap }) => {
           { lap.lapNo === laps.length &&
           <Button
             variant="danger"
+            disabled={!!saveLoader}
             onClick={ deleteCurrentLap }
           >
+            { deleteLoader && (
+              <div
+                className="loader"
+                data-testid="loader"
+              />
+            )}
+            {deleteLoader}
+            {!deleteLoader && <>
             <BinIcon/>
             &nbsp; Delete Lap
+          </>}
           </Button>
           }
           <Button
             variant="success"
             type="submit"
-            onClick={ updateLap }>
+            disabled={!!deleteLoader}
+            onClick={ updateLap }
+          >
+            { saveLoader && (
+              <div
+                className="loader"
+                data-testid="loader"
+              />
+            )}
+            {saveLoader}
+            {!saveLoader && <>
             <SaveIcon/>
             &nbsp; Save
+            </>}
           </Button>
         </Modal.Footer>
 

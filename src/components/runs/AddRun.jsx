@@ -20,6 +20,7 @@ const AddRun = () => {
 
   const { dispatchRuns } = useContext(RunContext)
   const [show, setShow] = useState(false);
+  const [loader, setLoader] = useState(false)
 
   const description = methods.watch("description")
   const date = methods.watch("date")
@@ -30,7 +31,7 @@ const AddRun = () => {
   const handleShow = () => setShow(true);
 
   const addRun = async () => {
-
+    setLoader(true)
     const runDate = moment(date, "DD/MM/YY").valueOf()
 
     let run
@@ -50,6 +51,7 @@ const AddRun = () => {
         })
       setShow(false)
     }
+    setLoader(false)
   }
 
   return (
@@ -121,8 +123,17 @@ const AddRun = () => {
             onClick={ handleSubmit(addRun) }
             disabled={!hasNoErrors}
           >
-            <SaveIcon/>
-            &nbsp; Save
+            { loader && (
+              <div
+                className="loader"
+                data-testid="loader"
+              />
+            )}
+            {loader}
+            {!loader && <>
+              <SaveIcon/>
+              &nbsp; Save
+            </>}
           </Button>
           </div>
         </Modal.Footer>

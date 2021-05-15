@@ -34,7 +34,18 @@ const elementContainers = async () => {
   totalTime = screen.getAllByTestId("total-time");
 };
 
-describe("Runs Main: Initial render", () => {
+describe("Runs Main: Add first run", () => {
+  it("should match snapshot for empty page", async () => {
+    jest.resetAllMocks()
+    getRuns.mockResolvedValueOnce([])
+    await act(async () => {
+      mainPage = render(<RunsMain/>);
+    });
+    expect(mainPage).toMatchSnapshot()
+  })
+})
+
+describe("Runs Main: Returning user", () => {
   beforeEach(async () => {
     jest.resetAllMocks()
     getRuns.mockResolvedValueOnce(get_runs)
